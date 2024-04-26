@@ -1,0 +1,31 @@
+html {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form {
+    display: grid;
+}
+
+.submit-btn {
+    max-width: 20px;
+}
+
+.container {
+    border: 2px;
+    border-radius: 2px;
+    width: 50%;
+}
+
+form {
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 16px;
+}
