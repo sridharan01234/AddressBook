@@ -126,8 +126,6 @@ class UserModel
     public function insert(string $table, array $data,int $id)
     {
         $data['id'] = $id;
-        //var_dump($data);
-        //echo'<br>';
         $query = "INSERT INTO $table ";
         if (is_array($data)) {
             $query = $query . $this->arrayToInsert($data);

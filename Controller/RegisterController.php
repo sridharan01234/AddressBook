@@ -9,17 +9,23 @@ class RegisterController
         $this->userModel = new UserModel();
     }
 
-    public function index()
+    /**
+     * Displays register page
+     */
+    public function index(): void
     {
         require_once "../View/register.php";
     }
 
-    public function register()
+    /**
+     * Gets values in post request and checks user in db and enters data in DB
+     */
+    public function register(): void
     {
         $data = [
             "name" => $_POST["name"],
             "email" => $_POST["email"],
-            "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
+            "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
             "first_name" => $_POST["first_name"],
             "last_name" => $_POST["last_name"],
             "name"=> $_POST["first_name"].$_POST["last_name"]
@@ -30,6 +36,7 @@ class RegisterController
                 echo"Email Successfully Registered";
             }
         } else {
+            var_dump($data);
             echo "Email Already Registered";
         }
     }
@@ -37,6 +44,9 @@ class RegisterController
 
 $init = new RegisterController();
 
+/**
+ * Handles POST Request and redirects specific actions
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     switch ($_GET['type']) {
         case 'index':
@@ -47,6 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 
+/**
+ * Handles GET Request and redirects specific actions
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch ($_POST['type']) {
         case 'register':

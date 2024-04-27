@@ -29,3 +29,7 @@ form {
     border: 2px solid;
     border-radius: 16px;
 }
+
+.register-redirect{
+    text-decoration: none;
+}

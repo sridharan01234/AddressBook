@@ -15,8 +15,12 @@
   </head>
   <body>
     <div class="container">
-      <form class="row g-3" name = "register" onsubmit="return validateRegisterForm()" action="" method="post">
-      <h1>Sign Up</h1>
+      <form class="row" name = "register" onsubmit="return validateRegisterForm()" action="" method="post">
+      <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <h1>Sign Up</h1>
+          </div>
+        </div>
       <input type="hidden" name="type" value="register">
         <div class="col-md-6">
           <label for="inputFirstName" class="form-label">First Name</label>
@@ -55,12 +59,15 @@
             placeholder="Re-enter Password"
           />
         </div>
-        
+        <p>If you Already Have an Account<a class="register-redirect" href="javascript:{}" onclick="document.getElementById('register-page').submit();"> Click here</a></p>
         <div class="col-12 justify-content-md-center">
           <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
       </form>
     </div>
+    <form class="login-page" id="login-page" action="../Controller/LoginController.php" method="get">
+      <input type="hidden" name="type" value="index" />
+    </form>
     <script src="../Assets/javascript/script.js"></script>
   </body>
 </html>
