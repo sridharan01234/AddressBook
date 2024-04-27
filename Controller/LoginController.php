@@ -28,9 +28,9 @@ class LoginController
         $user = $this->userModel->get('users', ["email" => $data["email"]], 'password');
         if ($user) {
             if (password_verify($data['password'], $user->password)) {
-                echo "Login Success";
+                header('location: ListContactsController.php?type=index');
             } else {
-                header("location: ../View/login.php?message=IncorrectPassword");
+                header("location: ../View/login.php");
             }
         } else {
             echo "User not found";
