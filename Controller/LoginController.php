@@ -3,7 +3,7 @@ require "../Model/UserModel.php";
 require '../vendor/autoload.php';
 class LoginController
 {
-    private $userModel; 
+    private $userModel;
     public function __construct()
     {
         $this->userModel = new UserModel();

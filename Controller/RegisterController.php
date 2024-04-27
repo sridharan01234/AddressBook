@@ -28,12 +28,11 @@ class RegisterController
             "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
             "first_name" => $_POST["first_name"],
             "last_name" => $_POST["last_name"],
-            "name"=> $_POST["first_name"].$_POST["last_name"]
+            "name" => $_POST["first_name"] . $_POST["last_name"],
         ];
         if (!$this->userModel->get("users", ["email" => $data["email"]], "*")) {
-            if($this->userModel->insert("users", $data, 1))
-            {
-                echo"Email Successfully Registered";
+            if ($this->userModel->insert("users", $data, 1)) {
+                echo "Email Successfully Registered";
             }
         } else {
             var_dump($data);

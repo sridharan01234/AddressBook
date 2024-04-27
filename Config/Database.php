@@ -26,12 +26,25 @@ class Database
             echo $this->error;
         }
     }
-
-    public function query($sql)
+    /**
+     * 
+     * 
+     * @param mixed $sql
+     * @return void
+     */
+    public function query($sql): void
     {
         $this->stmt = $this->dbh->prepare($sql);
     }
 
+    /**
+     * Binds parameter according to this data type in query
+     * 
+     * @param mixed $param
+     * @param mixed $value
+     * @param mixed $type
+     * @return void
+     */
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -52,30 +65,65 @@ class Database
         $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute()
+    /**
+     * Performs query execution in DB
+     * 
+     * @return mixed
+     */
+    public function execute(): mixed
     {
         return $this->stmt->execute();
     }
 
-    public function resultSet()
+    /**
+     * Return all the rows matches the query
+     * 
+     * @return mixed
+     */
+    public function resultSet(): mixed
     {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function single()
+    /**
+     * Return first row which matches the query
+     * 
+     * @return mixed
+     */
+    public function single(): mixed
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * Return number of rows after query execution
+     * 
+     * @return mixed
+     */
     public function rowCount()
     {
         return $this->stmt->rowCount();
     }
 
-    public function affected_rows() {
+    /**
+     * Return number of rows affted after sql query execution
+     * 
+     * @return mixed
+     */
+    public function affected_rows()
+    {
         return $this->stmt->rowCount();
     }
-    public function errorCode() { return $this->stmt->errorCode(); }
+
+    /**
+     * Return sql error code
+     * 
+     * @return mixed
+     */
+    public function errorCode()
+    {
+        return $this->stmt->errorCode();
+    }
 }

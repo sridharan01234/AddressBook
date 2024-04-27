@@ -41,11 +41,23 @@
             placeholder="Password"
           />
         </div>
-        <p>If you don't Have an Account<a class="register-redirect" href="javascript:{}" onclick="document.getElementById('register-page').submit();"> Click here</a></p>
+        <p>
+          If you don't Have an Account<a
+            class="register-redirect"
+            href="javascript:{}"
+            onclick="document.getElementById('register-page').submit();"
+          >
+            Click here</a
+          >
+        </p>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
-    <form id="register-page" action="../Controller/RegisterController.php" method="get">
+    <form
+      id="register-page"
+      action="../Controller/RegisterController.php"
+      method="get"
+    >
       <input type="hidden" name="type" value="index" />
     </form>
     <script
