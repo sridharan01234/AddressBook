@@ -17,6 +17,7 @@
   <body>
     <h1>List of Contacts</h1>
     <div class="container">
+    <form action="" method="post">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -41,24 +42,27 @@
             <td><?php echo $user->age; ?></td>
             <td><?php echo $user->address; ?></td>
             <td><?php echo $user->pincode; ?></td>
-            <td><?php echo $user->country_id; ?></td>
-            <td><?php echo $user->state_id; ?></td>
+            <td><?php echo $user->country ?></td>
+            <td><?php echo $user->state ?></td>
             <td><a href="">ClickHere</a></td>
             <td>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckChecked"
-                  checked
-                />
-              </div>
+            <div class="form-check">
+              <form action="../Controller/delete.php" method="post">
+              <input
+              class="form-check-input"
+               type="checkbox"
+               name="delete_users[]"
+               value="<?php echo $user->id ?>"
+               id="flexCheckChecked<?php echo $user->id ?>"
+              />
+            </div>
             </td>
           </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
+      <button>Submit</button>
+      </form>
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

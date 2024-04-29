@@ -9,9 +9,4 @@ function validateRegisterForm() {
     alert("All the Fields must be Filled");
     return false;
   }
-  // console.log(document.getElementById("inputFirstName").value);
-  // console.log(document.getElementById("inputLastName").value);
-  // console.log(document.getElementById("inputEmail").value);
-  // console.log(document.getElementById("inputPassword").value);
-  // console.log(document.getElementById("ConfirmPassword").value);
 }
