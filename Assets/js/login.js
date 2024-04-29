@@ -1,12 +1,10 @@
-function validateRegisterForm() {
+function validateLoginForm() {
   if (
-    document.getElementById("inputFirstName").value == "" ||
-    document.getElementById("inputLastName").value == "" ||
-    document.getElementById("inputEmail").value == "" ||
-    document.getElementById("inputPassword").value == "" ||
-    document.getElementById("ConfirmPassword").value == ""
+    document.getElementById("email").value == "" ||
+    document.getElementById("password").value == ""
   ) {
-    alert("All the Fields must be Filled");
+    document.getElementById('error').style.display = "block";
+    document.getElementById('error').innerHTML = "All the fields must be filled";
     return false;
   }
 }
