@@ -27,8 +27,8 @@ class Database
         }
     }
     /**
-     * 
-     * 
+     *
+     *
      * @param mixed $sql
      * @return void
      */
@@ -39,7 +39,7 @@ class Database
 
     /**
      * Binds parameter according to this data type in query
-     * 
+     *
      * @param mixed $param
      * @param mixed $value
      * @param mixed $type
@@ -67,7 +67,7 @@ class Database
 
     /**
      * Performs query execution in DB
-     * 
+     *
      * @return mixed
      */
     public function execute(): mixed
@@ -77,7 +77,7 @@ class Database
 
     /**
      * Return all the rows matches the query
-     * 
+     *
      * @return mixed
      */
     public function resultSet(): mixed
@@ -88,7 +88,7 @@ class Database
 
     /**
      * Return first row which matches the query
-     * 
+     *
      * @return mixed
      */
     public function single(): mixed
@@ -99,7 +99,7 @@ class Database
 
     /**
      * Return number of rows after query execution
-     * 
+     *
      * @return mixed
      */
     public function rowCount()
@@ -109,7 +109,7 @@ class Database
 
     /**
      * Return number of rows affted after sql query execution
-     * 
+     *
      * @return mixed
      */
     public function affected_rows()
@@ -119,7 +119,7 @@ class Database
 
     /**
      * Return sql error code
-     * 
+     *
      * @return mixed
      */
     public function errorCode()
