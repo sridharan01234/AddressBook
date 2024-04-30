@@ -23,11 +23,10 @@ class RegisterController
     public function register(): void
     {
         $data = [
-            "name" => $_POST["name"],
-            "email" => $_POST["email"],
-            "password" => password_hash($_POST['password'], PASSWORD_DEFAULT),
-            "first_name" => $_POST["first_name"],
-            "last_name" => $_POST["last_name"],
+            "email" => $_POST["floating_email"],
+            "password" => password_hash($_POST['floating_password'], PASSWORD_DEFAULT),
+            "first_name" => $_POST["floating_first_name"],
+            "last_name" => $_POST["floating_last_name"],
             "name" => $_POST["first_name"] . $_POST["last_name"],
         ];
         if (!$this->userModel->get("users", ["email" => $data["email"]], "*")) {

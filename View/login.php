@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +24,12 @@
           <form class="space-y-4 md:space-y-6" action="" onsubmit="return validateLoginForm()" method="post">
             <input type="hidden" name="type" value="login">
             <div>
-              <div id="error" style="display: none;"
+              <div id="error" style="display:none;"
                 class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              </div>
+              <div id="error" style="display:<?php if(isset($message)) echo"block"; else echo "none"?>;"
+                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <?php echo $message?>
               </div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
               <input type="email" name="email" id="email"

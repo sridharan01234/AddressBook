@@ -14,6 +14,7 @@
 <body>
 
   <form action="" method="post">
+    <input type="hidden" name="type" value="delete">
     <div class="flex-row items-center justify-between p-4 space-y-5 sm:flex sm:space-y-0 sm:space-x-4">
       <div>
         <h5 class="mr-3 font-semibold dark:text-white">List Users</h5>
@@ -42,6 +43,7 @@
         </a>
 
         <button
+        type="submit"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
             id="Delete">

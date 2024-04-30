@@ -33,11 +33,12 @@ class LoginController
                 header('location: ListContactsController.php?type=index');
                 exit;
             } else {
-                header("location: ../View/login.php");
-                exit;
+                $message = "incorrect password";
+                require_once '../View/login.php';
             }
         } else {
-            echo "User not found";
+            $message = "User not found";
+            require_once '../View/login.php';
         }
     }
 }
