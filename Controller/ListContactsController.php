@@ -13,16 +13,6 @@ class ListContactsController
     }
 
     /**
-     * Display ListContacts page
-     *
-     * @return void
-     */
-    public function index(): void
-    {
-        require_once '../View/listContacts.php';
-    }
-
-    /**
      * Get conatcts of an user from DB
      *
      * @return void
@@ -45,6 +35,7 @@ class ListContactsController
         foreach ($_POST['delete_users'] as $user) {
             $this->userModel->delete('contacts', ['id' => $user]);
         }
+        $this->listContacts();
     }
 }
 if(!isset($_SESSION['user_id']))
@@ -53,8 +44,20 @@ if(!isset($_SESSION['user_id']))
     exit;
 }
 $init = new ListContactsController();
-if (isset($_POST['delete_users'])) {
-    $init->deleteContacts();
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    switch ($_POST['type'])
+    {
+        case 'delete':
+            $init->deleteContacts();
+            break;
+        case 'index':
+            $init->listContacts();
+            break;
+        default:
+            $init->listContacts();
+            break;
+    }
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'GET')

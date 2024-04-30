@@ -94,7 +94,7 @@ class UserModel
      * @param condition array
      * @return mixed
      */
-    public function getAll(string $table, array $condition, array|string $columns): mixed
+    public function getAll(string $table, array|string $condition, array|string $columns): mixed
     {
         if(is_array($columns)) {
             $query = "SELECT ".$this->arrayToColumns($columns)." FROM $table ";
@@ -162,7 +162,6 @@ class UserModel
         } catch (Exception $e) {
             error_log($e->getMessage());
         }
-        var_dump($data);
         if($this->db->affected_rows() == 0) {
             if($this->db->errorCode() == 23000) {
                 $this->insert($table, $data,++$id);

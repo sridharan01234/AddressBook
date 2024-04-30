@@ -21,7 +21,7 @@
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Create and account
           </h1>
-          <form class="space-y-4 md:space-y-6" action method="post" onsubmit="return validateRegisterForm()">
+          <form class="space-y-4 md:space-y-6" action="" method="post" onsubmit="return validateRegisterForm()">
             <input type="hidden" name="type" value="register" />
             <div id="error" style="display: none;"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
