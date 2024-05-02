@@ -1,5 +1,5 @@
 <?php
-require "../Model/UserModel.php";
+require "../model/UserModel.php";
 require '../vendor/autoload.php';
 class RegisterController
 {
@@ -11,12 +11,11 @@ class RegisterController
 
     public function index()
     {
-        require_once "../View/register.php";
+        require_once "../view/register.php";
     }
 
     public function register()
     {
-        var_dump($_POST);
         $data = [
             "name" => $_POST["name"],
             "email" => $_POST["email"],
@@ -28,10 +27,12 @@ class RegisterController
         if (!$this->userModel->get("users", ["email" => $data["email"]], "*")) {
             if($this->userModel->insert("users", $data, 1))
             {
-                echo"Email Successfully Registered";
+                $message = "Email Successfully Registered";
+                require_once "../view/register.php";
             }
         } else {
-            echo "Email Already Registered";
+            $error =  "Email Already Registered";
+            require_once "../view/register.php";
         }
     }
 }
