@@ -27,7 +27,8 @@ class AddUserController
             'pincode'=> $_POST['pincode'],
         ];
         $this->userModel->insert('contacts', $data, 1);
-        $this->index();
+        $message = sprintf("contact %s added successfully",$data['name']);
+        require '../View/adduser.php';
     }
 }
 

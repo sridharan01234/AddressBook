@@ -15,6 +15,9 @@
       <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
         Add a new Contact
       </h2>
+      <div style="display:<?php if(isset($message)) echo"block"; else echo "none"?>;" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+        <span class="font-medium">Success !</span> <?php echo $message?>
+      </div>
       <form action="" method="post">
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <div class="w-full">
@@ -49,8 +52,8 @@
             </select>
           </div>
           <div class="sm:col-span-2">
-            <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-            <textarea id="address" rows="8" name="address" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter Address"></textarea>
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+            <textarea id="message" rows="4" name="address" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your address here..."></textarea>
           </div>
         </div>
         <div class="md:container md:mx-auto">

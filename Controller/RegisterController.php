@@ -31,11 +31,12 @@ class RegisterController
         ];
         if (!$this->userModel->get("users", ["email" => $data["email"]], "*")) {
             if ($this->userModel->insert("users", $data, 1)) {
-                echo "Email Successfully Registered";
+                $message =  "Email Successfully Registered";
+                require_once "../View/register.php";
             }
         } else {
-            var_dump($data);
-            echo "Email Already Registered";
+            $message = "Email Already Registered";
+            require_once "../View/register.php";
         }
     }
 }

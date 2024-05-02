@@ -19,12 +19,16 @@
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-            Create and account
+            Create an account
           </h1>
           <form class="space-y-4 md:space-y-6" action="" method="post" onsubmit="return validateRegisterForm()">
             <input type="hidden" name="type" value="register" />
             <div id="error" style="display: none;"
               class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            </div>
+            <div id="error" style="display:<?php if(isset($message)) echo"block"; else echo "none"?>;"
+                class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <?php echo $message?>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6">
               <div class="relative z-0 w-full mb-5 group">
