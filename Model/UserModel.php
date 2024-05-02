@@ -189,6 +189,7 @@ class UserModel
         if (is_array($condition)) {
             $query = $query . $this->arrayToCondition($condition);
         } 
+        var_dump($query);
         $this->db->query($query);
         try {
             $this->db->execute();

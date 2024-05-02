@@ -32,6 +32,7 @@ class ListContactsController
 
     public function deleteContacts(): void
     {
+
         foreach ($_POST['delete_users'] as $user) {
             $this->userModel->delete('contacts', ['id' => $user]);
         }
@@ -46,18 +47,7 @@ if(!isset($_SESSION['user_id']))
 $init = new ListContactsController();
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-    switch ($_POST['type'])
-    {
-        case 'delete':
-            $init->deleteContacts();
-            break;
-        case 'index':
-            $init->listContacts();
-            break;
-        default:
-            $init->listContacts();
-            break;
-    }
+    $init->deleteContacts();
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'GET')
@@ -68,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
             $init->listContacts();
             break;
         default:
-            header('location: ./LoginController.php');
-            exit;
+            $init->listContacts();
+            break;
     }
 }
