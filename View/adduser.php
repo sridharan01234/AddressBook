@@ -18,6 +18,9 @@
       <div style="display:<?php if(isset($message)) echo"block"; else echo "none"?>;" class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Success !</span> <?php echo $message?>
       </div>
+      <div style="display:<?php if(isset($error)) echo"block"; else echo "none"?>;" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <span class="font-medium">alert!</span> <?php echo $error?>
+      </div>
       <form action="" method="post">
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <div class="w-full">
