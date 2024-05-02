@@ -17,18 +17,23 @@ class AddUserController
     public function create()
     {
         $data = [
-            'name'=> $_POST['name'],
-            'phone'=> $_POST['phone'],
-            'age'=> $_POST['age'],
-            'country_id'=> $_POST['country'],
-            'state_id'=> $_POST['state'],
-            'address'=> $_POST['address'],
-            'user_id'=>$_SESSION['user_id'],
-            'pincode'=> $_POST['pincode'],
+            'name' => $_POST['name'],
+            'phone' => $_POST['phone'],
+            'age' => $_POST['age'],
+            'country_id' => $_POST['country'],
+            'state_id' => $_POST['state'],
+            'address' => $_POST['address'],
+            'user_id' => $_SESSION['user_id'],
+            'pincode' => $_POST['pincode'],
         ];
-        $this->userModel->insert('contacts', $data, 1);
-        $message = sprintf("contact %s added successfully",$data['name']);
-        require '../View/adduser.php';
+        if ($this->userModel->get('contacts', ['phone' => $data['phone']], '*')) {
+            $error = sprintf("contact already exist in name of %s", $data['name']);
+            require '../View/adduser.php';
+        } else {
+            $this->userModel->insert('contacts', $data, 1);
+            $message = sprintf("contact %s added successfully", $data['name']);
+            require '../View/adduser.php';
+        }
     }
 }
 
@@ -43,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             break;
     }
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $init->create();
 }
