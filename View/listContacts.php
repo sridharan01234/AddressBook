@@ -117,7 +117,13 @@
               <?php echo $user->state ?>
             </td>
             <td class="px-6 py-4">
-              <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View/Edit</a>
+              <form id="edit-page" action="../Controller/EditUserController.php" method="get">
+              <input type="hidden" name="type" value="edit">
+              <input type="hidden" name="user_id" value="<?php echo $user->id?>">
+              <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="javascript:{}"
+                onclick="document.getElementById('edit-page').submit();">
+                view/edit</a>
+              </form>
             </td>
           </tr>
           <?php endforeach;?>
