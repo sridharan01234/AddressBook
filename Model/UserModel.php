@@ -1,6 +1,6 @@
 <?php
 // Including the Database class file
-require_once '../Config/Database.php';
+require_once '../Database/Database.php';
 
 class UserModel
 {
