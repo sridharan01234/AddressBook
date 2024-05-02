@@ -8,7 +8,7 @@ class Database
 
     public function __construct()
     {
-        require '../Config/config.php';
+        require '../config/config.php';
         $dsn = 'mysql:host=' . host . ';dbname=' . dbname;
         $options = array(
             PDO::ATTR_PERSISTENT => true,

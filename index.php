@@ -1,3 +1,3 @@
 <?php
-header("location: Controller/RegisterController.php?type=index");
+header("location: controller/RegisterController.php?type=index");
 ?>
