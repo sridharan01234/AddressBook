@@ -2,36 +2,36 @@ $("#register-form").validate(
   {
     rules:
     {
-      floating_first_name : "required",
-      floating_last_name : "required",
-      floating_email: "required",
-      floating_password: {
+      first_name : "required",
+      last_name : "required",
+      email: "required",
+      password: {
         required: true,
         minlength: 8
       },
-      floating_repeat_password : {
+      repeat_password : {
         required: true,
         minlength: 8,
-        equalTo: "#floating_password"
+        equalTo: "#password"
       }
     }
   },
   {
     messages:
     {
-      floating_first_name: "This field is required",
-      floating_last_name: "This field is required",
-      floating_email:
+      first_name: "This field is required",
+      last_name: "This field is required",
+      email:
       {
         required: true,
         email: true
       },
-      floating_password:
+      password:
       {
         required: "this field is required",
         minlength: "minimum 8 characters required"
       },
-      floating_repeat_password:
+      repeat_password:
       {
         required: "this field is required",
         minlength: "minimum 8 characters required",
