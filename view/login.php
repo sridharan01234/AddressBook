@@ -6,6 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
+  <link rel="stylesheet" href="./assets/css/login.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -21,15 +22,20 @@
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Sign in to your account
           </h1>
-          <form class="space-y-4 md:space-y-6" action="" onsubmit="return validateLoginForm()" method="post">
+          <form class="space-y-4 md:space-y-6" id="login-form" method="post">
             <input type="hidden" name="type" value="login">
             <div>
               <div id="error" style="display:none;"
                 class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
               </div>
-              <div id="error" style="display:<?php if(isset($message)) echo"block"; else echo "none"?>;"
+              <div id="error" style="display:<?php if (isset($message)) {
+                echo "block";
+              } else {
+                echo "none";
+              }
+              ?>;"
                 class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <?php echo $message?>
+                <?php echo $message ?>
               </div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
               <input type="email" name="email" id="email"
@@ -51,7 +57,7 @@
               <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="./register">
                 Click Here</a>
             </p>
-            <button type="submit"
+            <button
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
               Submit
             </button>
@@ -60,9 +66,9 @@
       </div>
     </div>
   </section>
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-  <script src="./assets/js/login.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script src="./assets/js/login.js"></script>
 </body>
-
 </html>

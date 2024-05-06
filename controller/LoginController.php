@@ -1,6 +1,5 @@
 <?php
 require "./model/UserModel.php";
-require './vendor/autoload.php';
 class LoginController
 {
     private $userModel;
@@ -28,12 +27,14 @@ class LoginController
         $user = $this->userModel->get('users', ["email" => $data["email"]], 'password');
         if ($user) {
             if (password_verify($data['password'], $user->password)) {
-                header('location: ListContactsController.php?type=index');
+                header('location: ./listcontacts');
             } else {
-                header("location: ./view/login.php");
+                $message = "Incorrect password";
+                require_once './view/login.php';            
             }
         } else {
-            echo "User not found";
+            $message = "User not found";
+            require_once './view/login.php';
         }
     }
 }
