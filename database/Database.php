@@ -2,25 +2,21 @@
 
 class Database
 {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pass = 'password';
-    private $dbname = 'address_book';
-
     private $dbh;
     private $stmt;
     private $error;
 
     public function __construct()
     {
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        require './config/config.php';
+        $dsn = 'mysql:host=' . host . ';dbname=' . dbname;
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         );
 
         try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->dbh = new PDO($dsn, user, pass, $options);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;

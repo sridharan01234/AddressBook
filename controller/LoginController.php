@@ -1,7 +1,6 @@
 <?php
 require "../Model/UserModel.php";
 require '../vendor/autoload.php';
-require '../Helper/SessionHelper.php';
 class LoginController
 {
     private $userModel;
@@ -26,15 +25,12 @@ class LoginController
             'email' => $_POST['email'],
             'password' => $_POST['password'], PASSWORD_DEFAULT,
         ];
-        $user = $this->userModel->get('users', ["email" => $data["email"]], '*');
+        $user = $this->userModel->get('users', ["email" => $data["email"]], 'password');
         if ($user) {
             if (password_verify($data['password'], $user->password)) {
-                $_SESSION['user_id'] = $user->id;
                 header('location: ListContactsController.php?type=index');
-                exit;
             } else {
                 header("location: ../View/login.php");
-                exit;
             }
         } else {
             echo "User not found";
