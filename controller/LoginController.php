@@ -3,6 +3,6 @@ class LoginController
 {
     public function index()
     {
-        echo "Login comming soon...";
+        echo "<h1>Login comming soon...</h1>";
     }
 }
