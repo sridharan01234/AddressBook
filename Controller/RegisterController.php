@@ -1,6 +1,5 @@
 <?php
 require "../Model/UserModel.php";
-require '../vendor/autoload.php';
 class RegisterController
 {
     private $userModel;
