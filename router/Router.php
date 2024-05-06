@@ -6,6 +6,8 @@ class Router
     /**
      * Add application paths
      *
+     * @param string $path
+     * @param array $param
      * @return void
      */
     public function add(string $path, array $param): void
@@ -19,7 +21,8 @@ class Router
     /**
      * Searchs path
      *
-     * @return mixed
+     * @param string $uri
+     * @return bool|array
      */
     public function searchPath(string $uri): bool|array
     {

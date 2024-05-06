@@ -43,6 +43,7 @@ class Database
      * @param mixed $param The parameter identifier.
      * @param mixed $value The value to bind to the parameter.
      * @param int $type (optional) The PDO parameter type.
+     *
      */
     public function bind($param, $value, $type = null)
     {
@@ -129,7 +130,7 @@ class Database
     /**
      * Converts array into sql insert statements
      *
-     * @param data array
+     * @param $data array
      * @return string
      */
     public function arrayToInsert(array $data): string
@@ -137,8 +138,13 @@ class Database
         $str = "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";
         return $str;
     }
-
-    public function arrayToColumns($columns)
+    /**
+     * Converts array of column names into sql format column parameter
+     *
+     * @param array $columns
+     * @return string
+     */
+    public function arrayToColumns(array $columns): string
     {
         return "(" . implode(",", $columns) . ")";
     }
@@ -146,7 +152,7 @@ class Database
     /**
      * Converts array into sql set statements
      *
-     * @param data array
+     * @param $data array
      * @return string
      */
     public function setValues(array $data): string
@@ -161,7 +167,7 @@ class Database
     /**
      * Converts array into sql conditional statement
      *
-     * @param data array
+     * @param $data array
      * @return string
      */
     public function arrayToCondition(array $data): string
@@ -180,8 +186,8 @@ class Database
     /**
      * Dynamically delete rows from db
      *
-     * @param table string
-     * @param condition array
+     * @param $table string
+     * @param $condition array
      * @return mixed
      */
     public function delete(string $table, array $condition): mixed
@@ -206,8 +212,8 @@ class Database
     /**
      * Dynamically retrive rows from db
      *
-     * @param table string
-     * @param condition array
+     * @param $table string
+     * @param $condition array
      * @return mixed
      */
     public function get(string $table, array $condition, array|string $columns): mixed
@@ -233,15 +239,13 @@ class Database
     /**
      * Dynamically retrive rows from db
      *
-     * @param table string
-     * @param data array
+     * @param $table string
+     * @param $data array
      * @return mixed
      */
-    public function insert(string $table, array $data, int $id)
+    public function insert(string $table, array $data, int $id): mixed
     {
         $data['id'] = $id;
-        //var_dump($data);
-        //echo'<br>';
         $query = "INSERT INTO $table ";
         if (is_array($data)) {
             $query = $query . $this->arrayToInsert($data);
@@ -264,9 +268,9 @@ class Database
     /**
      * Dynamically update rows from db
      *
-     * @param table string
-     * @param condition array
-     * @param data array
+     * @param $table string
+     * @param $condition array
+     * @param $data array
      * @return mixed
      */
     public function update(string $table, array $data, array $condition): mixed
