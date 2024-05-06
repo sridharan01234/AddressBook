@@ -1,20 +1,29 @@
 <?php
-require "./model/UserModel.php";
-require './vendor/autoload.php';
+require "./database/Database.php";
 class RegisterController
 {
-    private $userModel;
+    private $db;
+
     public function __construct()
     {
-        $this->userModel = new UserModel();
+        $this->db = new Database();
     }
-
-    public function index()
+    /**
+     * Displays index function
+     * 
+     * @return void
+     */
+    public function index(): void
     {
         require_once "./view/register.php";
     }
 
-    public function register()
+    /**
+     * Checks duplicate user and registers using Database class
+     * 
+     * @return void
+     */
+    public function register(): void
     {
         $data = [
             "name" => $_POST["first_name"] . $_POST['last_name'],
@@ -23,8 +32,8 @@ class RegisterController
             "first_name" => $_POST["first_name"],
             "last_name" => $_POST["last_name"],
         ];
-        if (!$this->userModel->get("users", ["email" => $data["email"]], "*")) {
-            if ($this->userModel->insert("users", $data, 1)) {
+        if (!$this->db->get("users", ["email" => $data["email"]], "*")) {
+            if ($this->db->insert("users", $data, 1)) {
                 $message = "Email Successfully Registered";
                 require_once "./view/register.php";
             }
@@ -44,9 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             default:
                 header('location: ./');
         }
-    }
-    else
-    {
+    } else {
         $init->index();
     }
 }
