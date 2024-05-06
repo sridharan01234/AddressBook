@@ -2,6 +2,12 @@
 class Router
 {
     private $routes;
+
+    /**
+     * Add application paths
+     *
+     * @return void
+     */
     public function add(string $path, array $param): void
     {
         $this->routes[] = [
@@ -9,7 +15,13 @@ class Router
             "params" => $param,
         ];
     }
-    public function searchPath(string $uri): bool | array
+
+    /**
+     * Searchs path
+     *
+     * @return mixed
+     */
+    public function searchPath(string $uri): bool|array
     {
         foreach ($this->routes as $path) {
             if ($path['path'] === $uri) {
