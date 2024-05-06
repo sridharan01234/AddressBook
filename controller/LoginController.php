@@ -1,15 +1,6 @@
 <?php
-<<<<<<< HEAD:controller/LoginController.php
-class LoginController
-{
-    public function index()
-    {
-        echo "Login comming soon...";
-    }
-}
-=======
-require "../Model/UserModel.php";
-require '../vendor/autoload.php';
+require "./model/UserModel.php";
+require './vendor/autoload.php';
 class LoginController
 {
     private $userModel;
@@ -23,7 +14,7 @@ class LoginController
      */
     public function index(): void
     {
-        require_once '../View/login.php';
+        require_once './View/login.php';
     }
     /**
      * Login controller verifies user and password from db using userModel
@@ -68,4 +59,3 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             break;
     }
 }
->>>>>>> 9e71069166b2a26e6ac58f25015359524ef731ed:Controller/LoginController.php

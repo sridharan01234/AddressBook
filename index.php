@@ -1,14 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="Controller/RegisterController.php" method="get">
-        <input type="hidden" name="type" value="index">
-        <button>Register Page</button>
-    </form>
-</body>
-</html>
+<?php
+require "router/Route.php";
+$path = $_SERVER['REQUEST_URI'];
+if (strpos($path, '?')) {
+    $path = substr($path, 0, strpos($path, '?'));
+}
+
+$router = new Router;
+
+$router->add("/", array('Controller' => 'RegisterController', 'action' => 'index'));
+$router->add("/register", array('Controller' => 'RegisterController', 'action' => 'index'));
+$router->add("/login", array('Controller' => 'LoginController', 'action' => 'index'));
+
+$param = $router->searchPath($path);
+if (!$param) {
+    echo 'Page Not Found';
+    exit;
+}
+
+$controller = $param['Controller'];
+$action = $param['action'];
+
+require "controller/$controller.php";
+
+$controller_object = new $controller();
+$controller_object->$action();
