@@ -1,5 +1,5 @@
 <?php
-require "router/Route.php";
+require "router/Router.php";
 $path = $_SERVER['REQUEST_URI'];
 if (strpos($path, '?')) {
     $path = substr($path, 0, strpos($path, '?'));
