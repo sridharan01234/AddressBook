@@ -87,7 +87,33 @@ class UserModel
         }
         return $this->db->affected_rows();
     }
-
+    /**
+     * Dynamically retrive rows from db
+     *
+     * @param table string
+     * @param condition array
+     * @return mixed
+     */
+    public function getAll(string $table, array $condition, array|string $columns): mixed
+    {
+        if(is_array($columns)) {
+            $query = "SELECT ".$this->arrayToColumns($columns)." FROM $table ";
+        }
+        else {
+            $query = "SELECT $columns FROM $table ";
+        }
+        if (is_array($condition)) {
+            $query = $query . $this->arrayToCondition($condition);
+        } else {
+            $query = "SELECT * FROM $table";
+        }
+        $this->db->query($query);
+        $row = $this->db->resultSet();
+        if ($row) {
+            return $row;
+        }
+        return false;
+    }
     /**
      * Dynamically retrive rows from db
      *
@@ -116,8 +142,8 @@ class UserModel
         return false;
     }
 
-        /**
-     * Dynamically retrive rows from db
+    /**
+     * Dynamically insert rows from db
      *
      * @param table string
      * @param data array
@@ -126,8 +152,6 @@ class UserModel
     public function insert(string $table, array $data,int $id)
     {
         $data['id'] = $id;
-        //var_dump($data);
-        //echo'<br>';
         $query = "INSERT INTO $table ";
         if (is_array($data)) {
             $query = $query . $this->arrayToInsert($data);
@@ -137,8 +161,8 @@ class UserModel
             $this->db->execute();
         } catch (Exception $e) {
             error_log($e->getMessage());
-            
         }
+        var_dump($data);
         if($this->db->affected_rows() == 0) {
             if($this->db->errorCode() == 23000) {
                 $this->insert($table, $data,++$id);
