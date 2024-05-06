@@ -14,7 +14,7 @@ class LoginController
      */
     public function index(): void
     {
-        require_once './View/login.php';
+        require_once './view/login.php';
     }
     /**
      * Login controller verifies user and password from db using userModel
@@ -30,7 +30,7 @@ class LoginController
             if (password_verify($data['password'], $user->password)) {
                 header('location: ListContactsController.php?type=index');
             } else {
-                header("location: ../View/login.php");
+                header("location: ./view/login.php");
             }
         } else {
             echo "User not found";
