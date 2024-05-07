@@ -1,12 +1,13 @@
 <?php
 require "./model/UserModel.php";
+
 class RegisterController
 {
-    private $db;
+    private $model;
 
     public function __construct()
     {
-        $this->db = new UserModel();
+        $this->model = new UserModel();
     }
     
     /**
@@ -33,8 +34,8 @@ class RegisterController
             "first_name" => $_POST["first_name"],
             "last_name" => $_POST["last_name"],
         ];
-        if (!$this->db->get("users", ["email" => $data["email"]], "*")) {
-            if ($this->db->insert("users", $data, 1)) {
+        if (!$this->model->verifyEmail($data['email'])) {
+            if ($this->model->registerUser($data)) {
                 $message = "Email Successfully Registered";
             }
         } else {
@@ -43,6 +44,10 @@ class RegisterController
         require_once "./view/register.php";
     }
 }
+
+/**
+ * For handling requests
+ */
 $init = new RegisterController();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch ($_POST['type']) {
