@@ -223,12 +223,12 @@ class Database
      * 
      * @return mixed
      */
-    public function get(string $table, array $condition, array|string $columns): mixed
+    public function get(string $table, array $condition, array $columns): mixed
     {
-        if (is_array($columns)) {
+        if (!empty($columns)) {
             $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
         } else {
-            $query = "SELECT $columns FROM $table ";
+            $query = "SELECT * FROM $table ";
         }
         if (is_array($condition)) {
             $query = $query . $this->arrayToCondition($condition);

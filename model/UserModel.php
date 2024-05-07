@@ -3,7 +3,7 @@ require "./database/Database.php";
 
 class UserModel extends Database
 {
-    
+
     /**
      * Verifies email is existing or not in db
      * 
@@ -13,7 +13,7 @@ class UserModel extends Database
      */
     public function verifyEmail(string $email): mixed
     {
-        return $this->get("users",['email'=>$email], "*");
+        return $this->get("users",['email'=>$email], []);
     }
     
     /**
@@ -25,6 +25,6 @@ class UserModel extends Database
      */
     public function registerUser(array $data): mixed
     {
-        return $this->insert("users", $data, 1);
+        return $this->insert("users", $data);
     }
 }
