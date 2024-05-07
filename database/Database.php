@@ -1,4 +1,5 @@
 <?php
+require './config/config.php'; // Include the database configuration file
 
 class Database
 {
@@ -12,8 +13,7 @@ class Database
      */
     public function __construct()
     {
-        require './config/config.php'; // Include the database configuration file
-        $dsn = 'mysql:host=' . host . ';dbname=' . dbname; // Construct the Data Source Name (DSN)
+        $dsn =  sprintf("mysql:host=%s;dbname=%s",host,dbname); // Construct the Data Source Name (DSN)
         $options = array(
             PDO::ATTR_PERSISTENT => true, // Enable persistent connections
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Set error mode to exceptions
@@ -31,8 +31,9 @@ class Database
      * Prepare a SQL query.
      *
      * @param string $sql The SQL query to prepare.
+     * @return void
      */
-    public function query($sql)
+    public function query(string $sql): void
     {
         $this->stmt = $this->dbh->prepare($sql);
     }
@@ -44,8 +45,9 @@ class Database
      * @param mixed $value The value to bind to the parameter.
      * @param int $type (optional) The PDO parameter type.
      *
+     * @return void
      */
-    public function bind($param, $value, $type = null)
+    public function bind(mixed $param, mixed $value, $type = null): void
     {
         if (is_null($type)) {
             switch (true) {
@@ -70,7 +72,7 @@ class Database
      *
      * @return bool True on success, false on failure.
      */
-    public function execute()
+    public function execute(): bool
     {
         return $this->stmt->execute();
     }
@@ -80,7 +82,7 @@ class Database
      *
      * @return array|false An array of objects representing the result set, or false on failure.
      */
-    public function resultSet()
+    public function resultSet(): array|false
     {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
@@ -91,7 +93,7 @@ class Database
      *
      * @return object|false The next row from the result set, or false if no rows are left.
      */
-    public function single()
+    public function single(): object|false 
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
@@ -102,7 +104,7 @@ class Database
      *
      * @return int The number of rows affected.
      */
-    public function rowCount()
+    public function rowCount(): int
     {
         return $this->stmt->rowCount();
     }
@@ -112,7 +114,7 @@ class Database
      *
      * @return int The number of rows affected.
      */
-    public function affected_rows()
+    public function affected_rows(): int
     {
         return $this->stmt->rowCount();
     }
@@ -122,7 +124,7 @@ class Database
      *
      * @return string The SQLSTATE error code.
      */
-    public function errorCode()
+    public function errorCode(): string
     {
         return $this->stmt->errorCode();
     }
@@ -131,6 +133,7 @@ class Database
      * Converts array into sql insert statements
      *
      * @param $data array
+     * 
      * @return string
      */
     public function arrayToInsert(array $data): string
@@ -142,6 +145,7 @@ class Database
      * Converts array of column names into sql format column parameter
      *
      * @param array $columns
+     * 
      * @return string
      */
     public function arrayToColumns(array $columns): string
@@ -153,6 +157,7 @@ class Database
      * Converts array into sql set statements
      *
      * @param $data array
+     * 
      * @return string
      */
     public function setValues(array $data): string
@@ -168,6 +173,7 @@ class Database
      * Converts array into sql conditional statement
      *
      * @param $data array
+     * 
      * @return string
      */
     public function arrayToCondition(array $data): string
@@ -188,6 +194,7 @@ class Database
      *
      * @param $table string
      * @param $condition array
+     * 
      * @return mixed
      */
     public function delete(string $table, array $condition): mixed
@@ -214,6 +221,7 @@ class Database
      *
      * @param $table string
      * @param $condition array
+     * 
      * @return mixed
      */
     public function get(string $table, array $condition, array|string $columns): mixed
@@ -241,6 +249,7 @@ class Database
      *
      * @param $table string
      * @param $data array
+     * 
      * @return mixed
      */
     public function insert(string $table, array $data, int $id): mixed
@@ -271,6 +280,7 @@ class Database
      * @param $table string
      * @param $condition array
      * @param $data array
+     * 
      * @return mixed
      */
     public function update(string $table, array $data, array $condition): mixed
