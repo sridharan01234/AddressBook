@@ -12,7 +12,7 @@ class Database
      */
     public function __construct()
     {
-        require './config/config.php'; // Include the database configuration file
+        require_once './config/config.php'; // Include the database configuration file
         $dsn = 'mysql:host=' . host . ';dbname=' . dbname; // Construct the Data Source Name (DSN)
         $options = array(
             PDO::ATTR_PERSISTENT => true, // Enable persistent connections
