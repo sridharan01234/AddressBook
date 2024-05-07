@@ -22,8 +22,7 @@ class Database
         try {
             $this->dbh = new PDO($dsn, user, pass, $options); // Create a new PDO instance
         } catch (PDOException $e) {
-            $this->error = $e->getMessage(); // Capture any errors
-            echo $this->error; // Output the error message
+            error_log($e->getMessage()); //Logs error
         }
     }
 
@@ -252,9 +251,8 @@ class Database
      * 
      * @return mixed
      */
-    public function insert(string $table, array $data, int $id): mixed
+    public function insert(string $table, array $data): mixed
     {
-        $data['id'] = $id;
         $query = "INSERT INTO $table ";
         if (is_array($data)) {
             $query = $query . $this->arrayToInsert($data);
@@ -267,11 +265,10 @@ class Database
 
         }
         if ($this->affected_rows() == 0) {
-            if ($this->errorCode() == 23000) {
-                $this->insert($table, $data, ++$id);
-            }
+            return false;
         }
-        return $id;
+        return true;
+
     }
 
     /**
