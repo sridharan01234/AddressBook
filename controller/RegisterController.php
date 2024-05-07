@@ -1,12 +1,12 @@
 <?php
-require "./database/Database.php";
+require "./model/UserModel.php";
 class RegisterController
 {
     private $db;
 
     public function __construct()
     {
-        $this->db = new Database();
+        $this->db = new UserModel();
     }
     
     /**
@@ -27,7 +27,7 @@ class RegisterController
     public function register(): void
     {
         $data = [
-            "name" => $_POST["first_name"] . $_POST['last_name'],
+            "name" => sprintf("%s%s",$_POST["first_name"],$_POST["last_name"]),
             "email" => $_POST["email"],
             "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
             "first_name" => $_POST["first_name"],
@@ -36,12 +36,11 @@ class RegisterController
         if (!$this->db->get("users", ["email" => $data["email"]], "*")) {
             if ($this->db->insert("users", $data, 1)) {
                 $message = "Email Successfully Registered";
-                require_once "./view/register.php";
             }
         } else {
             $error = "Email Already Registered";
-            require_once "./view/register.php";
         }
+        require_once "./view/register.php";
     }
 }
 $init = new RegisterController();
