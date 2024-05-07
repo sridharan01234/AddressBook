@@ -9,7 +9,6 @@ $router = new Router;
 
 $router->add("/", array('Controller' => 'RegisterController', 'action' => 'index'));
 $router->add("/register", array('Controller' => 'RegisterController', 'action' => 'index'));
-$router->add("/login", array('Controller' => 'LoginController', 'action' => 'index'));
 
 $param = $router->searchPath($path);
 if (!$param) {
