@@ -12,7 +12,7 @@ $router->add("/register", array('Controller' => 'RegisterController', 'action' =
 
 $param = $router->searchPath($path);
 if (!$param) {
-    echo 'Page Not Found';
+    require_once './view/PageNotFound.php';
     exit;
 }
 
