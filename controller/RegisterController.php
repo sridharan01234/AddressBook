@@ -8,6 +8,7 @@ class RegisterController
     {
         $this->db = new Database();
     }
+    
     /**
      * Displays index function
      * 
@@ -44,20 +45,6 @@ class RegisterController
     }
 }
 $init = new RegisterController();
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['type'])) {
-        switch ($_GET['type']) {
-            case 'index':
-                $init->index();
-                break;
-            default:
-                header('location: ./');
-        }
-    } else {
-        $init->index();
-    }
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch ($_POST['type']) {
         case 'register':
