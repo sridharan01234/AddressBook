@@ -17,7 +17,7 @@ class RegisterController
      */
     public function index(): void
     {
-        require_once "./view/register.php";
+        require_once "./view/Register.php";
     }
 
     /**
@@ -41,7 +41,7 @@ class RegisterController
         } else {
             $error = "Email Already Registered";
         }
-        require_once "./view/register.php";
+        require_once "./view/Register.php";
     }
 }
 
