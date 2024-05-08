@@ -142,8 +142,7 @@ class AuthController extends BaseController
                 echo $error;
             }
         }
-        //$this->render("Register");
-        include './view/Register.php';
+        $this->render("Register");
         exit;
     }
 }
