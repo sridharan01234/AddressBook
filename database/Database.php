@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * This file contains database actions
+ * 
+ * Author : sridharan
+ * Email : sridharan01234@gmail.com
+ * Last modified : 8/5/2024
+ */
 require './config/config.php'; // Include the database configuration file
 
 class Database

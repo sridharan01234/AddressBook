@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * This file contains user auth database actions
+ * 
+ * Author : sridharan
+ * Email : sridharan01234@gmail.com
+ * Last modified : 8/5/2024
+ */
+
 require "./database/Database.php";
 
 class UserModel extends Database

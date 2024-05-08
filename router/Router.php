@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * This file contains routing functionalities
+ * 
+ * Author : sridharan
+ * Email : sridharan01234@gmail.com
+ * Last modified : 8/5/2024
+ */
+
 class Router
 {
     private $routes;
