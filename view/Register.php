@@ -91,7 +91,7 @@
       </div>
     </div>
   </section>
-  <!-- <script src="./assets/js/register.js"></script> -->
+  <script src="./assets/js/register.js"></script>
 </body>
 
 </html>
