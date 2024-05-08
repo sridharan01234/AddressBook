@@ -8,10 +8,12 @@ class BaseController
      * 
      * @return void 
      */
-    public function render(string $file): void
+    public function render(string $file, $variables): void
     {
-        include sprintf("./view/%s.php",$file);
+        $data = $variables;
+        include_once sprintf("./view/%s.php", $file);
     }
+    
 
     /**
      * Redirest pages dynamically
