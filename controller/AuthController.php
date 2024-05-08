@@ -11,6 +11,13 @@ class AuthController extends BaseController
         $this->model = new UserModel();
     }
 
+    public function httpResponse($error)  {
+        header_remove();
+        header("Content-Type: application/json");
+        http_response_code(200);
+        echo json_encode($error);
+        exit();
+    }
     /**
      * Validates register form entries
      * 
@@ -21,92 +28,52 @@ class AuthController extends BaseController
 
         if (strlen($_POST['first_name']) == 0) {
             $error = "please enter first name";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
         
         if (strlen($_POST['last_name']) == 0) {
             $error = "please enter last name";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strlen($_POST['email']) == 0) {
             $error = "please enter email ";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strlen($_POST['password']) == 0) {
             $error = "please enter password";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strlen($_POST['repeat_password']) == 0) {
             $error = "please enter confirm password";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strlen($_POST['password']) != strlen($_POST['repeat_password']) || $_POST['password'] != $_POST['repeat_password']) {
             $error = "password does not match";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (!strpos($_POST['email'], '@')) {
             $error = "Enter a valid email @ not found";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (!strpos($_POST['email'], '.')) {
             $error = "Enter a valid email . not found";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strpos($_POST['email'], '.') == strlen($_POST['email']) - 1 || strpos($_POST['email'], '.') == 0 || strpos($_POST['email'], '.') < strpos($_POST['email'], '@')) {
             $error = "Enter a valid email";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         if (strpos($_POST['email'], '@') == strlen($_POST['email']) - 1 || strpos($_POST['email'], '@') <= 2) {
             $error = "Enter a valid email";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         }
 
         $uppercase = preg_match('@[A-Z]@', $_POST['password']);
@@ -116,11 +83,7 @@ class AuthController extends BaseController
 
         if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($_POST['password']) < 8) {
             $error = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
+            $this->httpResponse($error);
         } else {
             return true;
         }
