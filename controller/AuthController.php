@@ -27,6 +27,7 @@ class AuthController extends BaseController
             echo json_encode($error);
             exit();
         }
+        
         if (strlen($_POST['last_name']) == 0) {
             $error = "please enter last name";
             header_remove();
@@ -35,6 +36,7 @@ class AuthController extends BaseController
             echo json_encode($error);
             exit();
         }
+
         if (strlen($_POST['email']) == 0) {
             $error = "please enter email ";
             header_remove();
@@ -43,6 +45,7 @@ class AuthController extends BaseController
             echo json_encode($error);
             exit();
         }
+
         if (strlen($_POST['password']) == 0) {
             $error = "please enter password";
             header_remove();
@@ -51,6 +54,7 @@ class AuthController extends BaseController
             echo json_encode($error);
             exit();
         }
+
         if (strlen($_POST['repeat_password']) == 0) {
             $error = "please enter confirm password";
             header_remove();
@@ -59,8 +63,35 @@ class AuthController extends BaseController
             echo json_encode($error);
             exit();
         }
-        if (strpos($_POST['email'],'@'))
-        {
+
+        if (strlen($_POST['password']) != strlen($_POST['repeat_password']) || $_POST['password'] != $_POST['repeat_password']) {
+            $error = "password does not match";
+            header_remove();
+            header("Content-Type: application/json");
+            http_response_code(200);
+            echo json_encode($error);
+            exit();
+        }
+
+        if (!strpos($_POST['email'], '@')) {
+            $error = "Enter a valid email @ not found";
+            header_remove();
+            header("Content-Type: application/json");
+            http_response_code(200);
+            echo json_encode($error);
+            exit();
+        }
+
+        if (!strpos($_POST['email'], '.')) {
+            $error = "Enter a valid email . not found";
+            header_remove();
+            header("Content-Type: application/json");
+            http_response_code(200);
+            echo json_encode($error);
+            exit();
+        }
+
+        if (strpos($_POST['email'], '.') == strlen($_POST['email']) - 1 || strpos($_POST['email'], '.') == 0 || strpos($_POST['email'], '.') < strpos($_POST['email'], '@')) {
             $error = "Enter a valid email";
             header_remove();
             header("Content-Type: application/json");
@@ -69,28 +100,7 @@ class AuthController extends BaseController
             exit();
         }
 
-        if (strpos($_POST['email'],'.'))
-        {
-            $error = "Enter a valid email";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
-        }
-
-        if (strpos($_POST['email'],'.') == strlen($_POST['email']) || strpos($_POST['email'],'.') == 0 || strpos($_POST['email'],'.') < strpos($_POST['email'],'@') )
-        {
-            $error = "Enter a valid email";
-            header_remove();
-            header("Content-Type: application/json");
-            http_response_code(200);
-            echo json_encode($error);
-            exit();
-        }
-
-        if (strpos($_POST['email'],'@') == strlen($_POST['email']) || strpos($_POST['email'],'@') <=2)
-        {
+        if (strpos($_POST['email'], '@') == strlen($_POST['email']) - 1 || strpos($_POST['email'], '@') <= 2) {
             $error = "Enter a valid email";
             header_remove();
             header("Content-Type: application/json");
