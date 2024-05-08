@@ -38,35 +38,6 @@ class Database
     }
 
     /**
-     * Bind a parameter to the specified value and type.
-     *
-     * @param mixed $param The parameter identifier.
-     * @param mixed $value The value to bind to the parameter.
-     * @param int $type (optional) The PDO parameter type.
-     *
-     * @return void
-     */
-    public function bind(mixed $param, mixed $value, $type = null): void
-    {
-        if (is_null($type)) {
-            switch (true) {
-                case is_int($value):
-                    $type = PDO::PARAM_INT;
-                    break;
-                case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
-                    break;
-                case is_null($value):
-                    $type = PDO::PARAM_NULL;
-                    break;
-                default:
-                    $type = PDO::PARAM_STR;
-            }
-        }
-        $this->stmt->bindValue($param, $value, $type);
-    }
-
-    /**
      * Execute a prepared statement.
      *
      * @return bool True on success, false on failure.
