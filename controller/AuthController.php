@@ -20,18 +20,14 @@ class AuthController extends BaseController
      */
     public function errorResponse(string $error): void
     {
-        header_remove();
-        header("Content-Type: application/json");
-        http_response_code(200);
-        echo json_encode($error);
-        exit();
+        $this->render("Register",['error'=>$error]);
+        exit;
     }
     /**
      * Validates register form entries
      * 
-     * @return bool
      */
-    public function validateRegisterEntries(): bool
+    public function validateRegisterEntries()
     {
 
         if (strlen($_POST['first_name']) == 0) {
