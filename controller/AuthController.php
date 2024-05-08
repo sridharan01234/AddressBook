@@ -57,7 +57,7 @@ class AuthController extends BaseController
     private function errorResponse(string $error): void
     {
         $this->render("Register", ['error' => $error]);
-        exit;
+        return;
     }
 
     /**
