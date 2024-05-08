@@ -19,7 +19,7 @@ if (!$param) {
 $controller = $param['Controller'];
 $action = $param['action'];
 
-require "controller/$controller.php";
+require sprintf("controller/%s.php",$controller);
 
 $controller_object = new $controller();
 $controller_object->$action();
