@@ -27,14 +27,20 @@
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
             <div style="display:<?php if (isset($data['message'])) {
-              echo " block"; } else { echo "none" ; } ?>;" class="p-4 mb-4
+              echo " block";
+            } else {
+              echo "none";
+            } ?>;" class="p-4 mb-4
               text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
               dark:text-green-400" role="alert">
               <span class="font-medium">Success !</span>
               <?php echo $data['message'] ?>
             </div>
             <div style="display:<?php if (isset($data['error'])) {
-              echo " block"; } else { echo "none" ; } ?>;" class="p-4 mb-4
+              echo " block";
+            } else {
+              echo "none";
+            } ?>;" class="p-4 mb-4
               text-sm text-red-800 rounded-lg bg-red-50
               dark:bg-gray-800 dark:text-red-400" role="alert">
               <span class="font-medium">Oops!</span>
