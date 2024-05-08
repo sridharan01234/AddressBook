@@ -25,7 +25,7 @@
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Create and account
           </h1>
-          <form class="space-y-4 md:space-y-6" action id="register-form" method="post">
+          <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
             <div style="display:<?php if (isset($message)) {
               echo " block"; } else { echo "none" ; } ?>;" class="p-4 mb-4
               text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
