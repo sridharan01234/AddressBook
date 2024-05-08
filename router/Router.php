@@ -28,7 +28,7 @@ class Router
     }
 
     /**
-     * Searchs path
+     * Search path
      *
      * @param string $uri
      * @return bool|array
