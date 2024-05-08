@@ -10,11 +10,11 @@
 
 require "./database/Database.php";
 
-class UserModel extends Database
+class AuthModel extends Database
 {
 
     /**
-     * Verifies email is existing or not in db
+     * Verify email is existing or not in db
      * 
      * @param string $email
      * 
@@ -26,7 +26,7 @@ class UserModel extends Database
     }
     
     /**
-     * Registers user in database
+     * Register user in database
      * 
      * @param array $data
      * 

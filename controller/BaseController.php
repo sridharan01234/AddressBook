@@ -11,20 +11,21 @@
 class BaseController
 {
     /**
-     * Renders pages dynamically
+     * Render pages dynamically
      * 
      * @param string $file
+     * @param array $messages
      * 
      * @return void 
      */
-    protected function render(string $file, $variables): void
+    protected function render(string $file,array $messages): void
     {
-        $data = $variables;
+        $data = $messages;
         include_once sprintf("./view/%s.php", $file);
     }
     
     /**
-     * Redirest pages dynamically
+     * Redirect pages dynamically
      * 
      * @param string $path
      * 
@@ -33,5 +34,6 @@ class BaseController
     protected function redirect(string $path): void
     {
         header(sprintf("location: %s",$path));
+        exit;
     }
 }

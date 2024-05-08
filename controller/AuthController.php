@@ -8,7 +8,7 @@
  * Last modified : 8/5/2024
  */
 
-require "./model/UserModel.php";
+require "./model/AuthModel.php";
 require_once "BaseController.php";
 
 class AuthController extends BaseController
@@ -17,15 +17,15 @@ class AuthController extends BaseController
 
     public function __construct()
     {
-        $this->model = new UserModel();
+        $this->model = new AuthModel();
     }
 
     /**
-     * Checks duplicate user and registers using Database class
+     * Validate duplicate user and add user
      * 
      * @return void
      */
-    protected function register(): void
+    public function register(): void
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $this->validateRegisterEntries();
@@ -45,11 +45,10 @@ class AuthController extends BaseController
             }
         }
         $this->render("Register", $data);
-        exit;
     }
 
     /**
-     * sends error in json format
+     * Send error to view page
      * 
      * @param string $error
      * 
@@ -62,7 +61,7 @@ class AuthController extends BaseController
     }
 
     /**
-     * Validates register form entries
+     * Validate register form entries
      * 
      * @return void
      */
