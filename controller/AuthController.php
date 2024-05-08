@@ -144,15 +144,13 @@ class AuthController extends BaseController
             ];
             if (!$this->model->verifyEmail($data['email'])) {
                 if ($this->model->registerUser($data)) {
-                    $message = "Email Successfully Registered";
-                    echo $message;
+                    $data = ['message'=>'Email Successfully Registered'];
                 }
             } else {
-                $error = "Email Already Registered";
-                echo $error;
+                $data = ['error'=>'Email Already Registered'];
             }
         }
-        $this->render("Register");
+        $this->render("Register",$data);
         exit;
     }
 }
