@@ -48,6 +48,6 @@ jQuery.validator.addMethod(
 );
 
 setTimeout(function() {
-$("#error").fadeOut("fast");
-$("#message").fadeOut("fast");
+$("#error").hide("slow");
+$("#message").hide("slow");
 },5000);
