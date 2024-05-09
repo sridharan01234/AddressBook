@@ -117,8 +117,7 @@ class Database
      */
     public function arrayToInsert(array $data): string
     {
-        $str = "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";
-        return $str;
+        return "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";;
     }
     /**
      * Converts array of column names into sql format column parameter
@@ -145,6 +144,7 @@ class Database
         foreach ($data as $key => $value) {
             $str .= $key . "= '" . $value . "' ,";
         }
+
         return substr($str, 0, strlen($str) - 1);
     }
 
@@ -165,6 +165,7 @@ class Database
             }
             $str = $str . $key . "=" . "'" . $value . "'";
         }
+
         return $str;
     }
 
@@ -192,6 +193,7 @@ class Database
             var_dump($e->getMessage());
             error_log($e->getMessage());
         }
+
         return $this->affected_rows();
     }
 
@@ -239,8 +241,8 @@ class Database
             $this->execute();
         } catch (Exception $e) {
             error_log($e->getMessage());
-
         }
+
         return $this->affected_rows();
 
     }
