@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains register actions
+ * This file contains auth actions
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
@@ -13,7 +13,7 @@ require_once "BaseController.php";
 
 class AuthController extends BaseController
 {
-    private const post = 'POST';
+    private const POST = 'POST';
     private $model;
 
     public function __construct()
@@ -29,7 +29,7 @@ class AuthController extends BaseController
     public function register(): void
     {
         $data = [];
-        if ($_SERVER['REQUEST_METHOD'] === self::post) {
+        if ($_SERVER['REQUEST_METHOD'] === self::POST) {
             $message = $this->validateRegisterEntries();
             if (!$message) {
                 $data = [

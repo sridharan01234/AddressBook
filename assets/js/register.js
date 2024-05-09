@@ -58,6 +58,6 @@ jQuery.validator.addMethod(
 );
 
 $(document).ready(function () {
-  $("#error").fadeOut(5000);
-  $("#message").fadeOut(5000);
+  $("#error").slideUp(3000);
+  $("#message").slideUp(3000);
 });
