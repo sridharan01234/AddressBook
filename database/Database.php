@@ -5,7 +5,7 @@
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
- * Last modified : 8/5/2024
+ * Last modified : 9/5/2024
  */
 
 require './config/config.php'; // Include the database configuration file
@@ -22,7 +22,7 @@ class Database
      */
     public function __construct()
     {
-        $dsn =  sprintf("mysql:host=%s;dbname=%s",host,dbname); // Construct the Data Source Name (DSN)
+        $dsn = sprintf("mysql:host=%s;dbname=%s", host, dbname); // Construct the Data Source Name (DSN)
         $options = array(
             PDO::ATTR_PERSISTENT => true, // Enable persistent connections
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Set error mode to exceptions
@@ -72,7 +72,7 @@ class Database
      *
      * @return object|false The next row from the result set, or false if no rows are left.
      */
-    public function single(): object|false 
+    public function single(): object|false
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
@@ -174,9 +174,9 @@ class Database
      * @param $table string
      * @param $condition array
      * 
-     * @return mixed
+     * @return bool
      */
-    public function delete(string $table, array $condition): mixed
+    public function delete(string $table, array $condition): bool
     {
         $query = "DELETE FROM $table ";
         if (is_array($condition)) {
@@ -201,9 +201,9 @@ class Database
      * @param $table string
      * @param $condition array
      * 
-     * @return mixed
+     * @return bool|object
      */
-    public function get(string $table, array $condition, array $columns): mixed
+    public function get(string $table, array $condition, array $columns): bool|object
     {
         if (!empty($columns)) {
             $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
@@ -216,11 +216,8 @@ class Database
             $query = "SELECT * FROM $table";
         }
         $this->query($query);
-        $row = $this->single();
-        if ($row) {
-            return $row;
-        }
-        return false;
+
+        return $this->single();
     }
 
     /**
@@ -229,9 +226,9 @@ class Database
      * @param $table string
      * @param $data array
      * 
-     * @return mixed
+     * @return bool
      */
-    public function insert(string $table, array $data): mixed
+    public function insert(string $table, array $data): bool
     {
         $query = "INSERT INTO $table ";
         if (is_array($data)) {
@@ -244,10 +241,7 @@ class Database
             error_log($e->getMessage());
 
         }
-        if ($this->affected_rows() == 0) {
-            return false;
-        }
-        return true;
+        return $this->affected_rows();
 
     }
 
@@ -258,9 +252,9 @@ class Database
      * @param $condition array
      * @param $data array
      * 
-     * @return mixed
+     * @return bool
      */
-    public function update(string $table, array $data, array $condition): mixed
+    public function update(string $table, array $data, array $condition): bool
     {
         $query = "UPDATE $table ";
         if (is_array($data)) {
@@ -277,6 +271,7 @@ class Database
         } catch (Exception $e) {
             error_log($e->getMessage());
         }
+
         return $this->affected_rows();
 
     }

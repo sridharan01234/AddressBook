@@ -5,7 +5,7 @@
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
- * Last modified : 8/5/2024
+ * Last modified : 9/5/2024
  */
 
 require "./model/AuthModel.php";
@@ -31,7 +31,8 @@ class AuthController extends BaseController
     {
         $data = [];
         if ($_SERVER['REQUEST_METHOD'] == $this->post) {
-            if (is_bool($this->validateRegisterEntries())) {
+            $message = $this->validateRegisterEntries();
+            if (!$message) {
                 $data = [
                     "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
                     "email" => $_POST["email"],
@@ -47,7 +48,7 @@ class AuthController extends BaseController
                     $data = ['error' => 'Email Already Registered'];
                 }
             } else {
-                $data = ['error' => $this->validateRegisterEntries()];
+                $data = ['error' => $message];
             }
         }
         $this->render("Register", $data);
@@ -56,9 +57,9 @@ class AuthController extends BaseController
     /**
      * Validate register form entries
      * 
-     * @return true|string
+     * @return string
      */
-    private function validateRegisterEntries(): bool|string
+    private function validateRegisterEntries(): string
     {
 
         if (strlen($_POST['first_name']) == 0) {
@@ -99,6 +100,6 @@ class AuthController extends BaseController
             length and should include at least one upper case letter, one number,
              and one special character.";
         }
-        return true;
+        return '';
     }
 }
