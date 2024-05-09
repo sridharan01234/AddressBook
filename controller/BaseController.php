@@ -18,12 +18,12 @@ class BaseController
      * 
      * @return void 
      */
-    protected function render(string $file,array $messages): void
+    protected function render(string $file, array $messages): void
     {
         $data = $messages;
         include_once sprintf("./view/%s.php", $file);
     }
-    
+
     /**
      * Redirect pages dynamically
      * 
@@ -33,7 +33,7 @@ class BaseController
      */
     protected function redirect(string $path): void
     {
-        header(sprintf("location: %s",$path));
+        header(sprintf("location: %s", $path));
         exit;
     }
 }

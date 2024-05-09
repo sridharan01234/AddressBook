@@ -7,7 +7,8 @@
  * Last Modified : 9-5-2024
  */
 
-interface PageInterface{
+interface PageInterface
+{
 
     /**
      * Displays page
