@@ -14,43 +14,115 @@ require_once "BaseController.php";
 class AuthController extends BaseController
 {
     private const POST = 'POST';
+    private const GET = 'GET';
     private $model;
+    private $path;
 
-    public function __construct()
+    public function __construct($path)
     {
         $this->model = new AuthModel();
+        $this->path = $path;
     }
 
     /**
-     * Validate duplicate user and add user
+     * Handles login post request
+     */
+    private function login(): void
+    {
+        $message = $this->validateLoginEntries();
+        if (!$message) {
+            $data = [
+                'email' => $_POST['email'],
+                'password' => $_POST['password'], PASSWORD_DEFAULT,
+            ];
+            $user = $this->model->verifyEmail($data['email']);
+            if ($user) {
+                if (password_verify($data['password'], $user->password)) {
+                    $data = ['message' => 'Login success'];
+                } else {
+                    $data = ['error' => 'Incorrect password'];
+                }
+            } else {
+                $data = ['error' => 'User not found'];
+            }
+        } else {
+            $data = ['error' => $message];
+        }
+        $this->render("Login", $data);
+    }
+
+    /**
+     * Handles register post request for user add
+     */
+    private function register(): void
+    {
+        $message = $this->validateRegisterEntries();
+        if (!$message) {
+            $data = [
+                "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
+                "email" => $_POST["email"],
+                "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
+                "first_name" => $_POST["first_name"],
+                "last_name" => $_POST["last_name"],
+            ];
+            if (!$this->model->verifyEmail($data['email'])) {
+                if ($this->model->registerUser($data)) {
+                    $data = ['message' => 'Email Successfully Registered'];
+                }
+            } else {
+                $data = ['error' => 'Email Already Registered'];
+            }
+        } else {
+            $data = ['error' => $message];
+        }
+        $this->render("Register", $data);
+    }
+
+
+    /**
+     * Handles HTTP requests
      * 
      * @return void
      */
-    public function register(): void
+    public function index(): void
     {
-        $data = [];
+        /**
+         * Handles post request
+         */
         if ($_SERVER['REQUEST_METHOD'] === self::POST) {
-            $message = $this->validateRegisterEntries();
-            if (!$message) {
-                $data = [
-                    "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
-                    "email" => $_POST["email"],
-                    "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
-                    "first_name" => $_POST["first_name"],
-                    "last_name" => $_POST["last_name"],
-                ];
-                if (!$this->model->verifyEmail($data['email'])) {
-                    if ($this->model->registerUser($data)) {
-                        $data = ['message' => 'Email Successfully Registered'];
-                    }
-                } else {
-                    $data = ['error' => 'Email Already Registered'];
-                }
-            } else {
-                $data = ['error' => $message];
+            if ($_POST['type'] === 'register') {
+                $this->register();
+            }
+            if ($_POST['type'] === 'login') {
+                $this->login();
             }
         }
-        $this->render("Register", $data);
+
+        /**
+         * Handles get requests
+         */
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            if ($this->path == 'register')
+                $this->render("Register", []);
+            if ($this->path == 'login')
+                $this->render("Login", []);
+        }
+    }
+
+    /**
+     * Validate login form entries
+     * 
+     * @return string
+     */
+    private function validateLoginEntries(): string
+    {
+        if (!strlen($_POST['email'])) {
+            return "Please enter email";
+        }
+        if (!strlen($_POST['password'])) {
+            return "Please enter password";
+        }
+        return "";
     }
 
     /**
