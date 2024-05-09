@@ -97,13 +97,7 @@
       </div>
     </div>
   </section>
-  <!-- <script src="./assets/js/register.js"></script> -->
-  <script>
-    $(document).ready(function () {
-  $("#error").hide(2000);
-  $("#message").hide(2000);
-});
-  </script>
+  <script src="./assets/js/register.js"></script>
 </body>
 
 </html>
