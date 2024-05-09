@@ -119,6 +119,7 @@ class Database
     {
         return "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";;
     }
+    
     /**
      * Converts array of column names into sql format column parameter
      *
@@ -190,7 +191,6 @@ class Database
         try {
             $this->execute();
         } catch (Exception $e) {
-            var_dump($e->getMessage());
             error_log($e->getMessage());
         }
 
@@ -218,6 +218,11 @@ class Database
             $query = "SELECT * FROM $table";
         }
         $this->query($query);
+        try {
+            $this->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
 
         return $this->single();
     }
