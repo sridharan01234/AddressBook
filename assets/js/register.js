@@ -40,24 +40,14 @@ $("#register-form").validate(
 jQuery.validator.addMethod(
   "strongPassword",
   function (value, element) {
-    var hasLowercase = /[a-z]/.test(value);
-    var hasUppercase = /[A-Z]/.test(value);
-    var hasDigit = /\d/.test(value);
-    var hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
-
-    return (
-      this.optional(element) ||
-      (hasLowercase &&
-        hasUppercase &&
-        hasDigit &&
-        hasSpecial &&
-        value.length >= 8)
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(
+      value
     );
   },
   "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
 );
 
 $(document).ready(function () {
-  $("#error").slideUp(3000);
-  $("#message").slideUp(3000);
+  $("#error").fadeOut(5000);
+  $("#message").fadeOut(5000);
 });
