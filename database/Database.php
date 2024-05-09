@@ -117,9 +117,9 @@ class Database
      */
     public function arrayToInsert(array $data): string
     {
-        return "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";;
+        return "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";
     }
-    
+
     /**
      * Converts array of column names into sql format column parameter
      *
