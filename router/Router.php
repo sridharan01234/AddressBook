@@ -36,7 +36,7 @@ class Router
     public function searchPath(string $uri): bool|array
     {
         foreach ($this->routes as $path) {
-            if ($path['path'] === $uri) {
+            if ($path['path'] == $uri) {
                 return $path['params'];
             }
         }
