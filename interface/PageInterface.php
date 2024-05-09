@@ -1,4 +1,11 @@
 <?php
+
 interface PageInterface{
-    public function index();
+
+    /**
+     * Displays page
+     * 
+     * @return void
+     */
+    public function index(): void;
 }
