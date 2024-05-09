@@ -34,7 +34,8 @@ class AuthController extends BaseController implements PageInterface
         if (!$message) {
             $data = [
                 'email' => $_POST['email'],
-                'password' => $_POST['password'], PASSWORD_DEFAULT,
+                'password' => $_POST['password'],
+                PASSWORD_DEFAULT,
             ];
             $user = $this->model->verifyEmail($data['email']);
             if ($user) {
@@ -106,6 +107,8 @@ class AuthController extends BaseController implements PageInterface
             if ($this->path == 'register')
                 $this->render("Register", []);
             if ($this->path == 'login')
+                $this->render("Login", []);
+            if (!$this->path)
                 $this->render("Login", []);
         }
     }
