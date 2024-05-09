@@ -31,7 +31,6 @@ class AuthController extends BaseController
     {
         $data = [];
         if ($_SERVER['REQUEST_METHOD'] == $this->post) {
-            $data = ['error'=>$this->validateRegisterEntries()];
             if (is_bool($this->validateRegisterEntries())) {
                 $data = [
                     "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
@@ -47,8 +46,10 @@ class AuthController extends BaseController
                 } else {
                     $data = ['error' => 'Email Already Registered'];
                 }
+            } else {
+                $data = ['error' => $this->validateRegisterEntries()];
             }
-        } 
+        }
         $this->render("Register", $data);
     }
 
