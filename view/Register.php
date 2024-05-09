@@ -26,7 +26,7 @@
             Create and account
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
-            <div style="display:<?php if (isset($data['message'])) {
+            <div id="error" style="display:<?php if (isset($data['message'])) {
               echo " block";
             } else {
               echo "none";
@@ -36,7 +36,7 @@
               <span class="font-medium">Success !</span>
               <?php echo $data['message'] ?>
             </div>
-            <div style="display:<?php if (isset($data['error'])) {
+            <div id="message" style="display:<?php if (isset($data['error'])) {
               echo " block";
             } else {
               echo "none";
@@ -97,7 +97,7 @@
       </div>
     </div>
   </section>
-  <!-- <script src="./assets/js/register.js"></script> -->
+  <script src="./assets/js/register.js"></script>
 </body>
 
 </html>
