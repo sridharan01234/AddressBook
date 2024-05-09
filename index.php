@@ -7,8 +7,9 @@ if (strpos($path, '?')) {
 
 $router = new Router;
 
-$router->add("/", array('Controller' => 'AuthController', 'action' => 'register'));
-$router->add("/register", array('Controller' => 'AuthController', 'action' => 'register'));
+$router->add("/", array('Controller' => 'AuthController', 'action' => 'index'));
+$router->add("/register", array('Controller' => 'AuthController', 'action' => 'index'));
+$router->add("/login", array('Controller' => 'AuthController', 'action' => 'index'));
 
 $param = $router->searchPath($path);
 if (!$param) {
@@ -21,5 +22,5 @@ $action = $param['action'];
 
 require sprintf("controller/%s.php",$controller);
 
-$controller_object = new $controller();
+$controller_object = new $controller(substr($path,1,strlen($path)-1));
 $controller_object->$action();
