@@ -13,12 +13,11 @@ require_once "BaseController.php";
 
 class AuthController extends BaseController
 {
-    private readonly string $post;
+    private const post = 'POST';
     private $model;
 
     public function __construct()
     {
-        $this->post = 'POST';
         $this->model = new AuthModel();
     }
 
@@ -30,7 +29,7 @@ class AuthController extends BaseController
     public function register(): void
     {
         $data = [];
-        if ($_SERVER['REQUEST_METHOD'] == $this->post) {
+        if ($_SERVER['REQUEST_METHOD'] === self::post) {
             $message = $this->validateRegisterEntries();
             if (!$message) {
                 $data = [
@@ -82,7 +81,7 @@ class AuthController extends BaseController
             return "please enter confirm password";
         }
 
-        if ($_POST['password'] != $_POST['repeat_password']) {
+        if ($_POST['password'] !== $_POST['repeat_password']) {
             return "password and confirm password does not match";
         }
 
