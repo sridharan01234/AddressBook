@@ -106,9 +106,7 @@ class AuthController extends BaseController implements PageInterface
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
             if ($this->path == 'register')
                 $this->render("Register", []);
-            if ($this->path == 'login')
-                $this->render("Login", []);
-            if (!$this->path)
+            if ($this->path == 'login' || !$this->path)
                 $this->render("Login", []);
         }
     }
