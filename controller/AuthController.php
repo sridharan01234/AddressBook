@@ -8,10 +8,11 @@
  * Last modified : 9/5/2024
  */
 
-require "./model/AuthModel.php";
+require_once "./model/AuthModel.php";
 require_once "BaseController.php";
+require_once "./interface/PageInterface.php";
 
-class AuthController extends BaseController
+class AuthController extends BaseController implements PageInterface
 {
     private const POST = 'POST';
     private const GET = 'GET';
