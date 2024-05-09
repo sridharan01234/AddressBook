@@ -38,7 +38,8 @@ class Database
     /**
      * Prepare a SQL query.
      *
-     * @param string $sql The SQL query to prepare.
+     * @param string $sql
+     * 
      * @return void
      */
     public function query(string $sql): void
@@ -49,7 +50,7 @@ class Database
     /**
      * Execute a prepared statement.
      *
-     * @return bool True on success, false on failure.
+     * @return bool
      */
     public function execute(): bool
     {
@@ -59,7 +60,7 @@ class Database
     /**
      * Return a result set as an array of objects.
      *
-     * @return array|false An array of objects representing the result set, or false on failure.
+     * @return array|false
      */
     public function resultSet(): array|false
     {
@@ -70,7 +71,7 @@ class Database
     /**
      * Return a single row as an object.
      *
-     * @return object|false The next row from the result set, or false if no rows are left.
+     * @return object|false
      */
     public function single(): object|false
     {
@@ -81,7 +82,7 @@ class Database
     /**
      * Get the number of rows affected by the last SQL statement.
      *
-     * @return int The number of rows affected.
+     * @return int
      */
     public function rowCount(): int
     {
@@ -91,7 +92,7 @@ class Database
     /**
      * Alias of rowCount().
      *
-     * @return int The number of rows affected.
+     * @return int
      */
     public function affected_rows(): int
     {
@@ -101,7 +102,7 @@ class Database
     /**
      * Get the SQLSTATE error code associated with the last operation on the statement handle.
      *
-     * @return string The SQLSTATE error code.
+     * @return string
      */
     public function errorCode(): string
     {
