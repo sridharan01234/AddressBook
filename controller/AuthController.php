@@ -11,7 +11,7 @@
 require_once "./model/AuthModel.php";
 require_once "BaseController.php";
 
-class AuthController extends BaseController implements PageDisplayInterface
+class AuthController extends BaseController
 {
     private const POST = 'POST';
     private const GET = 'GET';
