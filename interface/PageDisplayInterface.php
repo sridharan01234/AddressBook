@@ -7,7 +7,7 @@
  * Last Modified : 9-5-2024
  */
 
-interface PageInterface
+interface PageDisplayInterface
 {
 
     /**
