@@ -33,26 +33,26 @@ class AuthController extends BaseController
     {
         $data = [];
         if ($_SERVER['REQUEST_METHOD'] === self::POST) {
-        $message = $this->validateLoginEntries();
-        if (!$message) {
-            $data = [
-                'email' => $_POST['email'],
-                'password' => $_POST['password'],
-                PASSWORD_DEFAULT,
-            ];
-            $user = $this->model->verifyEmail($data['email']);
-            if ($user) {
-                if (password_verify($data['password'], $user->password)) {
-                    $data = ['message' => 'login success'];
+            $message = $this->validateLoginEntries();
+            if (!$message) {
+                $data = [
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    PASSWORD_DEFAULT,
+                ];
+                $user = $this->model->verifyEmail($data['email']);
+                if ($user) {
+                    if (password_verify($data['password'], $user->password)) {
+                        $data = ['message' => 'login success'];
+                    } else {
+                        $data = ['error' => 'Incorrect password'];
+                    }
                 } else {
-                    $data = ['error' => 'Incorrect password'];
+                    $data = ['error' => 'User not found'];
                 }
             } else {
-                $data = ['error' => 'User not found'];
+                $data = ['error' => $message];
             }
-        } else {
-            $data = ['error' => $message];
-        }
         }
         $this->render("login", $data);
     }
@@ -64,24 +64,25 @@ class AuthController extends BaseController
     {
         $data = [];
         if ($_SERVER['REQUEST_METHOD'] === self::POST) {
-        $message = $this->validateRegisterEntries();
-        if (!$message) {
-            $data = [
-                "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
-                "email" => $_POST["email"],
-                "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
-                "first_name" => $_POST["first_name"],
-                "last_name" => $_POST["last_name"],
-            ];
-            if (!$this->model->verifyEmail($data['email'])) {
-                if ($this->model->registerUser($data)) {
-                    $data = ['message' => 'Email Successfully Registered'];
+            $message = $this->validateRegisterEntries();
+            if (!$message) {
+                $data = [
+                    "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
+                    "email" => $_POST["email"],
+                    "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
+                    "first_name" => $_POST["first_name"],
+                    "last_name" => $_POST["last_name"],
+                ];
+                if (!$this->model->verifyEmail($data['email'])) {
+                    if ($this->model->registerUser($data)) {
+                        $data = ['message' => 'Email Successfully Registered'];
+                    }
+                } else {
+                    $data = ['error' => 'Email Already Registered'];
                 }
             } else {
-                $data = ['error' => 'Email Already Registered'];
+                $data = ['error' => $message];
             }
-        } else {
-            $data = ['error' => $message];
         }
         $this->render("register", $data);
     }
