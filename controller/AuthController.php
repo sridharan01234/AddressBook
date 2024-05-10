@@ -26,9 +26,13 @@ class AuthController extends BaseController
 
     /**
      * Handles login post request
+     * 
+     * @return void
      */
-    private function login(): void
+    public function login(): void
     {
+        $data = [];
+        if ($_SERVER['REQUEST_METHOD'] === self::POST) {
         $message = $this->validateLoginEntries();
         if (!$message) {
             $data = [
