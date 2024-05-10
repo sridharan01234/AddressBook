@@ -59,6 +59,8 @@ class AuthController extends BaseController
 
     /**
      * Handles register post request for user add
+     * 
+     * @return void
      */
     public function register(): void
     {
