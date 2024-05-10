@@ -17,6 +17,7 @@ class Router
      *
      * @param string $path
      * @param array $param
+     * 
      * @return void
      */
     public function add(string $path, array $param): void
@@ -31,6 +32,7 @@ class Router
      * Search path
      *
      * @param string $uri
+     * 
      * @return bool|array
      */
     public function searchPath(string $uri): bool|array
