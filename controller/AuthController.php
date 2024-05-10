@@ -52,7 +52,7 @@ class AuthController extends BaseController implements PageInterface
         } else {
             $data = ['error' => $message];
         }
-        $this->render("Login", $data);
+        $this->render("login", $data);
     }
 
     /**
@@ -79,7 +79,7 @@ class AuthController extends BaseController implements PageInterface
         } else {
             $data = ['error' => $message];
         }
-        $this->render("Register", $data);
+        $this->render("register", $data);
     }
 
 
@@ -107,13 +107,13 @@ class AuthController extends BaseController implements PageInterface
          */
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
             if ($this->path == 'register')
-                $this->render("Register", []);
+                $this->render("register", []);
             if ($this->path == 'login' || !$this->path)
-                $this->render("Login", []);
+                $this->render("login", []);
             if ($this->path == 'logout') {
                 session_destroy();
                 unset($_SESSION);
-                $this->render("Login", []);
+                $this->render("login", []);
             }
         }
     }

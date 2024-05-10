@@ -36,14 +36,14 @@ class UserController extends BaseController implements PageInterface
     {
         if ($_SERVER['REQUEST_METHOD'] == self::GET) {
             if ($this->path == 'listcontacts') {
-                $this->render('ListContacts', $this->getContacts());
+                $this->render('listContacts', $this->getContacts());
             }
         }
         if ($_SERVER['REQUEST_METHOD'] == self::POST) {
             if ($_POST['type'] == 'delete') {
                 $this->deleteContacts();
             }
-            $this->render('ListContacts', $this->getContacts());
+            $this->render('listContacts', $this->getContacts());
         }
     }
 
