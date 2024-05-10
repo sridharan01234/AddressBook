@@ -10,7 +10,6 @@
 
 require_once "./model/AuthModel.php";
 require_once "BaseController.php";
-require_once "./interface/PageDisplayInterface.php";
 
 class AuthController extends BaseController implements PageDisplayInterface
 {
