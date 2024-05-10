@@ -203,6 +203,7 @@ class Database
      *
      * @param $table string
      * @param $condition array
+     * @param $table string
      * 
      * @return bool|object
      */
@@ -213,7 +214,7 @@ class Database
         } else {
             $query = "SELECT * FROM $table ";
         }
-        if (is_array($condition)) {
+        if (!empty($condition)) {
             $query = $query . $this->arrayToCondition($condition);
         } else {
             $query = "SELECT * FROM $table";
@@ -226,6 +227,37 @@ class Database
         }
 
         return $this->single();
+    }
+
+    /**
+     * Dynamically get all the rows from databace
+     * 
+     * @param $table string
+     * @param $condition array
+     * @param $table string
+     * 
+     * @return array
+     */
+    public function getAll(string $table, array $condition, array $columns): array
+    {
+        if (!empty($columns)) {
+            $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
+        } else {
+            $query = "SELECT * FROM $table ";
+        }
+        if (!empty($condition)) {
+            $query = $query . $this->arrayToCondition($condition);
+        } else {
+            $query = "SELECT * FROM $table";
+        }
+        $this->query($query);
+        try {
+            $this->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+
+        return $this->resultSet();
     }
 
     /**

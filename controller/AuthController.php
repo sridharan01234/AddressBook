@@ -11,17 +11,18 @@
 require_once "./model/AuthModel.php";
 require_once "BaseController.php";
 require_once "./interface/PageInterface.php";
+require_once "./helper/SessionHelper.php";
 
 class AuthController extends BaseController implements PageInterface
 {
     private const POST = 'POST';
     private const GET = 'GET';
-    private $model;
+    private $authModel;
     private $path;
 
     public function __construct($path)
     {
-        $this->model = new AuthModel();
+        $this->authModel = new AuthModel();
         $this->path = $path;
     }
 
@@ -37,10 +38,11 @@ class AuthController extends BaseController implements PageInterface
                 'password' => $_POST['password'],
                 PASSWORD_DEFAULT,
             ];
-            $user = $this->model->verifyEmail($data['email']);
+            $user = $this->authModel->verifyEmail($data['email']);
             if ($user) {
                 if (password_verify($data['password'], $user->password)) {
-                    $data = ['message' => 'Login success'];
+                    $_SESSION['userId'] = $user->id;
+                    $this->redirect('listcontacts');
                 } else {
                     $data = ['error' => 'Incorrect password'];
                 }
@@ -67,8 +69,8 @@ class AuthController extends BaseController implements PageInterface
                 "first_name" => $_POST["first_name"],
                 "last_name" => $_POST["last_name"],
             ];
-            if (!$this->model->verifyEmail($data['email'])) {
-                if ($this->model->registerUser($data)) {
+            if (!$this->authModel->verifyEmail($data['email'])) {
+                if ($this->authModel->registerUser($data)) {
                     $data = ['message' => 'Email Successfully Registered'];
                 }
             } else {

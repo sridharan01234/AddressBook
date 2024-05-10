@@ -34,6 +34,6 @@ class BaseController
     protected function redirect(string $path): void
     {
         header(sprintf("location: %s", $path));
-        exit;
+        return;
     }
 }

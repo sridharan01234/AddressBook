@@ -10,6 +10,8 @@ $router = new Router;
 $router->add("/", array('Controller' => 'AuthController', 'action' => 'index'));
 $router->add("/register", array('Controller' => 'AuthController', 'action' => 'index'));
 $router->add("/login", array('Controller' => 'AuthController', 'action' => 'index'));
+$router->add("/listcontacts", array('Controller' => 'UserController', 'action' => 'index'));
+
 
 $param = $router->searchPath($path);
 if (!$param) {
@@ -20,7 +22,7 @@ if (!$param) {
 $controller = $param['Controller'];
 $action = $param['action'];
 
-require sprintf("controller/%s.php",$controller);
+require sprintf("controller/%s.php", $controller);
 
-$controller_object = new $controller(substr($path,1,strlen($path)-1));
+$controller_object = new $controller(substr($path, 1, strlen($path) - 1));
 $controller_object->$action();
