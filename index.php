@@ -7,9 +7,9 @@ if (strpos($path, '?')) {
 
 $router = new Router;
 
-$router->add("/", array('Controller' => 'AuthController', 'action' => 'index'));
-$router->add("/register", array('Controller' => 'AuthController', 'action' => 'index'));
-$router->add("/login", array('Controller' => 'AuthController', 'action' => 'index'));
+$router->add("/", array('Controller' => 'AuthController', 'action' => 'login'));
+$router->add("/register", array('Controller' => 'AuthController', 'action' => 'register'));
+$router->add("/login", array('Controller' => 'AuthController', 'action' => 'login'));
 
 $param = $router->searchPath($path);
 if (!$param) {
