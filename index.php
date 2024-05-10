@@ -10,7 +10,9 @@ $router = new Router;
 $router->add("/", array('Controller' => 'AuthController', 'action' => 'index'));
 $router->add("/register", array('Controller' => 'AuthController', 'action' => 'index'));
 $router->add("/login", array('Controller' => 'AuthController', 'action' => 'index'));
+$router->add("/logout", array('Controller' => 'AuthController', 'action' => 'index'));
 $router->add("/listcontacts", array('Controller' => 'UserController', 'action' => 'index'));
+$router->add("/deleteContacts", array('Controller' => 'UserController', 'action' => 'index'));
 
 
 $param = $router->searchPath($path);
