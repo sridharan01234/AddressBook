@@ -27,20 +27,14 @@
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
             <div id="error" style="display:<?php if (isset($data['message'])) {
-              echo " block";
-            } else {
-              echo "none";
-            } ?>;" class="p-4 mb-4
+              echo " block"; } else { echo "none" ; } ?>;" class="p-4 mb-4
               text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
               dark:text-green-400" role="alert">
               <span class="font-medium">Success !</span>
               <?php echo $data['message'] ?>
             </div>
             <div id="message" style="display:<?php if (isset($data['error'])) {
-              echo " block";
-            } else {
-              echo "none";
-            } ?>;" class="p-4 mb-4
+              echo " block"; } else { echo "none" ; } ?>;" class="p-4 mb-4
               text-sm text-red-800 rounded-lg bg-red-50
               dark:bg-gray-800 dark:text-red-400" role="alert">
               <span class="font-medium">Oops!</span>
@@ -87,10 +81,13 @@
                 class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm
                 password</label>
             </div>
+            <div>
+              <p class="text-sm font-light text-gray-500 dark:text-gray-400">All the fields are required <span
+                  class="required">*</span> </p>
+            </div>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               Already have an account yet?
-              <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="./login"
-              >
+              <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="./login">
                 Click here</a>
             </p>
             <button

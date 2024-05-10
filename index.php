@@ -17,7 +17,7 @@ $router->add("/deleteContacts", array('Controller' => 'UserController', 'action'
 
 $param = $router->searchPath($path);
 if (!$param) {
-    require_once './view/PageNotFound.php';
+    require_once './view/pageNotFound.php';
     exit;
 }
 

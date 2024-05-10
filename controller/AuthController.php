@@ -116,7 +116,7 @@ class AuthController extends BaseController implements PageInterface
                 $this->render("login", []);
             }
         }
-    }
+}
 
     /**
      * Validate login form entries
@@ -181,5 +181,35 @@ class AuthController extends BaseController implements PageInterface
              and one special character.";
         }
         return '';
+    }
+    
+    /**
+     * Handles HTTP requests
+     * 
+     * @return void
+     */
+    public function index(): void
+    {
+        /**
+         * Handles post request
+         */
+        if ($_SERVER['REQUEST_METHOD'] === self::POST) {
+            if ($_POST['type'] === 'register') {
+                $this->register();
+            }
+            if ($_POST['type'] === 'login') {
+                $this->login();
+            }
+        }
+
+        /**
+         * Handles get requests
+         */
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            if ($this->path == 'register')
+                $this->render("register", []);
+            if ($this->path == 'login' || !$this->path)
+                $this->render("login", []);
+        }
     }
 }
