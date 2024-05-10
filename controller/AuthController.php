@@ -40,7 +40,7 @@ class AuthController extends BaseController implements PageInterface
             $user = $this->model->verifyEmail($data['email']);
             if ($user) {
                 if (password_verify($data['password'], $user->password)) {
-                    $data = ['message' => 'Login success'];
+                    $data = ['message' => 'login success'];
                 } else {
                     $data = ['error' => 'Incorrect password'];
                 }
@@ -50,7 +50,7 @@ class AuthController extends BaseController implements PageInterface
         } else {
             $data = ['error' => $message];
         }
-        $this->render("Login", $data);
+        $this->render("login", $data);
     }
 
     /**
@@ -77,7 +77,7 @@ class AuthController extends BaseController implements PageInterface
         } else {
             $data = ['error' => $message];
         }
-        $this->render("Register", $data);
+        $this->render("register", $data);
     }
 
 
@@ -105,9 +105,9 @@ class AuthController extends BaseController implements PageInterface
          */
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
             if ($this->path == 'register')
-                $this->render("Register", []);
+                $this->render("register", []);
             if ($this->path == 'login' || !$this->path)
-                $this->render("Login", []);
+                $this->render("login", []);
         }
     }
 

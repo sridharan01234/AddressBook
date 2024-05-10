@@ -13,7 +13,7 @@ $router->add("/login", array('Controller' => 'AuthController', 'action' => 'inde
 
 $param = $router->searchPath($path);
 if (!$param) {
-    require_once './view/PageNotFound.php';
+    require_once './view/pageNotFound.php';
     exit;
 }
 
