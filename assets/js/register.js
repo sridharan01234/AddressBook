@@ -47,7 +47,7 @@ jQuery.validator.addMethod(
   "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
 );
 
-setTimeout(function() {
-$("#error").hide("slow");
-$("#message").hide("slow");
-},5000);
+setTimeout(function () {
+  $("#error").hide("slow");
+  $("#message").hide("slow");
+}, 5000);
