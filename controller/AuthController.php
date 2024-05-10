@@ -110,6 +110,11 @@ class AuthController extends BaseController implements PageInterface
                 $this->render("Register", []);
             if ($this->path == 'login' || !$this->path)
                 $this->render("Login", []);
+            if ($this->path == 'logout') {
+                session_destroy();
+                unset($_SESSION);
+                $this->render("Login", []);
+            }
         }
     }
 
