@@ -36,9 +36,39 @@ class UserController extends BaseController implements PageInterface
     {
         if ($_SERVER['REQUEST_METHOD'] == self::GET) {
             if ($this->path == 'listcontacts') {
-                $data = $this->userModel->getContacts($_SESSION['userId']);
-                $this->render('ListContacts', $data);
+                $this->render('ListContacts', $this->getContacts());
             }
+        }
+        if ($_SERVER['REQUEST_METHOD'] == self::POST) {
+            if ($_POST['type'] == 'delete') {
+                $this->deleteContacts();
+            }
+            $this->render('ListContacts', $this->getContacts());
+        }
+    }
+
+    /**
+     * Get all contacts of an user
+     * 
+     * @return array
+     */
+    public function getContacts(): array
+    {
+        $contacts = $this->userModel->getContacts($_SESSION['userId']);
+        foreach ($contacts as $user) {
+            $user->country = $this->userModel->get('countries', ['id' => $user->country_id], ['name'])->name;
+            $user->state = $this->userModel->get('states', ['id' => $user->state_id], ['name'])->name;
+        }
+        return $contacts;
+    }
+
+    /**
+     * Delete all the selected contacts
+     */
+    public function deleteContacts(): void
+    {
+        foreach ($_POST['delete_users'] as $user) {
+            $this->userModel->delete('contacts', ['id' => $user]);
         }
     }
 }
