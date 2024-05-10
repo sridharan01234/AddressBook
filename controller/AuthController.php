@@ -53,14 +53,17 @@ class AuthController extends BaseController
         } else {
             $data = ['error' => $message];
         }
+        }
         $this->render("login", $data);
     }
 
     /**
      * Handles register post request for user add
      */
-    private function register(): void
+    public function register(): void
     {
+        $data = [];
+        if ($_SERVER['REQUEST_METHOD'] === self::POST) {
         $message = $this->validateRegisterEntries();
         if (!$message) {
             $data = [
