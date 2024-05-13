@@ -10,7 +10,6 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 </head>
 
 <body>
@@ -26,23 +25,23 @@
             Create and account
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
-            <div id="error" style="display:<?php if (isset($data['message'])) {
+            <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
               echo " block";
             } else {
-              echo "none";
-            } ?>;" class="p-4 mb-4
-              text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
-              dark:text-green-400" role="alert">
+              echo "hidden";
+            } ?>
+                            text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
+                            dark:text-green-400" role="alert">
               <span class="font-medium">Success !</span>
               <?php echo $data['message'] ?>
             </div>
-            <div id="message" style="display:<?php if (isset($data['error'])) {
-              echo " block";
+            <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
+              echo "block";
             } else {
-              echo "none";
-            } ?>;" class="p-4 mb-4
-              text-sm text-red-800 rounded-lg bg-red-50
-              dark:bg-gray-800 dark:text-red-400" role="alert">
+              echo "hidden";
+            } ?>
+                            text-sm text-red-800 rounded-lg bg-red-50
+                            dark:bg-gray-800 dark:text-red-400" role="alert">
               <span class="font-medium">Oops!</span>
               <?php echo $data['error'] ?>
             </div>
@@ -87,7 +86,15 @@
                 class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm
                 password</label>
             </div>
-
+            <div>
+              <p class="text-sm font-light text-gray-500 dark:text-gray-400">All the fields are required <span
+                  class="required">*</span> </p>
+            </div>
+            <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+              Already have an account yet?
+              <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="./login">
+                Click here</a>
+            </p>
             <button
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               Submit

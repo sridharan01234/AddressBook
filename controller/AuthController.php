@@ -5,24 +5,58 @@
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
- * Last modified : 9/5/2024
+ * Last modified : 10/5/2024
  */
 
-require "./model/AuthModel.php";
+require_once "./model/AuthModel.php";
 require_once "BaseController.php";
 
 class AuthController extends BaseController
 {
     private const POST = 'POST';
+    private const GET = 'GET';
     private $model;
 
-    public function __construct()
+    public function __construct(private $path)
     {
         $this->model = new AuthModel();
     }
 
     /**
-     * Validate duplicate user and add user
+     * Handles login post request
+     * 
+     * @return void
+     */
+    public function login(): void
+    {
+        $data = [];
+        if ($_SERVER['REQUEST_METHOD'] === self::POST) {
+            $message = $this->validateLoginEntries();
+            if (!$message) {
+                $data = [
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    PASSWORD_DEFAULT,
+                ];
+                $user = $this->model->verifyEmail($data['email']);
+                if ($user) {
+                    if (password_verify($data['password'], $user->password)) {
+                        $data = ['message' => 'login success'];
+                    } else {
+                        $data = ['error' => 'Incorrect password'];
+                    }
+                } else {
+                    $data = ['error' => 'User not found'];
+                }
+            } else {
+                $data = ['error' => $message];
+            }
+        }
+        $this->render("login", $data);
+    }
+
+    /**
+     * Handles register post request for user add
      * 
      * @return void
      */
@@ -50,7 +84,23 @@ class AuthController extends BaseController
                 $data = ['error' => $message];
             }
         }
-        $this->render("Register", $data);
+        $this->render("register", $data);
+    }
+
+    /**
+     * Validate login form entries
+     * 
+     * @return string
+     */
+    private function validateLoginEntries(): string
+    {
+        if (!strlen($_POST['email'])) {
+            return "Please enter email";
+        }
+        if (!strlen($_POST['password'])) {
+            return "Please enter password";
+        }
+        return "";
     }
 
     /**
