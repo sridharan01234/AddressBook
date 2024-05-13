@@ -19,5 +19,5 @@ $action = $param['action'];
 
 require_once sprintf("controller/%s.php", $controller);
 
-$controller_object = new $controller();substr($path,1,strlen($path)-1));
+$controller_object = new $controller($path);
 $controller_object->$action();
