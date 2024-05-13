@@ -28,21 +28,21 @@
                     </h1>
                     <form id="login-form" class="space-y-4 md:space-y-6" action="/login" method="post">
                         <input type="hidden" name="type" value="login">
-                        <div id="error" style="display:<?php if (isset($data['message'])) {
+                        <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
                             echo " block";
                         } else {
-                            echo "none";
-                        } ?>;" class="p-4 mb-4
+                            echo "hidden";
+                        } ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                             <span class="font-medium">Success !</span>
                             <?php echo $data['message'] ?>
                         </div>
-                        <div id="message" style="display:<?php if (isset($data['error'])) {
-                            echo " block";
+                        <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
+                            echo "block";
                         } else {
-                            echo "none";
-                        } ?>;" class="p-4 mb-4
+                            echo "hidden";
+                        } ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                             <span class="font-medium">Oops!</span>
