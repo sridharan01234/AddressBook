@@ -16,12 +16,10 @@ class AuthController extends BaseController
     private const POST = 'POST';
     private const GET = 'GET';
     private $model;
-    private $path;
 
-    public function __construct($path)
+    public function __construct(private $path)
     {
         $this->model = new AuthModel();
-        $this->path = $path;
     }
 
     /**
