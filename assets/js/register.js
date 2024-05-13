@@ -48,5 +48,5 @@ jQuery.validator.addMethod(
 );
 
 setTimeout(function () {
-  $("#error,#message").hide("slow");
+  $("#error, #message").hide("slow");
 }, 5000);
