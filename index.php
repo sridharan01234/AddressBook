@@ -8,7 +8,7 @@ $router->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
 $router->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
 $router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
 $router->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
-
+$router->add("/logout", ['Controller'=> 'AuthController', 'action' => 'logout'],);
 
 $param = $router->searchPath($path);
 if (!$param) {

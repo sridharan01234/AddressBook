@@ -157,4 +157,15 @@ class AuthController extends BaseController
         }
         return '';
     }
+
+    /**
+     * Handles logout request
+     * 
+     * @return void
+     */
+    public function logout(): void
+    {
+        session_destroy();
+        $this->redirect('login');
+    }
 }
