@@ -1,3 +1,5 @@
-#register-form .error, #register-form .required {
-  color: #ff0000;
+#register-form {
+  .error, .required {
+    color: #FF0000;
+  }
 }
