@@ -22,9 +22,9 @@ class AuthModel extends Database
      */
     public function verifyEmail(string $email): mixed
     {
-        return $this->get("users", ['email'=>$email], []);
+        return $this->get("users", ['email' => $email], []);
     }
-    
+
     /**
      * Register user in database
      * 

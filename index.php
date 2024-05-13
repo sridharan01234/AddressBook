@@ -7,6 +7,8 @@ $router = new Router;
 $router->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
 $router->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
 $router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
+$router->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
+
 
 $param = $router->searchPath($path);
 if (!$param) {

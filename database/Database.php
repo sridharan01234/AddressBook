@@ -229,6 +229,37 @@ class Database
     }
 
     /**
+     * Get all records from a table based on conditions
+     *
+     * @param string $table The table name
+     * @param array $condition The condition to filter the records
+     * @param array $columns The columns to be selected
+     * @return array The result set
+     */
+    public function getAll(string $table, array $condition, array $columns): array
+    {
+        if (!empty($columns)) {
+            $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
+        } else {
+            $query = "SELECT * FROM $table ";
+        }
+        if (is_array($condition)) {
+            $query .= $this->arrayToCondition($condition);
+        } else {
+            $query = "SELECT * FROM $table";
+        }
+        $this->query($query);
+
+        try {
+            $this->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+
+        return $this->resultSet();
+    }
+
+    /**
      * Dynamically retrive rows from db
      *
      * @param $table string
@@ -250,7 +281,6 @@ class Database
         }
 
         return $this->affected_rows();
-
     }
 
     /**
@@ -281,6 +311,5 @@ class Database
         }
 
         return $this->affected_rows();
-
     }
 }
