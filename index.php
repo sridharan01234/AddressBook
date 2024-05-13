@@ -1,15 +1,12 @@
 <?php
-require "router/Router.php";
-$path = $_SERVER['REQUEST_URI'];
-if (strpos($path, '?')) {
-    $path = substr($path, 0, strpos($path, '?'));
-}
+require_once "router/Router.php";
+$path = strtok($_SERVER['REQUEST_URI'], '?');
 
 $router = new Router;
 
-$router->add("/", array('Controller' => 'AuthController', 'action' => 'login'));
-$router->add("/register", array('Controller' => 'AuthController', 'action' => 'register'));
-$router->add("/login", array('Controller' => 'AuthController', 'action' => 'login'));
+$router->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
+$router->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
+$router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
 
 $param = $router->searchPath($path);
 if (!$param) {
@@ -20,7 +17,7 @@ if (!$param) {
 $controller = $param['Controller'];
 $action = $param['action'];
 
-require sprintf("controller/%s.php",$controller);
+require_once sprintf("controller/%s.php", $controller);
 
-$controller_object = new $controller(substr($path,1,strlen($path)-1));
+$controller_object = new $controller();substr($path,1,strlen($path)-1));
 $controller_object->$action();
