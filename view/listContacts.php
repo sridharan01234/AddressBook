@@ -19,16 +19,14 @@
     </div>
     <div class="grid grid-cols-2">
       <a href="/logout">
-        <button type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Logout
         </button>
       </a>
-      <form id="delete" action="/deleteContact" method="post">
-        <button type="submit"
-          class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-          Delete Selected
-        </button>
+       <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
+          <button type="submit" 
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >Delete Selected</button>
       </form>
     </div>
 
@@ -40,8 +38,7 @@
         <tr>
           <th scope="col" class="p-4">
             <div class="flex items-center">
-              <input id="checkbox-all" type="checkbox" onclick="checkAll(this)"
-                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              <input id="checkbox-all" type="checkbox" onclick="checkAll(this)" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
               <label for="checkbox-all" class="sr-only">Choose</label>
             </div>
           </th>
@@ -56,13 +53,11 @@
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($data['contacts'] as $user): ?>
+        <?php foreach ($data['contacts'] as $user) : ?>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="w-4 p-4">
               <div class="flex items-center">
-                <input form="delete" name="delete_users[]" value="<?php echo $user->id ?>"
-                  id="flexCheckChecked<?php echo $user->id ?>" type="checkbox"
-                  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <input form="delete" name="delete_users[]" value="<?php echo $user->id ?>" id="flexCheckChecked<?php echo $user->id ?>" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                 <label for="checkbox-table-1" class="sr-only">checkbox</label>
               </div>
             </td>
@@ -88,12 +83,12 @@
               <?php echo $user->state ?>
             </td>
             <td class="px-6 py-4">
-              <form id="edit-page" action="./EditUserController.php" method="get">
+              <form id="edit-page" action="">
                 <input type="hidden" name="contact_id" value="<?php echo $user->id ?>">
-                <button
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-xs rounded-sm px-2 py-1 text-center inline-flex items-center me-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   view/delete
                 </button>
+
               </form>
 
             </td>

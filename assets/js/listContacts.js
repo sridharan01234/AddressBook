@@ -10,3 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     checkboxAll.addEventListener('change', selectAll);
 });
+
+function deleteAlert() {
+    return confirm("Are you sure you want to delete this user?");
+  }
+  
+  
