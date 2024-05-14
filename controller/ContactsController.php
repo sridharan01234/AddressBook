@@ -6,7 +6,7 @@ require_once "./helper/SessionHelper.php";
 
 class ContactsController extends BaseController
 {
-    
+
     private const POST = "POST";
     private const GET = "GET";
     private $contactsModel;
@@ -27,7 +27,8 @@ class ContactsController extends BaseController
     public function listContacts(): void
     {
         //verfies if the user is logged in
-        if(!isset($_SESSION['user_id'])) $this->redirect("login"); 
+        if (!isset($_SESSION['user_id']))
+            $this->redirect("login");
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
         foreach ($contacts as $contact) {

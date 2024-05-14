@@ -234,6 +234,7 @@ class Database
      * @param string $table The table name
      * @param array $condition The condition to filter the records
      * @param array $columns The columns to be selected
+     * 
      * @return array The result set
      */
     public function getAll(string $table, array $condition, array $columns): array
