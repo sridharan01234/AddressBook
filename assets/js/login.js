@@ -9,6 +9,6 @@ $("#login-form").validate({
   },
 });
 
-setTimeout(function() {
+setTimeout(function () {
   $("#error, #message").hide("slow");
 }, 5000);
