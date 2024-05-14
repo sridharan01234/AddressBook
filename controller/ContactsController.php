@@ -49,6 +49,34 @@ class ContactsController extends BaseController
     }
 
     /**
+     * Add a contact
+     * 
+     * @return void
+     */
+    public function addContact(): void
+    {
+        if ($_SERVER["REQUEST_METHOD"] == self::POST) {
+            $data = [
+                "name" => $_POST["name"],
+                "phone" => $_POST["phone"],
+                "age" => $_POST["age"],
+                "pincode" => $_POST["pincode"],
+                "address" => $_POST["address"],
+                "country_id" => $_POST["country"],
+                "state_id" => $_POST["state"],
+                "user_id" => $_SESSION['user_id'],
+                ];
+            if($this->contactsModel->createContacts($data))
+            $this->render("addContact",['message' => 'Contact added successfully.']);
+        else
+            $this->render("addContact",['message' => 'Error adding contact.']);
+            }
+         else {
+            $this->render("addContact",[]);
+        }
+    }
+
+    /**
      * Delete a contact
      * 
      * @return void
@@ -59,5 +87,43 @@ class ContactsController extends BaseController
             $this->contactsModel->deleteContacts($value);
         }
         $this->listContacts();
+    }
+
+    /**
+     * Get all countries
+     * 
+     * @return void
+     */
+    public function getCounties(): void
+    {
+        $result = $this->contactsModel->getCounties();
+        $countries = array();
+        foreach ($result as $row) {
+            $countries[] = array(
+                'id' => $row->id,
+                'name' => $row->name,
+            );
+        }
+        echo json_encode($countries);
+        exit;
+    }
+
+    /**
+     * Get all states
+     * 
+     * @return void
+     */
+    public function getStates(): void
+    {
+        $result = $this->contactsModel->getStates();
+        $countries = array();
+        foreach ($result as $row) {
+            $countries[] = [
+                'id'=> $row->id,
+                'name'=> $row->name
+            ];
+                }
+        echo json_encode($countries);
+        exit;
     }
 }
