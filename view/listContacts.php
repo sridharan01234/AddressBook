@@ -14,19 +14,17 @@
     <div>
       <h5 class="mr-3 font-semibold dark:text-white">Hi <?php echo $_SESSION['user_name'] ?></h5>
       <p class="text-gray-500 dark:text-gray-400">
-        Manage all your existing users or add a new one
+        Manage all your existing Contacts or add a new one
       </p>
     </div>
-    <div class="grid grid-cols-2">
+    <div class="flex flex-row items-center justify-between space-x-4 sm:space-x-0">
       <a href="/logout">
         <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Logout
         </button>
       </a>
-       <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
-          <button type="submit" 
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >Delete Selected</button>
+      <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
+        <button type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-red-400 dark:hover:bg-red-500 dark:focus:ring-red-600">Delete Selected</button>
       </form>
     </div>
 
@@ -85,7 +83,7 @@
             <td class="px-6 py-4">
               <form id="edit-page" action="">
                 <input type="hidden" name="contact_id" value="<?php echo $user->id ?>">
-                <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-xs rounded-sm px-2 py-1 text-center inline-flex items-center me-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                   view/delete
                 </button>
 
