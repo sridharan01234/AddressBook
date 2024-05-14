@@ -47,6 +47,7 @@ class AuthController extends BaseController
                 if ($user) {
                     if (password_verify($data['password'], $user->password)) {
                         $_SESSION['user_id'] = $user->id;
+                        $_SESSION['user_name'] = $user->name;
                         $this->redirect('listContacts');
                     } else {
                         $data = ['error' => 'Incorrect password'];
@@ -100,6 +101,7 @@ class AuthController extends BaseController
      */
     private function validateLoginEntries(): string
     {
+        
         if (!strlen($_POST['email'])) {
             return "Please enter email";
         }
@@ -168,4 +170,5 @@ class AuthController extends BaseController
         session_destroy();
         $this->redirect('login');
     }
+
 }

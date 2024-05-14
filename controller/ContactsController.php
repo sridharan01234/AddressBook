@@ -6,6 +6,7 @@ require_once "./helper/SessionHelper.php";
 
 class ContactsController extends BaseController
 {
+    
     private const POST = "POST";
     private const GET = "GET";
     private $contactsModel;
@@ -25,24 +26,38 @@ class ContactsController extends BaseController
      */
     public function listContacts(): void
     {
-        if ($_SERVER["REQUEST_METHOD"] === self::GET) {
-            $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
-            foreach ($contacts as $contact) {
-                if (isset($contact->country_id)) {
-                    $contact->country = $this->contactsModel->getCountry($contact->country_id)->name;
-                } else {
-                    $contact->country = "N/A";
-                }
-
-                if (isset($contact->state_id)) {
-                    $contact->state = $this->contactsModel->getState($contact->state_id)->name;
-                } else {
-                    $contact->state = "N/A";
-                }
+        //verfies if the user is logged in
+        if(!isset($_SESSION['user_id'])) $this->redirect("login"); 
+        //get all contacts
+        $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
+        foreach ($contacts as $contact) {
+            if (isset($contact->country_id)) {
+                $contact->country = $this->contactsModel->getCountry($contact->country_id)->name;
+            } else {
+                $contact->country = "N/A";
             }
-            $this->render("listContacts", [
-                "contacts" => $contacts
-            ]);
+
+            if (isset($contact->state_id)) {
+                $contact->state = $this->contactsModel->getState($contact->state_id)->name;
+            } else {
+                $contact->state = "N/A";
+            }
         }
+        $this->render("listContacts", [
+            "contacts" => $contacts
+        ]);
+    }
+
+    /**
+     * Delete a contact
+     * 
+     * @return void
+     */
+    public function deleteContact(): void
+    {
+        foreach ($_POST['delete_users'] as $key => $value) {
+            $this->contactsModel->deleteContacts($value);
+        }
+        $this->listContacts();
     }
 }

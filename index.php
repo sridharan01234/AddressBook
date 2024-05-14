@@ -9,6 +9,9 @@ $router->add("/register", ['Controller' => 'AuthController', 'action' => 'regist
 $router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
 $router->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
 $router->add("/logout", ['Controller'=> 'AuthController', 'action' => 'logout'],);
+$router->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
+$router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
+
 
 $param = $router->searchPath($path);
 if (!$param) {
