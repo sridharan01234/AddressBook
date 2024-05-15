@@ -102,7 +102,7 @@ class AuthController extends BaseController
      */
     private function validateLoginEntries(): string
     {
-        
+
         if (!strlen($_POST['email'])) {
             return "Please enter email";
         }

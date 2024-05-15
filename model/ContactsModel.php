@@ -55,8 +55,7 @@ class ContactsModel extends Database
      */
     public function createContacts(array $data): bool
     {
-        if($this->db->get('contacts',['phone'=> $data['phone']],[]))
-        {
+        if ($this->db->get('contacts', ['phone' => $data['phone']], [])) {
             return false;
         }
         return $this->db->insert('contacts', $data);

@@ -1,4 +1,4 @@
-<?php $contact = $data['contact']?>
+<?php $contact = $data['contact'] ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit user</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/editContacts.css">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
                 <span class="font-medium">Oops!</span>
                 <?php echo $data['error'] ?>
             </div>
-            <form action="/editContact" method="post">
+            <form id="edit-contact-form" action="/editContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                     <div class="w-full">
@@ -74,7 +75,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                         <select id="countrySelect" name="country"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select country..</option>
+                            <option value="">Select country..</option>
                         </select>
                     </div>
                     <div>
@@ -82,13 +83,13 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State</label>
                         <select id="stateSelect" name="state"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Select state...</option>
+                            <option value="">Select state..</option>
                         </select>
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                             message</label>
-                        <textarea id="message" rows="4" name="address"
+                        <textarea id="address" rows="4" name="address"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Write your address here..."><?php echo $contact->address ?></textarea>
                     </div>
@@ -105,13 +106,15 @@
                         </button>
                 </div>
                 </a>
-                <input type="hidden" name="id" value="<?php echo $contact->id?>">
+                <input type="hidden" name="id" value="<?php echo $contact->id ?>">
             </form>
         </div>
     </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="./assets/js/fetchCountriesAndStates.js"></script>
+    <script src="./assets/js/editContacts.js"></script>
 </body>
 
 </html>
