@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * ContactsController class
+ * 
+ * Author : sridharan
+ * Email : sridharan01234@gmail.com
+ * Last modified : 15/5/2024
+ */
+
 require_once "BaseController.php";
 require_once "./model/ContactsModel.php";
 require_once "./helper/SessionHelper.php";
