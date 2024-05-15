@@ -310,7 +310,12 @@ class Database
         } catch (Exception $e) {
             error_log($e->getMessage());
         }
-
-        return $this->affected_rows();
+        //var_dump($this->affected_rows());
+        //exit;
+        if($this->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
