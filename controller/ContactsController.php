@@ -15,7 +15,7 @@ require_once "./helper/SessionHelper.php";
 
 class ContactsController extends BaseController
 {
-    
+
     private const POST = "POST";
     private const GET = "GET";
     private $contactsModel;
@@ -36,7 +36,8 @@ class ContactsController extends BaseController
     public function listContacts(): void
     {
         //verfies if the user is logged in
-        if(!isset($_SESSION['user_id'])) $this->redirect("login"); 
+        if (!isset($_SESSION['user_id']))
+            $this->redirect("login");
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
         foreach ($contacts as $contact) {
@@ -74,14 +75,58 @@ class ContactsController extends BaseController
                 "country_id" => $_POST["country"],
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
-                ];
-            if($this->contactsModel->createContacts($data))
-            $this->render("addContact",['message' => 'Contact added successfully.']);
-        else
-            $this->render("addContact",['error' => 'Contact number aready exists.']);
+            ];
+            $error = $this->validateAddContact($data);
+            if ($error) {
+                $this->render("addContact", ['error' => $error]);
+                return;
             }
-         else {
-            $this->render("addContact",[]);
+            if ($this->contactsModel->createContacts($data))
+                $this->render("addContact", ['message' => 'Contact added successfully.']);
+            else
+                $this->render("addContact", ['error' => 'Contact number aready exists.']);
+        } else {
+            $this->render("addContact", []);
+        }
+    }
+
+    /**
+     * validate add user entries
+     * 
+     * @param array $data
+     * 
+     * @return string
+     */
+    public function validateAddContact(array $data): string
+    {
+        if (isset($data["name"]) && !empty($data["name"])) {
+            if (isset($data["phone"]) && !empty($data["phone"])) {
+                if (isset($data["age"]) && !empty($data["age"])) {
+                    if (isset($data["pincode"]) && !empty($data["pincode"])) {
+                        if (isset($data["address"]) && !empty($data["address"])) {
+                            if (isset($data["country_id"]) && !empty($data["country_id"])) {
+                                if (isset($data["state_id"]) && !empty($data["state_id"])) {
+                                    return "";
+                                } else {
+                                    return "Please fill the state field";
+                                }
+                            } else {
+                                return "Please fill the country field";
+                            }
+                        } else {
+                            return "Please fill the address field";
+                        }
+                    } else {
+                        return "Please fill the pincode field";
+                    }
+                } else {
+                    return "Please fill the age field";
+                }
+            } else {
+                return "Please fill the phone field";
+            }
+        } else {
+            return "Please fill the name field";
         }
     }
 
@@ -131,10 +176,10 @@ class ContactsController extends BaseController
         $countries = array();
         foreach ($result as $row) {
             $countries[] = [
-                'id'=> $row->id,
-                'name'=> $row->name
+                'id' => $row->id,
+                'name' => $row->name
             ];
-                }
+        }
         echo json_encode($countries);
         exit;
     }
