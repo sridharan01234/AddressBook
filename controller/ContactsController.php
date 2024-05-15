@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * ContactsController class
+ *
+ * Author : sridharan
+ * Email : sridharan01234@gmail.com
+ * Last modified : 15/5/2024
+ */
+
+
 require_once "BaseController.php";
 require_once "./model/ContactsModel.php";
 require_once "./helper/SessionHelper.php";
@@ -69,7 +78,7 @@ class ContactsController extends BaseController
             if($this->contactsModel->createContacts($data))
             $this->render("addContact",['message' => 'Contact added successfully.']);
         else
-            $this->render("addContact",['message' => 'Error adding contact.']);
+            $this->render("addContact",['error' => 'Contact number aready exists.']);
             }
          else {
             $this->render("addContact",[]);
@@ -83,8 +92,11 @@ class ContactsController extends BaseController
      */
     public function deleteContact(): void
     {
-        foreach ($_POST['delete_users'] as $key => $value) {
-            $this->contactsModel->deleteContacts($value);
+        if ($_SERVER["REQUEST_METHOD"] == self::POST && isset($_POST['delete_users'])) {
+            $users = $_POST['delete_users'];
+            foreach ($users as $userId) {
+                $this->contactsModel->deleteContacts($userId);
+            }
         }
         $this->listContacts();
     }
