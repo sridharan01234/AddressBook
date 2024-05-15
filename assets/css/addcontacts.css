@@ -1,0 +1,5 @@
+#add-contact-form {
+    .error, .required {
+      color: #FF0000;
+    }
+  }
