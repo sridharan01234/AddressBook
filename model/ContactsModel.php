@@ -70,9 +70,9 @@ class ContactsModel extends Database
      * 
      * @return bool True if the contact was updated successfully, false otherwise
      */
-    public function updateContacts(int $id, array $data): bool
+    public function updateContacts(string $id, array $data): bool
     {
-        return $this->db->update('contacts', ['id' => $id], $data);
+        return $this->db->update('contacts', $data, ['id' => $id]);
     }
 
     /**
