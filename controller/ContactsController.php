@@ -56,8 +56,11 @@ class ContactsController extends BaseController
      */
     public function deleteContact(): void
     {
-        foreach ($_POST['delete_users'] as $key => $value) {
-            $this->contactsModel->deleteContacts($value);
+        if ($_SERVER["REQUEST_METHOD"] == self::POST && isset($_POST['delete_users'])) {
+            $users = $_POST['delete_users'];
+            foreach ($users as $userId) {
+                $this->contactsModel->deleteContacts($userId);
+            }
         }
         $this->listContacts();
     }
