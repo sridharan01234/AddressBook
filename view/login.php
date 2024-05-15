@@ -24,7 +24,7 @@
                     </h1>
                     <form id="login-form" class="space-y-4 md:space-y-6" action="/login" method="post">
                         <input type="hidden" name="type" value="login">
-                        <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
+                        <div id="error" class="p-4 mb-4 <?php if (array_key_exists("message", $data)) {
                             echo " block";
                         } else {
                             echo "hidden";
@@ -32,9 +32,9 @@
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                             <span class="font-medium">Success !</span>
-                            <?php echo $data['message'] ?>
+                            <?php if (array_key_exists("message", $data)) echo $data['message'] ?>
                         </div>
-                        <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
+                        <div id="message" class="p-4 mb-4 <?php if (array_key_exists("error", $data)) {
                             echo "block";
                         } else {
                             echo "hidden";
@@ -42,7 +42,7 @@
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                             <span class="font-medium">Oops!</span>
-                            <?php echo $data['error'] ?>
+                            <?php if (array_key_exists("error", $data)) echo $data['error'] ?>
                         </div>
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your

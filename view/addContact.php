@@ -15,26 +15,26 @@
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                 Add a new Contact
             </h2>
-            <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
-                echo " block";
-            } else {
-                echo "hidden";
-            } ?>
+            <div id="error" class="p-4 mb-4 <?php if (array_key_exists("message", $data)) {
+                            echo " block";
+                        } else {
+                            echo "hidden";
+                        } ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
-                <span class="font-medium">Success !</span>
-                <?php echo $data['message'] ?>
-            </div>
-            <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
-                echo "block";
-            } else {
-                echo "hidden";
-            } ?>
+                            <span class="font-medium">Success !</span>
+                            <?php if (array_key_exists("message", $data)) echo $data['message'] ?>
+                        </div>
+                        <div id="message" class="p-4 mb-4 <?php if (array_key_exists("error", $data)) {
+                            echo "block";
+                        } else {
+                            echo "hidden";
+                        } ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
-                <span class="font-medium">Oops!</span>
-                <?php echo $data['error'] ?>
-            </div>
+                            <span class="font-medium">Oops!</span>
+                            <?php if (array_key_exists("error", $data)) echo $data['error'] ?>
+                        </div>
             <form id="add-contact-form" action="/addContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
@@ -44,21 +44,21 @@
                         </label>
                         <input type="text" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Type Contact name"  />
+                            placeholder="Type Contact name" />
                     </div>
                     <div class="w-full">
                         <label for="brand"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
                         <input type="text" name="phone" id="phone"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Conatct Number"  />
+                            placeholder="Conatct Number" />
                     </div>
                     <div class="w-full">
                         <label for="age"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
                         <input type="number" name="age" id="age"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder=""  />
+                            placeholder="" />
                     </div>
                     <div>
                         <label for="pincode"
@@ -66,7 +66,7 @@
                         </label>
                         <input type="number" name="pincode" id="pincode"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="636303"  />
+                            placeholder="636303" />
                     </div>
 
                     <div>
@@ -74,7 +74,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                         <select id="countrySelect" name="country"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option value="">Select your country...</option>
+                            <option value="">Select your country...</option>
                         </select>
                     </div>
                     <div>
@@ -94,15 +94,17 @@
                     </div>
                 </div>
                 <div class="md:container md:mx-auto">
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Add Contact
-                    </button>
-                    <a href="/listContacts">
-                        <button type="button"
+                    <div class="buttons">
+                        <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Go Back
+                            Add Contact
                         </button>
+                        <a href="/listContacts">
+                            <button type="button"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Go Back
+                            </button>
+                    </div>
                 </div>
                 </a>
             </form>
@@ -113,7 +115,7 @@
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="./assets/js/fetchCountriesAndStates.js"></script>
-    <!-- <script src="./assets/js/addcontacts.js"></script> -->
+    <script src="./assets/js/addcontacts.js"></script>
 </body>
 
 </html>

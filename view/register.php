@@ -25,26 +25,26 @@
             Create and account
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
-            <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
-              echo " block";
-            } else {
-              echo "hidden";
-            } ?>
+          <div id="error" class="p-4 mb-4 <?php if (array_key_exists("message", $data)) {
+                            echo " block";
+                        } else {
+                            echo "hidden";
+                        } ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
-              <span class="font-medium">Success !</span>
-              <?php echo $data['message'] ?>
-            </div>
-            <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
-              echo "block";
-            } else {
-              echo "hidden";
-            } ?>
+                            <span class="font-medium">Success !</span>
+                            <?php if (array_key_exists("message", $data)) echo $data['message'] ?>
+                        </div>
+                        <div id="message" class="p-4 mb-4 <?php if (array_key_exists("error", $data)) {
+                            echo "block";
+                        } else {
+                            echo "hidden";
+                        } ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
-              <span class="font-medium">Oops!</span>
-              <?php echo $data['error'] ?>
-            </div>
+                            <span class="font-medium">Oops!</span>
+                            <?php if (array_key_exists("error", $data)) echo $data['error'] ?>
+                        </div>
             <input type="hidden" name="type" value="register" />
             <div class="relative z-0 w-full mb-5 group">
               <input type="text" name="first_name" id="first_name"
@@ -103,7 +103,8 @@
         </div>
       </div>
     </div>
-  </section>
+    </div>
+  </div>
   <script src="./assets/js/register.js"></script>
 </body>
 
