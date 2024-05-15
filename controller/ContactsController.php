@@ -15,7 +15,7 @@ require_once "./helper/SessionHelper.php";
 
 class ContactsController extends BaseController
 {
-    
+
     private const POST = "POST";
     private const GET = "GET";
     private $contactsModel;
@@ -36,7 +36,8 @@ class ContactsController extends BaseController
     public function listContacts(): void
     {
         //verfies if the user is logged in
-        if(!isset($_SESSION['user_id'])) $this->redirect("login"); 
+        if (!isset($_SESSION['user_id']))
+            $this->redirect("login");
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
         foreach ($contacts as $contact) {
@@ -74,14 +75,13 @@ class ContactsController extends BaseController
                 "country_id" => $_POST["country"],
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
-                ];
-            if($this->contactsModel->createContacts($data))
-            $this->render("addContact",['message' => 'Contact added successfully.']);
-        else
-            $this->render("addContact",['error' => 'Contact number aready exists.']);
-            }
-         else {
-            $this->render("addContact",[]);
+            ];
+            if ($this->contactsModel->createContacts($data))
+                $this->render("addContact", ['message' => 'Contact added successfully.']);
+            else
+                $this->render("addContact", ['error' => 'Contact number aready exists.']);
+        } else {
+            $this->render("addContact", []);
         }
     }
 
@@ -92,26 +92,26 @@ class ContactsController extends BaseController
      */
     public function editContact(): void
     {
-        if($_SERVER["REQUEST_METHOD"] == self::GET)
-        {
-            $this->render("editContact",[
+
+        if ($_SERVER["REQUEST_METHOD"] == self::GET) {
+            $this->render("editContact", [
+                'contact_id' => $_GET['contact_id'],
                 "contact" => $this->contactsModel->getContacts($_SESSION['user_id'])[0]
             ]);
         }
-        if ($_SERVER["REQUEST_METHOD"] == self::POST) 
-        {
+        if ($_SERVER["REQUEST_METHOD"] == self::POST) {
             $data = [
-                "name"=> $_POST["name"],
-                "phone"=> $_POST["phone"],
-                "age"=> $_POST["age"],
-                "pincode"=> $_POST["pincode"],
-                "address"=> $_POST["address"],
-                "country_id"=> $_POST["country"],
-                "state_id"=> $_POST["state"],
-                "user_id"=> $_SESSION['user_id'],
-                ];
-            $this->contactsModel->updateContacts($_POST['id'],$data);
-            $this->listContacts();
+                "name" => $_POST["name"],
+                "phone" => $_POST["phone"],
+                "age" => $_POST["age"],
+                "pincode" => $_POST["pincode"],
+                "address" => $_POST["address"],
+                "country_id" => $_POST["country"],
+                "state_id" => $_POST["state"],
+                "user_id" => $_SESSION['user_id'],
+            ];
+            $this->contactsModel->updateContacts($_POST['id'], $data);
+            $this->render("editContact", ['message' => 'Contact updated successfully.']);
         }
     }
 
@@ -161,10 +161,10 @@ class ContactsController extends BaseController
         $countries = array();
         foreach ($result as $row) {
             $countries[] = [
-                'id'=> $row->id,
-                'name'=> $row->name
+                'id' => $row->id,
+                'name' => $row->name
             ];
-                }
+        }
         echo json_encode($countries);
         exit;
     }
