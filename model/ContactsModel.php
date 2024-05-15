@@ -63,19 +63,6 @@ class ContactsModel extends Database
     }
 
     /**
-     * Update a contact with the given ID and data
-     * 
-     * @param int $id The ID of the contact to update
-     * @param array $data The data to update the contact with
-     * 
-     * @return bool True if the contact was updated successfully, false otherwise
-     */
-    public function updateContacts(int $id, array $data): bool
-    {
-        return $this->db->update('contacts', ['id' => $id], $data);
-    }
-
-    /**
      * Get the country name based on the ID
      * 
      * @param int $id The ID of the country

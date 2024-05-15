@@ -86,36 +86,6 @@ class ContactsController extends BaseController
     }
 
     /**
-     * Edit a contact
-     * 
-     * @return void
-     */
-    public function editContact(): void
-    {
-        if($_SERVER["REQUEST_METHOD"] == self::GET)
-        {
-            $this->render("editContact",[
-                "contact" => $this->contactsModel->getContacts($_SESSION['user_id'])[0]
-            ]);
-        }
-        if ($_SERVER["REQUEST_METHOD"] == self::POST) 
-        {
-            $data = [
-                "name"=> $_POST["name"],
-                "phone"=> $_POST["phone"],
-                "age"=> $_POST["age"],
-                "pincode"=> $_POST["pincode"],
-                "address"=> $_POST["address"],
-                "country_id"=> $_POST["country"],
-                "state_id"=> $_POST["state"],
-                "user_id"=> $_SESSION['user_id'],
-                ];
-            $this->contactsModel->updateContacts($_POST['id'],$data);
-            $this->listContacts();
-        }
-    }
-
-    /**
      * Delete a contact
      * 
      * @return void
