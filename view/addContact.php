@@ -34,7 +34,7 @@
                 <span class="font-medium">Oops!</span>
                 <?php echo $data['error'] ?>
             </div>
-            <form action="/addContact" method="post">
+            <form id="add-contact-form" action="/addContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                     <div class="w-full">
