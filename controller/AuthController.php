@@ -19,7 +19,6 @@ class AuthController extends BaseController
     private $model;
 
     /**
-     * AuthController constructor.
      * @param string $path
      */
     public function __construct(private string $path)
