@@ -5,7 +5,7 @@
  * 
  * Author: Sridharan
  * Email: sridharan01234@gmail.com
- * Last Modified: 13/5/2024
+ * Last Modified: 15/5/2024
  */
 
 require "./database/Database.php";
@@ -55,6 +55,10 @@ class ContactsModel extends Database
      */
     public function createContacts(array $data): bool
     {
+        if($this->db->get('contacts',['phone'=> $data['phone']],[]))
+        {
+            return false;
+        }
         return $this->db->insert('contacts', $data);
     }
 
