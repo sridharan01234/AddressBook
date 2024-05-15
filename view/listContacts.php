@@ -17,7 +17,7 @@
         Manage all your existing Contacts or add a new one
       </p>
     </div>
-    <div class="flex flex-row itemsnvm ls-remote-center justify-between space-x-4 sm:space-x-0">
+    <div class="flex flex-row items-center justify-between space-x-4 sm:space-x-0">
       <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
         <button type="submit" class="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-red-400 dark:hover:bg-red-500 dark:focus:ring-red-600">Delete Selected</button>
       </form>
@@ -32,9 +32,9 @@
 
   <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <thead class="bg-gray-100 text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
         <tr>
-          <th scope="col" class="p-4">
+          <th scope="col" class="px-6 py-3">
             <div class="flex items-center">
               <input id="checkbox-all" type="checkbox" onclick="checkAll(this)" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
               <label for="checkbox-all" class="sr-only">Choose</label>
