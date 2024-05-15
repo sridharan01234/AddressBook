@@ -46,4 +46,8 @@ $(document).ready(function(){
             select.append('<option value="' + state.id + '">' + state.name + '</option>');
         });
     }
+
+    $('#stateSelect').on('focus', function() {
+        $(this).val('');
+    });
 });
