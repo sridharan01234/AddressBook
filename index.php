@@ -12,6 +12,7 @@ $router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
 $router->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
 $router->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
 $router->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
+$router->add('/editContact', ['Controller' => 'ContactsController', 'action' => 'editContact']);
 $router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
 $router->add("/getCounties", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
 $router->add("/getStates", ['Controller' => 'ContactsController', 'action' => 'getStates']);
