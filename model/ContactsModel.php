@@ -26,6 +26,7 @@ class ContactsModel extends Database
      * Get the contacts for the current user
      * 
      * @param int $id The ID of the user
+     * 
      * @return array An array of contact objects
      */
     public function getContacts(int $id): array
@@ -37,6 +38,7 @@ class ContactsModel extends Database
      * Delete a contact with the given ID
      * 
      * @param int $id The ID of the contact to delete
+     * 
      * @return bool True if the contact was deleted successfully, false otherwise
      */
     public function deleteContacts(int $id): bool
@@ -48,6 +50,7 @@ class ContactsModel extends Database
      * Create a new contact with the given data
      * 
      * @param array $data The data for the new contact
+     * 
      * @return bool True if the contact was created successfully, false otherwise
      */
     public function createContacts(array $data): bool
@@ -59,6 +62,7 @@ class ContactsModel extends Database
      * Get the country name based on the ID
      * 
      * @param int $id The ID of the country
+     * 
      * @return object The name of the country
      */
     public function getCountry(int $id): object
@@ -70,6 +74,7 @@ class ContactsModel extends Database
      * Get the state name based on the ID
      * 
      * @param int $id The ID of the state
+     * 
      * @return object The name of the state
      */
     public function getState(int $id): object
