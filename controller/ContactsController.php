@@ -17,7 +17,6 @@ class ContactsController extends BaseController
 {
     
     private const POST = "POST";
-    private const GET = "GET";
     private $contactsModel;
 
     /**
