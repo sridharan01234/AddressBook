@@ -40,7 +40,7 @@ class ContactsController extends BaseController
             $contact->country = isset($contact->country_id) ? $this->contactsModel->getCountry($contact->country_id)->name : "N/A";
             $contact->state = isset($contact->state_id) ? $this->contactsModel->getState($contact->state_id)->name : "N/A";
             }
-        }
+
         $this->render("listContacts", [
             "contacts" => $contacts
         ]);
