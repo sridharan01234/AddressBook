@@ -23,6 +23,17 @@ class ContactsModel extends Database
     }
 
     /**
+     * Get a contact by its ID
+     * 
+     * @param int $id The ID of the contact to get
+     * 
+     * @return object The contact object
+     */
+    public function getContact($id)
+    {
+        return $this->db->get('contacts', ['id' => $id], []);
+    }
+    /**
      * Get the contacts for the current user
      * 
      * @param int $id The ID of the user

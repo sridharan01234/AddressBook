@@ -16,7 +16,7 @@
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                 Edit a Contact
             </h2>
-            <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
+            <div id="error" class="p-4 mb-4 <?php if (isset($data['message']) && $data['message'] != "") {
                 echo " block";
             } else {
                 echo "hidden";
@@ -24,9 +24,9 @@
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                 <span class="font-medium">Success !</span>
-                <?php echo $data['message'] ?>
+                <?php if (isset($data['message']) && $data['message'] != "") echo $data['message'] ?>
             </div>
-            <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
+            <div id="message" class="p-4 mb-4 <?php if (isset($data['error']) && $data['error'] != "") {
                 echo "block";
             } else {
                 echo "hidden";
@@ -34,7 +34,7 @@
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">Oops!</span>
-                <?php echo $data['error'] ?>
+                <?php if (isset($data['error']) && $data['error'] != "") echo $data['error'] ?>
             </div>
             <form id="edit-contact-form" action="/editContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -75,7 +75,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                         <select id="countrySelect" name="country"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Select country..</option>
+                            <option value="<?php echo $contact->country_id?>"><?php echo $contact->country?></option>
                         </select>
                     </div>
                     <div>
@@ -83,7 +83,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State</label>
                         <select id="stateSelect" name="state"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Select state..</option>
+                            <option value="<?php echo $contact->state_id?>"><?php echo $contact->state?></option>
                         </select>
                     </div>
                     <div class="sm:col-span-2">
