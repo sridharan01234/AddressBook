@@ -5,11 +5,12 @@
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
- * Last modified : 10/5/2024
+ * Last modified : 13/5/2024
  */
 
 require_once "./model/AuthModel.php";
 require_once "BaseController.php";
+require_once "./helper/SessionHelper.php";
 
 class AuthController extends BaseController
 {
@@ -17,7 +18,10 @@ class AuthController extends BaseController
     private const GET = 'GET';
     private $model;
 
-    public function __construct(private $path)
+    /**
+     * @param string $path
+     */
+    public function __construct(private string $path)
     {
         $this->model = new AuthModel();
     }
@@ -41,7 +45,9 @@ class AuthController extends BaseController
                 $user = $this->model->verifyEmail($data['email']);
                 if ($user) {
                     if (password_verify($data['password'], $user->password)) {
-                        $data = ['message' => 'login success'];
+                        $_SESSION['user_id'] = $user->id;
+                        $_SESSION['user_name'] = $user->name;
+                        $this->redirect('listContacts');
                     } else {
                         $data = ['error' => 'Incorrect password'];
                     }
@@ -94,6 +100,7 @@ class AuthController extends BaseController
      */
     private function validateLoginEntries(): string
     {
+
         if (!strlen($_POST['email'])) {
             return "Please enter email";
         }
@@ -151,4 +158,16 @@ class AuthController extends BaseController
         }
         return '';
     }
+
+    /**
+     * Handles logout request
+     * 
+     * @return void
+     */
+    public function logout(): void
+    {
+        session_destroy();
+        $this->redirect('login');
+    }
+
 }

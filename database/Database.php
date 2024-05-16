@@ -5,7 +5,7 @@
  * 
  * Author : sridharan
  * Email : sridharan01234@gmail.com
- * Last modified : 9/5/2024
+ * Last modified : 16/5/2024
  */
 
 require './config/config.php'; // Include the database configuration file
@@ -165,7 +165,11 @@ class Database
                 $str = $str . " $value ";
                 continue;
             }
-            $str = $str . $key . "=" . "'" . $value . "'";
+            if (is_array($value)) {
+                $str = $str . $key . " IN (" . implode(",", $value) . ") ";
+            } else {
+                $str = $str . $key . "=" . "'" . $value . "'";
+            }
         }
 
         return $str;
@@ -184,10 +188,7 @@ class Database
         $query = "DELETE FROM $table ";
         if (is_array($condition)) {
             $query = $query . $this->arrayToCondition($condition);
-        } else {
-            $query = "DELETE FROM $table";
         }
-
         $this->query($query);
         try {
             $this->execute();
@@ -213,10 +214,8 @@ class Database
         } else {
             $query = "SELECT * FROM $table ";
         }
-        if (is_array($condition)) {
-            $query = $query . $this->arrayToCondition($condition);
-        } else {
-            $query = "SELECT * FROM $table";
+        if (!empty($condition)) {
+            $query .= $this->arrayToCondition($condition);
         }
         $this->query($query);
         try {
@@ -226,6 +225,29 @@ class Database
         }
 
         return $this->single();
+    }
+
+    /**
+     * Get all records from a table based on conditions
+     *
+     * @param string $table The table name
+     * @param array $condition The condition to filter the records
+     * @param array $columns The columns to be selected
+     * 
+     * @return array The result set
+     */
+    public function getAll(string $table, array $condition, array $columns): array
+    {
+        $query = "SELECT " . ($columns ? $this->arrayToColumns($columns) : '*') . " FROM $table ";
+        $query .= $condition ? $this->arrayToCondition($condition) : '';
+        $this->query($query);
+        try {
+            $this->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+
+        return $this->resultSet();
     }
 
     /**
@@ -250,7 +272,6 @@ class Database
         }
 
         return $this->affected_rows();
-
     }
 
     /**
@@ -281,6 +302,5 @@ class Database
         }
 
         return $this->affected_rows();
-
     }
 }
