@@ -185,18 +185,19 @@ class Database
      */
     public function delete(string $table, array $condition): bool
     {
-        $sql = $this->buildDeleteQuery($table, $condition);
-        $stmt = $this->dbh->prepare($sql);
-        if (!empty($condition)) {
-            $stmt->execute(array_values($condition));
-        } else {
-            $stmt->execute();
+        $query = "DELETE FROM $table ";
+        if (is_array($condition)) {
+            $query = $query . $this->arrayToCondition($condition);
+        }
+        $this->query($query);
+        try {
+            $this->execute();
+        } catch (Exception $e) {
+            error_log($e->getMessage());
         }
 
-        return $stmt->rowCount();
+        return $this->affected_rows();
     }
-
-
 
     /**
      * Dynamically retrive rows from db
