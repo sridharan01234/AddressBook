@@ -19,7 +19,6 @@ class ContactsController extends BaseController
     private const GET = "GET";
     private $contactsModel;
 
-
     public function __construct()
     {
         $this->contactsModel = new ContactsModel();
