@@ -37,14 +37,15 @@ class ContactsModel extends Database
     /**
      * Delete a contact with the given ID
      * 
-     * @param int $id The ID of the contact to delete
+     * @param array $id The IDs of the contact to delete
      * 
      * @return bool True if the contact was deleted successfully, false otherwise
      */
-    public function deleteContacts(int $id): bool
+    public function deleteContacts(array $ids): bool
     {
-        return $this->db->delete('contacts', ['id' => $id]);
+        return $this->db->delete('contacts', ['id' => $ids]);
     }
+    
 
     /**
      * Create a new contact with the given data
