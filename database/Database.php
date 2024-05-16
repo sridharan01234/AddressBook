@@ -183,7 +183,10 @@ class Database
     {
         $query = "DELETE FROM $table ";
         if (is_array($condition)) {
-            $query = $query . $this->arrayToCondition($condition);
+            $ids = implode(",", array_map(function ($id) {
+                return "'$id'";
+            }, $condition['ids']));
+            $query .= "WHERE id IN ($ids)";
         } else {
             $query = "DELETE FROM $table";
         }
@@ -197,6 +200,7 @@ class Database
 
         return $this->affected_rows();
     }
+
 
     /**
      * Dynamically retrive rows from db
