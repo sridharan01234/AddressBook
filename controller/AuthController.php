@@ -60,7 +60,9 @@ class AuthController extends BaseController
                 $data = ['error' => $message];
             }
         }
-        $this->render("login", $data);
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            $this->render('login', $data);
+        }
     }
 
     /**
@@ -92,7 +94,9 @@ class AuthController extends BaseController
                 $data = ['error' => $message];
             }
         }
-        $this->render("register", $data);
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            $this->render('register', $data);
+        }
     }
 
     /**
