@@ -238,18 +238,9 @@ class Database
      */
     public function getAll(string $table, array $condition, array $columns): array
     {
-        if (!empty($columns)) {
-            $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
-        } else {
-            $query = "SELECT * FROM $table ";
-        }
-        if (is_array($condition)) {
-            $query .= $this->arrayToCondition($condition);
-        } else {
-            $query = "SELECT * FROM $table";
-        }
+        $query = "SELECT " . ($columns ? $this->arrayToColumns($columns) : '*') . " FROM $table ";
+        $query .= $condition ? $this->arrayToCondition($condition) : '';
         $this->query($query);
-
         try {
             $this->execute();
         } catch (Exception $e) {
