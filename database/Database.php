@@ -165,7 +165,11 @@ class Database
                 $str = $str . " $value ";
                 continue;
             }
-            $str = $str . $key . "=" . "'" . $value . "'";
+            if (is_array($value)) {
+                $str = $str . $key . " IN (" . implode(",", $value) . ") ";
+            } else {
+                $str = $str . $key . "=" . "'" . $value . "'";
+            }
         }
 
         return $str;
