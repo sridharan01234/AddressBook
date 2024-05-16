@@ -55,9 +55,7 @@ class ContactsController extends BaseController
     {
         if ($_SERVER["REQUEST_METHOD"] == self::POST && isset($_POST['delete_users'])) {
             $users = $_POST['delete_users'];
-            foreach ($users as $userId) {
-                $this->contactsModel->deleteContacts($userId);
-            }
+            $this->contactsModel->deleteContacts($users);
         }
         $this->listContacts();
     }
