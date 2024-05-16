@@ -39,7 +39,7 @@ class ContactsController extends BaseController
         if (!isset($_SESSION['user_id']))
             $this->redirect("login");
         //get all contacts
-        $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
+        $contacts = $this->contactsModel->getAllContacts($_SESSION['user_id']);
         foreach ($contacts as $contact) {
             if (isset($contact->country_id)) {
                 $contact->country = $this->contactsModel->getCountry($contact->country_id)->name;
