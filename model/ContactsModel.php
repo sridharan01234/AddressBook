@@ -40,7 +40,7 @@ class ContactsModel extends Database
      * 
      * @return array An array of contact objects
      */
-    public function getContacts(int $id): array
+    public function getAllContacts(int $id): array
     {
         return $this->db->getAll('contacts', ['user_id' => $id], []);
     }
