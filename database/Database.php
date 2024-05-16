@@ -185,7 +185,7 @@ class Database
         if (is_array($condition)) {
             $ids = implode(",", array_map(function ($id) {
                 return "'$id'";
-            }, $condition['ids']));
+            }, $condition['id']));
             $query .= "WHERE id IN ($ids)";
         } else {
             $query = "DELETE FROM $table";
