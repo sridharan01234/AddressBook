@@ -233,11 +233,9 @@ class Database
         } else {
             $query = "SELECT * FROM $table ";
         }
-        if (is_array($condition)) {
-            $query = $query . $this->arrayToCondition($condition);
-        } else {
-            $query = "SELECT * FROM $table";
-        }
+        if (!empty($condition)) {
+            $query .= $this->arrayToCondition($condition);
+        } 
         $this->query($query);
         try {
             $this->execute();
