@@ -1,7 +1,12 @@
 $("#edit-contact-form").validate({
     rules: {
         name: "required",
-        phone: "required",
+        phone: {
+            required: true,
+            minlength: 10,
+            maxlength: 10,
+            digits: true,
+        },
         address: "required",
         state: "required",
         pincode: "required",
@@ -15,7 +20,12 @@ $("#edit-contact-form").validate({
     },
     messages: {
         name: "Please enter your name",
-        phone: "Please enter your phone number",
+        phone: {
+            required: "Please enter your phone number",
+            minlength: "Please enter a valid phone number",
+            maxlength: "Please enter a valid phone number",
+            digits: "Please enter a valid phone number",
+        },
         address: "Please enter your address",
         state: "Please enter your state",
         pincode: "Please enter your pincode",
