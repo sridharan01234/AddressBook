@@ -172,6 +172,30 @@ class Database
     }
 
     /**
+     * Build delete query
+     *
+     * @param string $table
+     * @param array $condition
+     * 
+     * @return string
+     */
+    private function buildDeleteQuery(string $table, array $condition): string
+    {
+        $sql = "DELETE FROM $table";
+
+        if (!empty($condition)) {
+            $conditionString = implode(' AND ', array_map(function ($key, $value) {
+                return "$key = ?";
+            }, array_keys($condition), $condition));
+
+            $sql .= " WHERE $conditionString";
+        }
+
+        return $sql;
+    }
+
+
+    /**
      * Dynamically delete rows from db
      *
      * @param $table string
@@ -181,25 +205,17 @@ class Database
      */
     public function delete(string $table, array $condition): bool
     {
-        $query = "DELETE FROM $table ";
-        if (is_array($condition)) {
-            $ids = implode(",", array_map(function ($id) {
-                return "'$id'";
-            }, $condition['id']));
-            $query .= "WHERE id IN ($ids)";
+        $sql = $this->buildDeleteQuery($table, $condition);
+        $stmt = $this->dbh->prepare($sql);
+        if (!empty($condition)) {
+            $stmt->execute(array_values($condition));
         } else {
-            $query = "DELETE FROM $table";
+            $stmt->execute();
         }
 
-        $this->query($query);
-        try {
-            $this->execute();
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
-
-        return $this->affected_rows();
+        return $stmt->rowCount();
     }
+
 
 
     /**
