@@ -142,11 +142,29 @@ class ContactsController extends BaseController
      */
     public function editContact(): void
     {
+        $message = "";
+        $error = "";
+        if (array_key_exists("contact_id", $_GET)) {
+            $contact = $this->contactsModel->getContact($_GET['contact_id']);
+        }
+        if (array_key_exists('id', $_POST)) {
+            $contact = $this->contactsModel->getContact($_POST['id']);
+        }
+        if (isset($contact->country_id)) {
+            $contact->country = $this->contactsModel->getCountry($contact->country_id)->name;
+        } else {
+            $contact->country = "N/A";
+        }
 
+        if (isset($contact->state_id)) {
+            $contact->state = $this->contactsModel->getState($contact->state_id)->name;
+        } else {
+            $contact->state = "N/A";
+        }
         if ($_SERVER["REQUEST_METHOD"] == self::GET) {
             $this->render("editContact", [
                 'contact_id' => $_GET['contact_id'],
-                "contact" => $this->contactsModel->getContacts($_SESSION['user_id'])[0]
+                "contact" => $contact
             ]);
         }
         if ($_SERVER["REQUEST_METHOD"] == self::POST) {
@@ -166,8 +184,9 @@ class ContactsController extends BaseController
                 return;
             }
             $this->contactsModel->updateContacts($_POST['id'], $data);
-            $this->render("editContact", ['message' => 'Contact updated successfully.']);
+            $message = "Contact updated successfully.";
         }
+        $this->render("editContact", ['message' => $message, "contact" => $contact]);
     }
 
     /**
