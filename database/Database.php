@@ -216,7 +216,7 @@ class Database
         }
         if (!empty($condition)) {
             $query .= $this->arrayToCondition($condition);
-        } 
+        }
         $this->query($query);
         try {
             $this->execute();
