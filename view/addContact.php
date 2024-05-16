@@ -93,16 +93,18 @@
                             placeholder="Write your address here..."></textarea>
                     </div>
                 </div>
-                <div class="md:container md:mx-auto">
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Add Contact
-                    </button>
-                    <a href="/listContacts">
-                        <button type="button"
+                <div class="buttons">
+                    <div class="md:container md:mx-auto">
+                        <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Go Back
+                            Add Contact
                         </button>
+                        <a href="/listContacts">
+                            <button type="button"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Go Back
+                            </button>
+                    </div>
                 </div>
                 </a>
             </form>
