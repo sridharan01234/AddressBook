@@ -176,30 +176,6 @@ class Database
     }
 
     /**
-     * Build delete query
-     *
-     * @param string $table
-     * @param array $condition
-     * 
-     * @return string
-     */
-    private function buildDeleteQuery(string $table, array $condition): string
-    {
-        $sql = "DELETE FROM $table";
-
-        if (!empty($condition)) {
-            $conditionString = implode(' AND ', array_map(function ($key, $value) {
-                return "$key = ?";
-            }, array_keys($condition), $condition));
-
-            $sql .= " WHERE $conditionString";
-        }
-
-        return $sql;
-    }
-
-
-    /**
      * Dynamically delete rows from db
      *
      * @param $table string
