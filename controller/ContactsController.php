@@ -63,6 +63,11 @@ class ContactsController extends BaseController
      * 
      * @return void
      */
+    /**
+     * Add a contact
+     * 
+     * @return void
+     */
     public function addContact(): void
     {
         if ($_SERVER["REQUEST_METHOD"] == self::POST) {
@@ -76,12 +81,57 @@ class ContactsController extends BaseController
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
             ];
+            $error = $this->validateAddContact($data);
+            if ($error) {
+                $this->render("addContact", ['error' => $error]);
+                return;
+            }
             if ($this->contactsModel->createContacts($data))
                 $this->render("addContact", ['message' => 'Contact added successfully.']);
             else
                 $this->render("addContact", ['error' => 'Contact number aready exists.']);
         } else {
             $this->render("addContact", []);
+        }
+    }
+
+    /**
+     * validate add user entries
+     * 
+     * @param array $data
+     * 
+     * @return string
+     */
+    public function validateAddContact(array $data): string
+    {
+        if (isset($data["name"]) && !empty($data["name"])) {
+            if (isset($data["phone"]) && !empty($data["phone"])) {
+                if (isset($data["age"]) && !empty($data["age"])) {
+                    if (isset($data["pincode"]) && !empty($data["pincode"])) {
+                        if (isset($data["address"]) && !empty($data["address"])) {
+                            if (isset($data["country_id"]) && !empty($data["country_id"])) {
+                                if (isset($data["state_id"]) && !empty($data["state_id"])) {
+                                    return "";
+                                } else {
+                                    return "Please fill the state field";
+                                }
+                            } else {
+                                return "Please fill the country field";
+                            }
+                        } else {
+                            return "Please fill the address field";
+                        }
+                    } else {
+                        return "Please fill the pincode field";
+                    }
+                } else {
+                    return "Please fill the age field";
+                }
+            } else {
+                return "Please fill the phone field";
+            }
+        } else {
+            return "Please fill the name field";
         }
     }
 
@@ -110,9 +160,35 @@ class ContactsController extends BaseController
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
             ];
+            $error = $this->validateEditContact($data);
+            if ($error) {
+                $this->render("editContact", ['error' => $error]);
+                return;
+            }
             $this->contactsModel->updateContacts($_POST['id'], $data);
             $this->render("editContact", ['message' => 'Contact updated successfully.']);
         }
+    }
+
+    /**
+     * validate edit user entries
+     * 
+     * @param array $data
+     * 
+     * @return string
+     */
+    public function validateEditContact(array $data): string
+    {
+        if (
+            empty($data['name']) || empty($data['phone'])
+            || empty($data['age']) || empty($data['pincode'])
+            || empty($data['address']) || empty($data['country_id'])
+            || empty($data['state_id'])
+        ) {
+            return "Please fill all the fields";
+        }
+        return "";
+
     }
 
     /**
