@@ -8,7 +8,7 @@
  * Last modified : 8/5/2024
  */
 
-class BaseController
+abstract class BaseController
 {
     /**
      * Render pages dynamically
