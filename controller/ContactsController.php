@@ -83,11 +83,17 @@ class ContactsController extends BaseController
                 $this->render("addContact", ['error' => $error]);
                 return;
             }
-            if ($this->contactsModel->createContacts($data))
+            //check if the contact number already exists
+            if ($this->contactsModel->contactExists($data['phone'])) {
+                $this->render("addContact", ['error' => 'Contact number already exists.']);
+                return;
+            }
+            else {
                 $this->render("addContact", ['message' => 'Contact added successfully.']);
-            else
-                $this->render("addContact", ['error' => 'Contact number aready exists.']);
-        } else {
+                return;
+            }
+        }
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
             $this->render("addContact", []);
         }
     }
