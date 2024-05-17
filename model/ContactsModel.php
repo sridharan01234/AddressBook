@@ -49,7 +49,7 @@ class ContactsModel extends Database
     /**
      * Check if a contact with the given ID exists
      * 
-     * @param int $id The ID of the contact to check
+     * @param int $phone The phone number of the contact to check
      * 
      * @return bool True if the contact exists, false otherwise
      */
