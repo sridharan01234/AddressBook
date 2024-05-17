@@ -45,7 +45,18 @@ class ContactsModel extends Database
     {
         return $this->db->delete('contacts', ['id' => $ids]);
     }
-    
+
+    /**
+     * Check if a contact with the given ID exists
+     * 
+     * @param int $id The ID of the contact to check
+     * 
+     * @return bool True if the contact exists, false otherwise
+     */
+    public function contactExists(int $phone): bool
+    {
+        return is_object($this->db->get('contacts', ['phone' => $phone],[]));
+    }
 
     /**
      * Create a new contact with the given data
