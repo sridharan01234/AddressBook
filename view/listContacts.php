@@ -20,6 +20,12 @@
       <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
         <button type="submit" class="btn-delete bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg px-4 py-2">Delete Selected</button>
       </form>
+      <a href="/addContact">
+        <button type="button"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Add new Contacts
+        </button>
+      </a>
       <a href="/logout">
         <button type="button" class="btn-logout bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg px-4 py-2">Logout</button>
       </a>
