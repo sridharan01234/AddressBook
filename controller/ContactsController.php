@@ -87,8 +87,7 @@ class ContactsController extends BaseController
             if ($this->contactsModel->contactExists($data['phone'])) {
                 $this->render("addContact", ['error' => 'Contact number already exists.']);
                 return;
-            }
-            else {
+            } else {
                 $this->render("addContact", ['message' => 'Contact added successfully.']);
                 return;
             }
@@ -98,7 +97,12 @@ class ContactsController extends BaseController
         }
     }
 
-    public function checkContact()
+    /**
+     * Check if the contact number exists
+     * 
+     * @return void
+     */
+    public function checkContact(): void
     {
         $phone = $_GET['phone'];
         $contactExists = $this->contactsModel->contactExists($_GET['phone']);
