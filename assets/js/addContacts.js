@@ -45,11 +45,11 @@ var phoneInput = document.getElementById("phone");
 var errorMessage = document.getElementById("error-message");
 var form = document.getElementById("add-contact-form");
 
-phoneInput.addEventListener("input", function() {
+phoneInput.addEventListener("input", function () {
     var phone = phoneInput.value;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "/checkContact?phone=" + phone, true);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var response = JSON.parse(xhr.responseText);
             var contactExists = response.exists;
