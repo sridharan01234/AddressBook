@@ -41,6 +41,35 @@ $("#add-contact-form").validate({
     },
 });
 
+var phoneInput = document.getElementById("phone");
+var errorMessage = document.getElementById("error-message");
+var form = document.getElementById("add-contact-form");
+
+phoneInput.addEventListener("input", function() {
+    var phone = phoneInput.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/checkContact?phone=" + phone, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var contactExists = response.exists;
+
+            if (contactExists) {
+                errorMessage.textContent = "Contact already exists";
+                form.addEventListener("submit", preventFormSubmission);
+            } else {
+                errorMessage.textContent = "";
+                form.removeEventListener("submit", preventFormSubmission);
+            }
+        }
+    };
+    xhr.send();
+});
+
+function preventFormSubmission(event) {
+    event.preventDefault();
+}
+
 setTimeout(function () {
     $("#error, #message").hide("slow");
 }, 5000);
