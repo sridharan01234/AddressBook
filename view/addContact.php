@@ -46,14 +46,14 @@
                             </label>
                             <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Type Contact name" />
+                                placeholder="Enter Contact name" />
                         </div>
                         <div class="w-full">
                             <label for="brand"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone</label>
                             <input type="text" name="phone" id="phone"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Contact Number" />
+                                placeholder="Enter Contact Number" />
 
                             <div id="error-message" class="text-red-500"></div>
                         </div>
@@ -62,7 +62,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
                             <input type="number" name="age" id="age"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" />
+                                placeholder="Enter your age" />
                         </div>
                         <div>
                             <label for="pincode"
@@ -70,7 +70,7 @@
                             </label>
                             <input type="number" name="pincode" id="pincode"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="636303" />
+                                placeholder="Enter Your Pincode" />
                         </div>
 
                         <div>
