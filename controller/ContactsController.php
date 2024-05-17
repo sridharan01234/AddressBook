@@ -59,4 +59,114 @@ class ContactsController extends BaseController
         }
         $this->listContacts();
     }
+
+    /**
+     * Add a contact
+     * 
+     * @return void
+     */
+    public function addContact(): void
+    {
+        if ($_SERVER["REQUEST_METHOD"] == self::POST) {
+            $data = [
+                "name" => $_POST["name"],
+                "phone" => $_POST["phone"],
+                "age" => $_POST["age"],
+                "pincode" => $_POST["pincode"],
+                "address" => $_POST["address"],
+                "country_id" => $_POST["country"],
+                "state_id" => $_POST["state"],
+                "user_id" => $_SESSION['user_id'],
+            ];
+            $error = $this->validateAddContact($data);
+            if ($error) {
+                $this->render("addContact", ['error' => $error]);
+                return;
+            }
+            if ($this->contactsModel->createContacts($data))
+                $this->render("addContact", ['message' => 'Contact added successfully.']);
+            else
+                $this->render("addContact", ['error' => 'Contact number aready exists.']);
+        } else {
+            $this->render("addContact", []);
+        }
+    }
+
+    /**
+     * validate add user entries
+     * 
+     * @param array $data
+     * 
+     * @return string
+     */
+    public function validateAddContact(array $data): string
+    {
+        if (isset($data["name"]) && !empty($data["name"])) {
+            if (isset($data["phone"]) && !empty($data["phone"])) {
+                if (isset($data["age"]) && !empty($data["age"])) {
+                    if (isset($data["pincode"]) && !empty($data["pincode"])) {
+                        if (isset($data["address"]) && !empty($data["address"])) {
+                            if (isset($data["country_id"]) && !empty($data["country_id"])) {
+                                if (isset($data["state_id"]) && !empty($data["state_id"])) {
+                                    return "";
+                                } else {
+                                    return "Please fill the state field";
+                                }
+                            } else {
+                                return "Please fill the country field";
+                            }
+                        } else {
+                            return "Please fill the address field";
+                        }
+                    } else {
+                        return "Please fill the pincode field";
+                    }
+                } else {
+                    return "Please fill the age field";
+                }
+            } else {
+                return "Please fill the phone field";
+            }
+        } else {
+            return "Please fill the name field";
+        }
+    }
+
+    /**
+     * Get all countries
+     * 
+     * @return void
+     */
+    public function getCounties(): void
+    {
+        $result = $this->contactsModel->getCounties();
+        $countries = array();
+        foreach ($result as $row) {
+            $countries[] = array(
+                'id' => $row->id,
+                'name' => $row->name,
+            );
+        }
+        echo json_encode($countries);
+        exit;
+    }
+
+    /**
+     * Get all states
+     * 
+     * @return void
+     */
+    public function getStates(): void
+    {
+        $result = $this->contactsModel->getStates();
+        $countries = array();
+        foreach ($result as $row) {
+            $countries[] = [
+                'id' => $row->id,
+                'name' => $row->name
+            ];
+        }
+        echo json_encode($countries);
+        exit;
+    }
 }
