@@ -16,7 +16,6 @@ $router->add("/addContact", ['Controller' => 'ContactsController', 'action' => '
 $router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
 $router->add("/getCounties", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
 $router->add("/getStates", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-$router->add("/checkContact", ['Controller' => 'ContactsController', 'action' => 'checkContact']);
 
 $param = $router->searchPath($path);
 if (!$param) {
