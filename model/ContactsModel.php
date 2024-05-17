@@ -82,4 +82,24 @@ class ContactsModel extends Database
     {
         return $this->db->get('states', ['id' => $id], ['name']);
     }
+
+    /**
+     * Get all countries
+     * 
+     * @return array An array of country objects
+     */
+    public function getCounties()
+    {
+        return $this->db->getAll('countries', [], []);
+    }
+
+    /**
+     * Get all states
+     * 
+     * @return array An array of state objects
+     */
+    public function getStates()
+    {
+        return $this->db->getAll('states', ['country_id' => $_GET['country_id']], []);
+    }
 }
