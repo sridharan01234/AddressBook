@@ -98,6 +98,15 @@ class ContactsController extends BaseController
         }
     }
 
+    public function checkContact()
+    {
+        $phone = $_GET['phone'];
+        $contactExists = $this->contactsModel->contactExists($_GET['phone']);
+        $response = ['exists' => $contactExists];
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     /**
      * validate add user entries
      * 
