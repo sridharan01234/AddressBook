@@ -145,7 +145,7 @@ class ContactsController extends BaseController
     public function getCounties(): void
     {
         $result = $this->contactsModel->getCounties();
-        $countries = array();
+        $countries = [];
         foreach ($result as $row) {
             $countries[] = array(
                 'id' => $row->id,
