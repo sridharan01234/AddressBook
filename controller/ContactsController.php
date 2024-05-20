@@ -134,7 +134,7 @@ class ContactsController extends BaseController
         if (!isset($data["age"]) || empty($data["age"])) {
             return "Please fill the age field";
         }
-        
+
         return "";
     }
 
@@ -153,6 +153,7 @@ class ContactsController extends BaseController
                 'name' => $row->name,
             );
         }
+
         return json_encode($countries);
     }
 
@@ -171,6 +172,7 @@ class ContactsController extends BaseController
                 'name' => $row->name,
             ];
         }
+        
         return json_encode($countries);
     }
 }
