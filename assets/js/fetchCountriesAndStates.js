@@ -14,7 +14,7 @@ $(document).ready(function () {
     function populateCountries(countries) {
         var select = $('#countrySelect');
         $.each(countries, function (index, country) {
-            select.append('<option value="' + country.id + '">' + country.name + '</option>');
+            select.append(`<option value="${country.id}">${country.name}</option>`);
         });
 
         select.change(function () {
@@ -43,7 +43,7 @@ $(document).ready(function () {
         select.empty();
         $.each(states, function (index, state) {
             console.log(state);
-            select.append('<option value="' + state.id + '">' + state.name + '</option>');
+            select.append(`<option value="${state.id}">${state.name}</option>`);
         });
     }
 
