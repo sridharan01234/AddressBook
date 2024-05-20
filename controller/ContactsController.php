@@ -106,34 +106,120 @@ class ContactsController extends BaseController
     public function validateAddContact(array $data): string
     {
         if (!isset($data["name"]) || empty($data["name"])) {
-            return "Please fill the name field";
+            $errors[] = "Please fill the name field";
         }
 
         if (!isset($data["address"]) || empty($data["address"])) {
-            return "Please fill the address field";
-        }
-
-        if (!isset($data["country_id"]) || empty($data["country_id"])) {
-            return "Please fill the country field";
+            $errors[] = "Please fill the address field";
         }
 
         if (!isset($data["state_id"]) || empty($data["state_id"])) {
-            return "Please fill the state field";
+            $errors[] = "Please fill the state field";
+        }
+
+        if (!isset($data["country_id"]) || empty($data["country_id"])) {
+            $errors[] = "Please fill the country field";
         }
 
         if (!isset($data["pincode"]) || empty($data["pincode"])) {
-            return "Please fill the pincode field";
+            $errors[] = "Please fill the pincode field";
         }
 
         if (!isset($data["phone"]) || empty($data["phone"])) {
-            return "Please fill the phone field";
+            $errors[] = "Please fill the phone field";
         }
 
         if (!isset($data["age"]) || empty($data["age"])) {
-            return "Please fill the age field";
+            $errors[] = "Please fill the age field";
+        }
+        if (empty($errors)) {
+            return "";
         }
 
-        return "";
+        return implode("<br>", $errors);
+    }
+
+    /**
+     * Edit a contact
+     *
+     * @return void
+     */
+    public function editContact(): void
+    {
+        if ($_SERVER["REQUEST_METHOD"] == self::POST) {
+            $data = [
+                "id" => $_POST["id"],
+                "name" => $_POST["name"],
+                "address" => $_POST["address"],
+                "phone" => $_POST["phone"],
+                "age" => $_POST["age"],
+                "state_id" => $_POST["state"],
+                "country_id" => $_POST["country"],
+                "pincode" => $_POST["pincode"],
+            ];
+            $contact = $this->contactsModel->getContact($data['id']);
+            $error = $this->validateEditContact($data);
+            if ($error) {
+                $this->render("editContact", ['contact' => $contact, 'error' => $error]);
+                return;
+            }
+            if ($this->contactsModel->editContacts($data)) {
+                $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
+                return;
+            }
+            $this->render("editContact", ['contact' => $contact, 'error' => 'Please change any feilds for update.']);
+            return;
+        }
+        if ($_SERVER["REQUEST_METHOD"] == self::GET) {
+            $id = $_GET['contact_id'];
+            $contact = $this->contactsModel->getContact($id);
+            $this->render("editContact", ['contact' => $contact]);
+        }
+    }
+
+    /**
+     * validate edit user entries
+     *
+     * @param array $data
+     *
+     * @return string
+     */
+    public function validateEditContact(array $data): string
+    {
+
+        $errors = [];
+        if (!isset($data["name"]) || empty($data["name"])) {
+            $errors[] = "Please fill the name field";
+        }
+
+        if (!isset($data["address"]) || empty($data["address"])) {
+            $errors[] = "Please fill the address field";
+        }
+
+        if (!isset($data["state_id"]) || empty($data["state_id"])) {
+            $errors[] = "Please fill the state field";
+        }
+
+        if (!isset($data["country_id"]) || empty($data["country_id"])) {
+            $errors[] = "Please fill the country field";
+        }
+
+        if (!isset($data["pincode"]) || empty($data["pincode"])) {
+            $errors[] = "Please fill the pincode field";
+        }
+
+        if (!isset($data["phone"]) || empty($data["phone"])) {
+            $errors[] = "Please fill the phone field";
+        }
+
+        if (!isset($data["age"]) || empty($data["age"])) {
+            $errors[] = "Please fill the age field";
+        }
+        if (empty($errors)) {
+            return "";
+        }
+
+        return implode("<br>", $errors);
     }
 
     /**
