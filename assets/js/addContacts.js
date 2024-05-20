@@ -22,10 +22,9 @@ $("#add-contact-form").validate({
         name: "Please enter your name",
         phone: {
             required: "Please enter your phone number",
-            number: "Please enter a valid phone number",
-            minlength: "Please enter a valid phone number",
-            maxlength: "Please enter a valid phone number",
-            maxlength: "Please enter a valid phone number",
+            number: "Phone number should be a number",
+            minlength: "Phone number should be 10 digits",
+            maxlength: "Phone number should be 10 digits",
         },
         address: "Please enter your address",
         state: "Please enter your state",
