@@ -154,7 +154,8 @@ class ContactsController extends BaseController
             );
         }
 
-        return json_encode($countries);
+        echo json_encode($countries);
+        exit;
     }
 
     /**
@@ -172,7 +173,8 @@ class ContactsController extends BaseController
                 'name' => $row->name,
             ];
         }
-        
-        return json_encode($countries);
+
+        echo json_encode($countries);
+        exit;
     }
 }
