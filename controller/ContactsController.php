@@ -153,23 +153,23 @@ class ContactsController extends BaseController
                 "country_id" => $_POST["country"],
                 "pincode" => $_POST["pincode"],
             ];
-            $contact = $this->contactsModel->getContact($data['id']);
             $error = $this->validateEditContact($data);
             if ($error) {
+                $contact = $this->contactsModel->getContact($data['id']);
                 $this->render("editContact", ['contact' => $contact, 'error' => $error]);
-                return;
+                exit;
             }
-            if ($this->contactsModel->editContacts($data)) {
+            $this->contactsModel->editContacts($data); 
+            $contact = $this->contactsModel->getContact($data['id']);
                 $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
-                return;
-            }
-            $this->render("editContact", ['contact' => $contact, 'error' => 'Please change any feilds for update.']);
-            return;
+            exit;
         }
+
         if ($_SERVER["REQUEST_METHOD"] == self::GET) {
             $id = $_GET['contact_id'];
             $contact = $this->contactsModel->getContact($id);
             $this->render("editContact", ['contact' => $contact]);
+            exit;
         }
     }
 
