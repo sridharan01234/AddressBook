@@ -35,6 +35,30 @@ class ContactsModel extends Database
     }
 
     /**
+     * Get a contact with the given ID
+     * 
+     * @param int $id The ID of the contact to get
+     * 
+     * @return object The contact object
+     */
+    public function getContact(int $id): object
+    {
+        return $this->db->get('contacts', ['id' => $id], []);
+    }
+
+    /**
+     * Edit a contact with the given ID
+     * 
+     * @param array $data The data for the contact to edit
+     * 
+     * @return bool True if the contact was edited successfully, false otherwise
+     */
+    public function editContacts(array $data): bool
+    {
+        return $this->db->update('contacts', $data, ['id' => $data['id']]);
+    }
+
+    /**
      * Delete a contact with the given ID
      * 
      * @param array $id The IDs of the contact to delete
