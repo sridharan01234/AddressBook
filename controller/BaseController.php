@@ -7,9 +7,14 @@
  * Email : sridharan01234@gmail.com
  * Last modified : 8/5/2024
  */
+enum DisplayState: string {
+    case BLOCK = 'block';
+    case HIDDEN = 'hidden';
+}
 
 class BaseController
 {
+
     /**
      * Render pages dynamically
      * 
