@@ -38,7 +38,7 @@ class ContactsController extends BaseController
 
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
-
+        
         $this->render("listContacts", [
             "contacts" => $contacts,
         ]);
@@ -161,7 +161,7 @@ class ContactsController extends BaseController
             }
             $this->contactsModel->editContacts($data); 
             $contact = $this->contactsModel->getContact($data['id']);
-                $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
+            $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
             exit;
         }
 
