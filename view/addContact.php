@@ -15,22 +15,14 @@
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                 Add a new Contact
             </h2>
-            <div id="error" class="p-4 mb-4 <?php if (isset($data['message'])) {
-                echo " block";
-            } else {
-                echo "hidden";
-            } ?>
+            <div id="error" class="p-4 mb-4 <?php echo isset($data['message']) ? "block" : "hidden"; ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                 <span class="font-medium">Success !</span>
                 <?php if (isset($data['message']))
                     echo $data['message'] ?>
                 </div>
-                <div id="message" class="p-4 mb-4 <?php if (isset($data['error'])) {
-                    echo "block";
-                } else {
-                    echo "hidden";
-                } ?>
+                <div id="message" class="p-4 mb-4 <?php echo (isset($data['error'])) ? "block" : "hidden" ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">Oops!</span>
