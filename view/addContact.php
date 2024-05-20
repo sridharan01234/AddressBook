@@ -33,7 +33,7 @@
 }
 ?>
                 </div>
-                <form id="add-contact-form" action="/addContact" method="post">
+                <form id="contact-form" action="/addContact" method="post">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                         <div class="w-full">
@@ -116,7 +116,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
         <script src="./assets/js/fetchCountriesAndStates.js"></script>
-        <script src="./assets/js/addContacts.js"></script>
+        <script src="./assets/js/validContacts.js"></script>
     </body>
 
     </html>

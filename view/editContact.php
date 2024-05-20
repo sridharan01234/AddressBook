@@ -28,7 +28,7 @@
                 <span class="font-medium">Oops!</span>
                 <?php if (isset($data['error'])) echo $data['error'] ?>
             </div>
-            <form id="edit-contact-form" action="/editContact" method="post">
+            <form id="contact-form" action="/editContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                     <div class="w-full">
@@ -108,7 +108,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="./assets/js/fetchCountriesAndStates.js"></script>
-    <script src="./assets/js/editContacts.js"></script>
+    <script src="./assets/js/validContacts.js"></script>
 </body>
 
 </html>
