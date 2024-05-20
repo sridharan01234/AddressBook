@@ -50,8 +50,8 @@ class ContactsModel extends Database
     public function getContact(int $id): object
     {
         $contact = $this->db->get('contacts', ['id' => $id], []);
-        $contact->country = $this->getCountry($contact->country_id);
-        $contact->state = $this->getState($contact->state_id);
+        $contact->country = $this->getCountry($contact->country_id)->name;
+        $contact->state = $this->getState($contact->state_id)->name;
         return $contact;
     }
 
