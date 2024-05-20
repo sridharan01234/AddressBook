@@ -76,8 +76,8 @@ class AuthController extends BaseController
                     "name" => sprintf("%s%s", $_POST["first_name"], $_POST["last_name"]),
                     "email" => $_POST["email"],
                     "password" => password_hash($_POST["password"], PASSWORD_DEFAULT),
-                    "first_name" => $_POST["first_name"],
-                    "last_name" => $_POST["last_name"],
+                    "firstname" => $_POST["first_name"],
+                    "lastname" => $_POST["last_name"],
                 ];
                 if (!$this->model->verifyEmail($data['email'])) {
                     if ($this->model->registerUser($data)) {

@@ -5,7 +5,7 @@
  * 
  * Author: Sridharan
  * Email: sridharan01234@gmail.com
- * Last Modified: 13/5/2024
+ * Last Modified: 17/5/2024
  */
 
 require "./database/Database.php";
@@ -45,7 +45,19 @@ class ContactsModel extends Database
     {
         return $this->db->delete('contacts', ['id' => $ids]);
     }
-    
+
+    /**
+     * Check if a contact with the given ID exists
+     * 
+     * @param int $phone The phone number of the contact to check
+     * 
+     * @return bool True if the contact exists, false otherwise
+     */
+    public function contactExists(int $phone): bool
+    {
+        return is_object($this->db->get('contacts', ['phone' => $phone],[]));
+    }
+
 
     /**
      * Create a new contact with the given data
@@ -81,5 +93,25 @@ class ContactsModel extends Database
     public function getState(int $id): object
     {
         return $this->db->get('states', ['id' => $id], ['name']);
+    }
+
+    /**
+     * Get all countries
+     * 
+     * @return array An array of country objects
+     */
+    public function getCounties(): array
+    {
+        return $this->db->getAll('countries', [], []);
+    }
+
+    /**
+     * Get all states
+     * 
+     * @return array An array of state objects
+     */
+    public function getStates(): array
+    {
+        return $this->db->getAll('states', ['country_id' => $_GET['country_id']], []);
     }
 }

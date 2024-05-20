@@ -14,8 +14,8 @@ $router->add("/listContacts", ['Controller' => 'ContactsController', 'action' =>
 $router->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
 $router->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
 $router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
-$router->add("/getCounties", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
-$router->add("/getStates", ['Controller' => 'ContactsController', 'action' => 'getStates']);
+$router->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
+$router->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
 
 $param = $router->searchPath($path);
 if (!$param) {
