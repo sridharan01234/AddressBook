@@ -100,7 +100,7 @@ class ContactsModel extends Database
      * 
      * @return array An array of country objects
      */
-    public function getCounties()
+    public function getCounties(): array
     {
         return $this->db->getAll('countries', [], []);
     }
@@ -110,7 +110,7 @@ class ContactsModel extends Database
      * 
      * @return array An array of state objects
      */
-    public function getStates()
+    public function getStates(): array
     {
         return $this->db->getAll('states', ['country_id' => $_GET['country_id']], []);
     }
