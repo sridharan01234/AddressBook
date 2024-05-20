@@ -93,14 +93,7 @@ class ContactsController extends BaseController
             $this->render("addContact", ['message' => 'Contact added successfully.']);
             return;
         }
-        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
-            $this->render("addContact", []);
-        }
-
-        //If request method is not POST or GET, render the listContacts view
-        if ($_SERVER['REQUEST_METHOD']) {
-            $this->listContacts();
-        }
+        $this->render("addContact", []);
     }
 
     /**
