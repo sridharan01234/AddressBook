@@ -38,10 +38,6 @@ class ContactsController extends BaseController
 
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
-        foreach ($contacts as $contact) {
-            $contact->country = isset($contact->country_id) ? $this->contactsModel->getCountry($contact->country_id)->name : "N/A";
-            $contact->state = isset($contact->state_id) ? $this->contactsModel->getState($contact->state_id)->name : "N/A";
-        }
 
         $this->render("listContacts", [
             "contacts" => $contacts,
