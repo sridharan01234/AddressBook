@@ -38,7 +38,7 @@ class ContactsController extends BaseController
 
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
-        
+
         $this->render("listContacts", [
             "contacts" => $contacts,
         ]);
@@ -76,7 +76,7 @@ class ContactsController extends BaseController
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
             ];
-            $error = $this->validateAddContact($data);
+            $error = $this->validateContact($data);
             if ($error) {
                 $this->render("addContact", ['error' => $error]);
                 return;
@@ -99,7 +99,7 @@ class ContactsController extends BaseController
      *
      * @return string
      */
-    public function validateAddContact(array $data): string
+    public function validateContact(array $data): string
     {
         if (!isset($data["name"]) || empty($data["name"])) {
             $errors[] = "Please fill the name field";
@@ -153,7 +153,7 @@ class ContactsController extends BaseController
                 "country_id" => $_POST["country"],
                 "pincode" => $_POST["pincode"],
             ];
-            $error = $this->validateEditContact($data);
+            $error = $this->validateContact($data);
             if ($error) {
                 $contact = $this->contactsModel->getContact($data['id']);
                 $this->render("editContact", ['contact' => $contact, 'error' => $error]);
@@ -171,51 +171,6 @@ class ContactsController extends BaseController
             $this->render("editContact", ['contact' => $contact]);
             exit;
         }
-    }
-
-    /**
-     * validate edit user entries
-     *
-     * @param array $data
-     *
-     * @return string
-     */
-    public function validateEditContact(array $data): string
-    {
-
-        $errors = [];
-        if (!isset($data["name"]) || empty($data["name"])) {
-            $errors[] = "Please fill the name field";
-        }
-
-        if (!isset($data["address"]) || empty($data["address"])) {
-            $errors[] = "Please fill the address field";
-        }
-
-        if (!isset($data["state_id"]) || empty($data["state_id"])) {
-            $errors[] = "Please fill the state field";
-        }
-
-        if (!isset($data["country_id"]) || empty($data["country_id"])) {
-            $errors[] = "Please fill the country field";
-        }
-
-        if (!isset($data["pincode"]) || empty($data["pincode"])) {
-            $errors[] = "Please fill the pincode field";
-        }
-
-        if (!isset($data["phone"]) || empty($data["phone"])) {
-            $errors[] = "Please fill the phone field";
-        }
-
-        if (!isset($data["age"]) || empty($data["age"])) {
-            $errors[] = "Please fill the age field";
-        }
-        if (empty($errors)) {
-            return "";
-        }
-
-        return implode("<br>", $errors);
     }
 
     /**
