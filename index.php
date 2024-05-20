@@ -16,7 +16,7 @@ $router->add("/addContact", ['Controller' => 'ContactsController', 'action' => '
 $router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
 $router->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
 $router->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-~
+
 $param = $router->searchPath($path);
 if (!$param) {
     require_once './view/pageNotFound.php';
