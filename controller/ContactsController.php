@@ -2,7 +2,7 @@
 
 /**
  * ContactsController class
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 17/5/2024
@@ -26,14 +26,16 @@ class ContactsController extends BaseController
 
     /**
      * List all contacts
-     * 
+     *
      * @return void
      */
     public function listContacts(): void
     {
         //verfies if the user is logged in
-        if (!isset($_SESSION['user_id']))
+        if (!isset($_SESSION['user_id'])) {
             $this->redirect("login");
+        }
+
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
         foreach ($contacts as $contact) {
@@ -42,13 +44,13 @@ class ContactsController extends BaseController
         }
 
         $this->render("listContacts", [
-            "contacts" => $contacts
+            "contacts" => $contacts,
         ]);
     }
 
     /**
      * Delete a contact
-     * 
+     *
      * @return void
      */
     public function deleteContact(): void
@@ -62,7 +64,7 @@ class ContactsController extends BaseController
 
     /**
      * Add a contact
-     * 
+     *
      * @return void
      */
     public function addContact(): void
@@ -86,11 +88,10 @@ class ContactsController extends BaseController
             if ($this->contactsModel->contactExists($data['phone'])) {
                 $this->render("addContact", ['error' => 'Contact number already exists.']);
                 return;
-            } else {
-                $this->contactsModel->createContacts($data);
-                $this->render("addContact", ['message' => 'Contact added successfully.']);
-                return;
             }
+            $this->contactsModel->createContacts($data);
+            $this->render("addContact", ['message' => 'Contact added successfully.']);
+            return;
         }
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
             $this->render("addContact", []);
@@ -99,50 +100,50 @@ class ContactsController extends BaseController
 
     /**
      * validate add user entries
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return string
      */
     public function validateAddContact(array $data): string
     {
-        if (isset($data["name"]) && !empty($data["name"])) {
-            if (isset($data["phone"]) && !empty($data["phone"])) {
-                if (isset($data["age"]) && !empty($data["age"])) {
-                    if (isset($data["pincode"]) && !empty($data["pincode"])) {
-                        if (isset($data["address"]) && !empty($data["address"])) {
-                            if (isset($data["country_id"]) && !empty($data["country_id"])) {
-                                if (isset($data["state_id"]) && !empty($data["state_id"])) {
-                                    return "";
-                                } else {
-                                    return "Please fill the state field";
-                                }
-                            } else {
-                                return "Please fill the country field";
-                            }
-                        } else {
-                            return "Please fill the address field";
-                        }
-                    } else {
-                        return "Please fill the pincode field";
-                    }
-                } else {
-                    return "Please fill the age field";
-                }
-            } else {
-                return "Please fill the phone field";
-            }
-        } else {
+        if (!isset($data["name"]) || empty($data["name"])) {
             return "Please fill the name field";
         }
+
+        if (!isset($data["address"]) || empty($data["address"])) {
+            return "Please fill the address field";
+        }
+
+        if (!isset($data["country_id"]) || empty($data["country_id"])) {
+            return "Please fill the country field";
+        }
+
+        if (!isset($data["state_id"]) || empty($data["state_id"])) {
+            return "Please fill the state field";
+        }
+
+        if (!isset($data["pincode"]) || empty($data["pincode"])) {
+            return "Please fill the pincode field";
+        }
+
+        if (!isset($data["phone"]) || empty($data["phone"])) {
+            return "Please fill the phone field";
+        }
+
+        if (!isset($data["age"]) || empty($data["age"])) {
+            return "Please fill the age field";
+        }
+        
+        return "";
     }
 
     /**
      * Get all countries
-     * 
-     * @return void
+     *
+     * @return mixed
      */
-    public function getCounties(): void
+    public function getCounties(): mixed
     {
         $result = $this->contactsModel->getCounties();
         $countries = [];
@@ -152,26 +153,24 @@ class ContactsController extends BaseController
                 'name' => $row->name,
             );
         }
-        echo json_encode($countries);
-        exit;
+        return json_encode($countries);
     }
 
     /**
      * Get all states
-     * 
-     * @return void
+     *
+     * @return mixed
      */
-    public function getStates(): void
+    public function getStates(): mixed
     {
         $result = $this->contactsModel->getStates();
         $countries = array();
         foreach ($result as $row) {
             $countries[] = [
                 'id' => $row->id,
-                'name' => $row->name
+                'name' => $row->name,
             ];
         }
-        echo json_encode($countries);
-        exit;
+        return json_encode($countries);
     }
 }
