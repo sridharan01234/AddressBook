@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: 'Counties',
+        url: 'countries',
         type: 'GET',
         success: function (response) {
             var countries = JSON.parse(response);
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     function fetchStates(countryId) {
         $.ajax({
-            url: 'States',
+            url: 'states',
             type: 'GET',
             data: { country_id: countryId },
             success: function (response) {
