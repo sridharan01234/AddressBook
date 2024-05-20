@@ -1,4 +1,4 @@
-<?php $contact = $data['contact'] ?>
+<?php $contact = $data['contact']; var_dump( $contact); vard ?>
 <!DOCTYPE html>
 <html lang="en">
 
