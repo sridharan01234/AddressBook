@@ -1,3 +1,4 @@
+<?php $contact = $data['contact'] ?>
 <!DOCTYPE html>
 <html lang="en">
 
