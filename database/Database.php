@@ -2,19 +2,21 @@
 
 /**
  * This file contains database actions
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 16/5/2024
  */
 
 require './config/config.php'; // Include the database configuration file
+require './logger/DbLogger.php'; // Include the database logger file
 
 class Database
 {
     private $dbh;
     private $stmt;
     private $error;
+    private $logger;
 
     /**
      * Constructor method.
@@ -22,11 +24,12 @@ class Database
      */
     public function __construct()
     {
+        $this->logger = new DbLogger(); // Initialize the logger
         $dsn = sprintf("mysql:host=%s;dbname=%s", host, dbname); // Construct the Data Source Name (DSN)
-        $options = array(
+        $options = [
             PDO::ATTR_PERSISTENT => true, // Enable persistent connections
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Set error mode to exceptions
-        );
+        ];
 
         try {
             $this->dbh = new PDO($dsn, user, pass, $options); // Create a new PDO instance
@@ -39,7 +42,7 @@ class Database
      * Prepare a SQL query.
      *
      * @param string $sql
-     * 
+     *
      * @return void
      */
     public function query(string $sql): void
@@ -62,7 +65,7 @@ class Database
      *
      * @return array|false
      */
-    public function resultSet(): array|false
+    public function resultSet(): array | false
     {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
@@ -73,7 +76,7 @@ class Database
      *
      * @return object|false
      */
-    public function single(): object|false
+    public function single(): object | false
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
@@ -113,7 +116,7 @@ class Database
      * Converts array into sql insert statements
      *
      * @param $data array
-     * 
+     *
      * @return string
      */
     public function arrayToInsert(array $data): string
@@ -125,7 +128,7 @@ class Database
      * Converts array of column names into sql format column parameter
      *
      * @param array $columns
-     * 
+     *
      * @return string
      */
     public function arrayToColumns(array $columns): string
@@ -137,7 +140,7 @@ class Database
      * Converts array into sql set statements
      *
      * @param $data array
-     * 
+     *
      * @return string
      */
     public function setValues(array $data): string
@@ -154,7 +157,7 @@ class Database
      * Converts array into sql conditional statement
      *
      * @param $data array
-     * 
+     *
      * @return string
      */
     public function arrayToCondition(array $data): string
@@ -180,7 +183,7 @@ class Database
      *
      * @param $table string
      * @param $condition array
-     * 
+     *
      * @return bool
      */
     public function delete(string $table, array $condition): bool
@@ -190,7 +193,9 @@ class Database
             $query = $query . $this->arrayToCondition($condition);
         }
         $this->query($query);
+        //$this->logger->log($query, E_USER_WARNING);
         try {
+
             $this->execute();
         } catch (Exception $e) {
             error_log($e->getMessage());
@@ -204,10 +209,10 @@ class Database
      *
      * @param $table string
      * @param $condition array
-     * 
+     *
      * @return bool|object
      */
-    public function get(string $table, array $condition, array $columns): bool|object
+    public function get(string $table, array $condition, array $columns): bool | object
     {
         if (!empty($columns)) {
             $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
@@ -218,6 +223,7 @@ class Database
             $query .= $this->arrayToCondition($condition);
         }
         $this->query($query);
+        //$this->logger->log($query, E_USER_WARNING);
         try {
             $this->execute();
         } catch (Exception $e) {
@@ -233,7 +239,7 @@ class Database
      * @param string $table The table name
      * @param array $condition The condition to filter the records
      * @param array $columns The columns to be selected
-     * 
+     *
      * @return array The result set
      */
     public function getAll(string $table, array $condition, array $columns): array
@@ -241,6 +247,7 @@ class Database
         $query = "SELECT " . ($columns ? $this->arrayToColumns($columns) : '*') . " FROM $table ";
         $query .= $condition ? $this->arrayToCondition($condition) : '';
         $this->query($query);
+        //$this->logger->log($query, E_USER_WARNING);
         try {
             $this->execute();
         } catch (Exception $e) {
@@ -255,7 +262,7 @@ class Database
      *
      * @param $table string
      * @param $data array
-     * 
+     *
      * @return bool
      */
     public function insert(string $table, array $data): bool
@@ -265,6 +272,7 @@ class Database
             $query = $query . $this->arrayToInsert($data);
         }
         $this->query($query);
+        //$this->logger->log($query, E_USER_WARNING);
         try {
             $this->execute();
         } catch (Exception $e) {
@@ -280,7 +288,7 @@ class Database
      * @param $table string
      * @param $condition array
      * @param $data array
-     * 
+     *
      * @return bool
      */
     public function update(string $table, array $data, array $condition): bool
@@ -295,6 +303,7 @@ class Database
             $query = $query . $this->arrayToCondition($condition);
         }
         $this->query($query);
+        //$this->logger->log($query, E_USER_WARNING);
         try {
             $this->execute();
         } catch (Exception $e) {
