@@ -63,7 +63,7 @@
             <td class="px-6 py-4"><?= $user->country ?></td>
             <td class="px-6 py-4"><?= $user->state ?></td>
             <td class="px-6 py-4">
-              <form id="edit-page" action="">
+              <form id="edit-page" action="editContact" method="get">
                 <input type="hidden" name="contact_id" value="<?= $user->id ?>">
                 <button class="btn-edit bg-green-700 hover:bg-green-800 text-white font-medium rounded-lg px-4 py-2">View/Delete</button>
               </form>

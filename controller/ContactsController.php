@@ -38,10 +38,6 @@ class ContactsController extends BaseController
 
         //get all contacts
         $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
-        foreach ($contacts as $contact) {
-            $contact->country = isset($contact->country_id) ? $this->contactsModel->getCountry($contact->country_id)->name : "N/A";
-            $contact->state = isset($contact->state_id) ? $this->contactsModel->getState($contact->state_id)->name : "N/A";
-        }
 
         $this->render("listContacts", [
             "contacts" => $contacts,
@@ -80,7 +76,7 @@ class ContactsController extends BaseController
                 "state_id" => $_POST["state"],
                 "user_id" => $_SESSION['user_id'],
             ];
-            $error = $this->validateAddContact($data);
+            $error = $this->validateContact($data);
             if ($error) {
                 $this->render("addContact", ['error' => $error]);
                 return;
@@ -103,37 +99,78 @@ class ContactsController extends BaseController
      *
      * @return string
      */
-    public function validateAddContact(array $data): string
+    public function validateContact(array $data): string
     {
         if (!isset($data["name"]) || empty($data["name"])) {
-            return "Please fill the name field";
+            $errors[] = "Please fill the name field";
         }
 
         if (!isset($data["address"]) || empty($data["address"])) {
-            return "Please fill the address field";
-        }
-
-        if (!isset($data["country_id"]) || empty($data["country_id"])) {
-            return "Please fill the country field";
+            $errors[] = "Please fill the address field";
         }
 
         if (!isset($data["state_id"]) || empty($data["state_id"])) {
-            return "Please fill the state field";
+            $errors[] = "Please fill the state field";
+        }
+
+        if (!isset($data["country_id"]) || empty($data["country_id"])) {
+            $errors[] = "Please fill the country field";
         }
 
         if (!isset($data["pincode"]) || empty($data["pincode"])) {
-            return "Please fill the pincode field";
+            $errors[] = "Please fill the pincode field";
         }
 
         if (!isset($data["phone"]) || empty($data["phone"])) {
-            return "Please fill the phone field";
+            $errors[] = "Please fill the phone field";
         }
 
         if (!isset($data["age"]) || empty($data["age"])) {
-            return "Please fill the age field";
+            $errors[] = "Please fill the age field";
+        }
+        if (empty($errors)) {
+            return "";
         }
 
-        return "";
+        return implode("<br>", $errors);
+    }
+
+    /**
+     * Edit a contact
+     *
+     * @return void
+     */
+    public function editContact(): void
+    {
+        if ($_SERVER["REQUEST_METHOD"] == self::POST) {
+            $data = [
+                "id" => $_POST["id"],
+                "name" => $_POST["name"],
+                "address" => $_POST["address"],
+                "phone" => $_POST["phone"],
+                "age" => $_POST["age"],
+                "state_id" => $_POST["state"],
+                "country_id" => $_POST["country"],
+                "pincode" => $_POST["pincode"],
+            ];
+            $error = $this->validateContact($data);
+            if ($error) {
+                $contact = $this->contactsModel->getContact($data['id']);
+                $this->render("editContact", ['contact' => $contact, 'error' => $error]);
+                exit;
+            }
+            $this->contactsModel->editContacts($data); 
+            $contact = $this->contactsModel->getContact($data['id']);
+            $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
+            exit;
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == self::GET) {
+            $id = $_GET['contact_id'];
+            $contact = $this->contactsModel->getContact($id);
+            $this->render("editContact", ['contact' => $contact]);
+            exit;
+        }
     }
 
     /**

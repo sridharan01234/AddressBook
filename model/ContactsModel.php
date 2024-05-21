@@ -31,7 +31,40 @@ class ContactsModel extends Database
      */
     public function getContacts(int $id): array
     {
-        return $this->db->getAll('contacts', ['user_id' => $id], []);
+        $contacts = $this->db->getAll('contacts', ['user_id' => $id], []);
+        foreach ($contacts as $contact) {
+            $contact->country = isset($contact->country_id) ? $this->getCountry($contact->country_id)->name : "N/A";
+            $contact->state = isset($contact->state_id) ? $this->getState($contact->state_id)->name : "N/A";
+        }
+
+        return $contacts;
+    }
+
+    /**
+     * Get a contact with the given ID
+     * 
+     * @param int $id The ID of the contact to get
+     * 
+     * @return object The contact object
+     */
+    public function getContact(int $id): object
+    {
+        $contact = $this->db->get('contacts', ['id' => $id], []);
+        $contact->country = $this->getCountry($contact->country_id)->name;
+        $contact->state = $this->getState($contact->state_id)->name;
+        return $contact;
+    }
+
+    /**
+     * Edit a contact with the given ID
+     * 
+     * @param array $data The data for the contact to edit
+     * 
+     * @return bool True if the contact was edited successfully, false otherwise
+     */
+    public function editContacts(array $data): bool
+    {
+        return $this->db->update('contacts', $data, ['id' => $data['id']]);
     }
 
     /**

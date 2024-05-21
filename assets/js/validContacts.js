@@ -1,4 +1,4 @@
-$("#add-contact-form").validate({
+$("#contact-form").validate({
     rules: {
         name: "required",
         phone: {
