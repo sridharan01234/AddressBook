@@ -1,42 +1,42 @@
 <?php
 
-require_once "./helper/SessionHelper.php";
 require_once "router/Router.php";
+require_once "helper/SessionHelper.php";
 
-$path = strtok($_SERVER['REQUEST_URI'], '?');
+$requestUri = strtok($_SERVER['REQUEST_URI'], '?');
 
-$router = new Router;
+$route = new Router;
 
-$router->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
-$router->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
-$router->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
-$router->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
-$router->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
-$router->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
-$router->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
-$router->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
-$router->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-$router->add('/editContact', ['Controller'=> 'ContactsController','action' => 'editContact']);
+$route->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
+$route->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
+$route->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
+$route->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
+$route->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
+$route->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
+$route->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
+$route->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
+$route->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
+$route->add('/editContact', ['Controller'=> 'ContactsController','action' => 'editContact']);
 
-$param = $router->searchPath($path);
-if (!$param) {
+$routeParams = $route->findRoute($requestUri);
+if (!$routeParams) {
     require_once './view/pageNotFound.php';
     exit;
 }
 
-if (($path == '/login' || $path == '/') && isset($_SESSION['user_id'])) {
+if (($requestUri == '/login' || $requestUri == '/') && isset($_SESSION['user_id'])) {
     header('Location: /listContacts');
     exit;
 }
 
-if (!isset($_SESSION['user_id']) && !($path == '/login' || $path == '/register')) {
+if (!isset($_SESSION['user_id']) && !($requestUri == '/login' || $requestUri == '/register')) {
     header('Location: /login');
     exit;
 }
-$controller = $param['Controller'];
-$action = $param['action'];
+$controllerName = $routeParams['Controller'];
+$actionName = $routeParams['action'];
 
-require_once sprintf("controller/%s.php", $controller);
+require_once sprintf("controller/%s.php", $controllerName);
 
-$controller_object = new $controller($path);
-$controller_object->$action();
+$controllerObject = new $controllerName($requestUri);
+$controllerObject->$actionName();
