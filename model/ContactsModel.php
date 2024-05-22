@@ -83,12 +83,13 @@ class ContactsModel extends Database
      * Check if a contact with the given ID exists
      * 
      * @param int $phone The phone number of the contact to check
+     * @param int $user_id The ID of the user
      * 
      * @return bool True if the contact exists, false otherwise
      */
-    public function contactExists(int $phone): bool
+    public function contactExists(int $phone, int $user_id): bool
     {
-        return is_object($this->db->get('contacts', ['phone' => $phone],[]));
+        return is_object($this->db->get('contacts', ['phone' => $phone, 'user_id' => $user_id],[]));
     }
 
 
