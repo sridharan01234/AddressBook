@@ -81,7 +81,7 @@ class ContactsController extends BaseController
                 $this->render("addContact", ['error' => $error]);
                 return;
             }
-            if ($this->contactsModel->contactExists($data['phone'])) {
+            if ($this->contactsModel->contactExists($data['phone'], $data['user_id'])) {
                 $this->render("addContact", ['error' => 'Contact number already exists.']);
                 return;
             }

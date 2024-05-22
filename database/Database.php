@@ -163,18 +163,23 @@ class Database
     public function arrayToCondition(array $data): string
     {
         $str = "WHERE ";
+        $conditions = [];
+    
         foreach ($data as $key => $value) {
             if ($key == "condition") {
                 $str = $str . " $value ";
                 continue;
             }
+    
             if (is_array($value)) {
-                $str = $str . $key . " IN (" . implode(",", $value) . ") ";
+                $conditions[] = $key . " IN (" . implode(",", $value) . ")";
             } else {
-                $str = $str . $key . "=" . "'" . $value . "'";
+                $conditions[] = $key . "=" . "'" . $value . "'";
             }
         }
-
+    
+        $str .= implode(" AND ", $conditions);
+    
         return $str;
     }
 
