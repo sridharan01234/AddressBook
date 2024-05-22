@@ -5,18 +5,7 @@ require_once "helper/SessionHelper.php";
 
 $requestUri = strtok($_SERVER['REQUEST_URI'], '?');
 
-$route = new Router;
-
-$route->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
-$route->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
-$route->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
-$route->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
-$route->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
-$route->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
-$route->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
-$route->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
-$route->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-$route->add('/editContact', ['Controller'=> 'ContactsController','action' => 'editContact']);
+$route = new Router();
 
 $routeParams = $route->findRoute($requestUri);
 if (!$routeParams) {

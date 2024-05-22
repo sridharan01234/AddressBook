@@ -10,7 +10,22 @@
 
  class Router
  {
-     private $routes;
+     private $routes = [];
+ 
+    public function __construct()
+    {
+        $this->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
+        $this->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
+        $this->add("/login", ['Controller' => 'AuthController', 'action' => 'login']); 
+        $this->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
+        $this->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
+        $this->add('getContact', ['Controller' => 'ContactsController', 'action' => 'getContact']);
+        $this->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
+        $this->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
+        $this->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
+        $this->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
+        $this->add('/editContact', ['Controller'=> 'ContactsController','action' => 'editContact']);
+    }
  
      /**
       * Add application paths
@@ -45,4 +60,3 @@
          return false;
      }
  }
- 
