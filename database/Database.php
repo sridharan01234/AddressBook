@@ -9,7 +9,6 @@
  */
 
 require './config/config.php'; // Include the database configuration file
-require './logger/DbLogger.php'; // Include the database logger file
 
 class Database
 {
@@ -24,7 +23,6 @@ class Database
      */
     public function __construct()
     {
-        $this->logger = new DbLogger(); // Initialize the logger
         $dsn = sprintf("mysql:host=%s;dbname=%s", host, dbname); // Construct the Data Source Name (DSN)
         $options = [
             PDO::ATTR_PERSISTENT => true, // Enable persistent connections
@@ -308,7 +306,7 @@ class Database
             $query = $query . $this->arrayToCondition($condition);
         }
         $this->query($query);
-        //$this->logger->log($query, E_USER_WARNING);
+        error_log($query);
         try {
             $this->execute();
         } catch (Exception $e) {
