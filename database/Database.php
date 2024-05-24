@@ -162,22 +162,22 @@ class Database
     {
         $str = "WHERE ";
         $conditions = [];
-    
+
         foreach ($data as $key => $value) {
             if ($key == "condition") {
                 $str = $str . " $value ";
                 continue;
             }
-    
+
             if (is_array($value)) {
                 $conditions[] = $key . " IN (" . implode(",", $value) . ")";
             } else {
                 $conditions[] = $key . "=" . "'" . $value . "'";
             }
         }
-    
+
         $str .= implode(" AND ", $conditions);
-    
+
         return $str;
     }
 

@@ -2,7 +2,7 @@
 
 /**
  * This file contains db constants
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 8/5/2024

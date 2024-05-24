@@ -2,26 +2,26 @@
 
 /**
  * This file contains common basic actions
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 8/5/2024
  */
-enum DisplayState: string {
+enum DisplayState: string
+{
     case BLOCK = 'block';
     case HIDDEN = 'hidden';
 }
 
 class BaseController
 {
-
     /**
      * Render pages dynamically
-     * 
+     *
      * @param string $file
      * @param array $messages
-     * 
-     * @return void 
+     *
+     * @return void
      */
     protected function render(string $file, array $messages): void
     {
@@ -31,9 +31,9 @@ class BaseController
 
     /**
      * Redirect pages dynamically
-     * 
+     *
      * @param string $path
-     * 
+     *
      * @return void
      */
     protected function redirect(string $path): void

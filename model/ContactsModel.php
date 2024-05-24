@@ -2,7 +2,7 @@
 
 /**
  * This file contains the ContactsModel class responsible for handling contact data operations
- * 
+ *
  * Author: Sridharan
  * Email: sridharan01234@gmail.com
  * Last Modified: 17/5/2024
@@ -24,9 +24,9 @@ class ContactsModel extends Database
 
     /**
      * Get the contacts for the current user
-     * 
+     *
      * @param int $id The ID of the user
-     * 
+     *
      * @return array An array of contact objects
      */
     public function getContacts(int $id): array
@@ -42,9 +42,9 @@ class ContactsModel extends Database
 
     /**
      * Get a contact with the given ID
-     * 
+     *
      * @param int $id The ID of the contact to get
-     * 
+     *
      * @return object The contact object
      */
     public function getContact(int $id): object
@@ -57,9 +57,9 @@ class ContactsModel extends Database
 
     /**
      * Edit a contact with the given ID
-     * 
+     *
      * @param array $data The data for the contact to edit
-     * 
+     *
      * @return bool True if the contact was edited successfully, false otherwise
      */
     public function editContacts(array $data): bool
@@ -69,9 +69,9 @@ class ContactsModel extends Database
 
     /**
      * Delete a contact with the given ID
-     * 
+     *
      * @param array $id The IDs of the contact to delete
-     * 
+     *
      * @return bool True if the contact was deleted successfully, false otherwise
      */
     public function deleteContacts(array $ids): bool
@@ -81,23 +81,23 @@ class ContactsModel extends Database
 
     /**
      * Check if a contact with the given ID exists
-     * 
+     *
      * @param int $phone The phone number of the contact to check
      * @param int $user_id The ID of the user
-     * 
+     *
      * @return bool True if the contact exists, false otherwise
      */
     public function contactExists(int $phone, int $user_id): bool
     {
-        return is_object($this->db->get('contacts', ['phone' => $phone, 'user_id' => $user_id],[]));
+        return is_object($this->db->get('contacts', ['phone' => $phone, 'user_id' => $user_id], []));
     }
 
 
     /**
      * Create a new contact with the given data
-     * 
+     *
      * @param array $data The data for the new contact
-     * 
+     *
      * @return bool True if the contact was created successfully, false otherwise
      */
     public function createContacts(array $data): bool
@@ -107,9 +107,9 @@ class ContactsModel extends Database
 
     /**
      * Get the country name based on the ID
-     * 
+     *
      * @param int $id The ID of the country
-     * 
+     *
      * @return object The name of the country
      */
     public function getCountry(int $id): object
@@ -119,9 +119,9 @@ class ContactsModel extends Database
 
     /**
      * Get the state name based on the ID
-     * 
+     *
      * @param int $id The ID of the state
-     * 
+     *
      * @return object The name of the state
      */
     public function getState(int $id): object
@@ -131,7 +131,7 @@ class ContactsModel extends Database
 
     /**
      * Get all countries
-     * 
+     *
      * @return array An array of country objects
      */
     public function getCounties(): array
@@ -141,7 +141,7 @@ class ContactsModel extends Database
 
     /**
      * Get all states
-     * 
+     *
      * @return array An array of state objects
      */
     public function getStates(): array

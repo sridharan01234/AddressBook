@@ -8,7 +8,6 @@ require "./database/Database.php";
 
 class AdminModel extends Database
 {
-
     private $db;
 
     /**

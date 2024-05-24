@@ -14,7 +14,6 @@ require_once "./helper/SessionHelper.php";
 
 class AdminController extends BaseController
 {
-
     /**
      * @var AdminModel
      */

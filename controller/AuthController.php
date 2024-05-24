@@ -2,7 +2,7 @@
 
 /**
  * This file contains auth actions
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 13/5/2024
@@ -28,7 +28,7 @@ class AuthController extends BaseController
 
     /**
      * Handles login post request
-     * 
+     *
      * @return void
      */
     public function login(): void
@@ -63,7 +63,7 @@ class AuthController extends BaseController
 
     /**
      * Handles register post request for user add
-     * 
+     *
      * @return void
      */
     public function register(): void
@@ -92,26 +92,27 @@ class AuthController extends BaseController
         }
         $this->render("register", $data);
     }
-    
+
     /**
      * Verify user exists
-     * 
+     *
      * @return void
      */
     public function verifyUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
-            if($this->model->verifyEmail($_GET['email']))
-            echo "exists";
-            else
-            echo "not exists";
+            if($this->model->verifyEmail($_GET['email'])) {
+                echo "exists";
+            } else {
+                echo "not exists";
+            }
             exit;
         }
     }
 
     /**
      * Validate login form entries
-     * 
+     *
      * @return string
      */
     private function validateLoginEntries(): string
@@ -128,7 +129,7 @@ class AuthController extends BaseController
 
     /**
      * Validate register form entries
-     * 
+     *
      * @return string
      */
     private function validateRegisterEntries(): string
@@ -177,7 +178,7 @@ class AuthController extends BaseController
 
     /**
      * Handles logout request
-     * 
+     *
      * @return void
      */
     public function logout(): void
