@@ -92,6 +92,22 @@ class AuthController extends BaseController
         }
         $this->render("register", $data);
     }
+    
+    /**
+     * Verify user exists
+     * 
+     * @return void
+     */
+    public function verifyUser(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            if($this->model->verifyEmail($_GET['email']))
+            echo "exists";
+            else
+            echo "not exists";
+            exit;
+        }
+    }
 
     /**
      * Validate login form entries
