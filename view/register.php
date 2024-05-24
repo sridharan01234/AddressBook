@@ -55,6 +55,7 @@
                 <input type="text" name="email" id="email"
                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Email address" />
+                <div id="error-message" class="text-red-500"></div>
               </div>
               <div class="relative z-0 w-full mb-5 group">
                 <input type="password" name="password" id="password"
