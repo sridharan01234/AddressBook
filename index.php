@@ -13,15 +13,16 @@ if (!$routeParams) {
     exit;
 }
 
-if (($requestUri == '/login' || $requestUri == '/') && isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) && !in_array($requestUri, ['/login', '/register', '/verifyUser'])) {
+    header('Location: /login');
+    exit;
+}
+
+if (in_array($requestUri, ['/login', '/']) && isset($_SESSION['user_id'])) {
     header('Location: /listContacts');
     exit;
 }
 
-if (!isset($_SESSION['user_id']) && !($requestUri == '/login' || $requestUri == '/register')) {
-    header('Location: /login');
-    exit;
-}
 $controllerName = $routeParams['Controller'];
 $actionName = $routeParams['action'];
 
