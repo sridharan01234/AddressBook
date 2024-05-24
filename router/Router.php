@@ -16,6 +16,7 @@ class Router
     {
         $this->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
         $this->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
+        $this->add('/verifyUser', ['Controller' => 'AuthController', 'action' => 'verifyUser']);
         $this->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
         $this->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
         $this->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
