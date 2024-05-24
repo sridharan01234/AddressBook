@@ -1,22 +1,3 @@
-$.validator.addMethod("verifyUser", function(value, element) {
-  var email = value;
-  var response = false;
-  $.ajax({
-    url: 'verifyUser',
-    method: 'GET',
-    data: { email: email },
-    async: false,
-    success: function(result) {
-      response = (result === 'exists');
-    },
-    error: function() {
-      response = false;
-    }
-  });
-  return !response;
-});
-
-
 $("#register-form").validate({
   rules: {
     first_name: "required",
@@ -24,7 +5,22 @@ $("#register-form").validate({
     email: {
       required: true,
       email: true,
-      verifyUser: true
+      remote: {
+        url: "verifyUser",
+        type: "GET",
+        data: {
+          email: function() {
+            return $("#email").val();
+          }
+        },
+        complete: function(response) {
+          if (response.responseText === "exists") {
+            $("#error-message").text("User exists");
+          } else {
+            $("#error-message").text("");
+          }
+        }
+      }
     },
     password: {
       strongPassword: true,
@@ -43,7 +39,6 @@ $("#register-form").validate({
     email: {
       required: "This field is required",
       email: "Please enter a valid email address",
-      verifyUser: "User exists",
     },
     password: {
       required: "This field is required",
@@ -57,6 +52,16 @@ $("#register-form").validate({
   },
 });
 
-setTimeout(function() {
-  $("#error, #message").hide("slow");
-}, 5000);
+  jQuery.validator.addMethod(
+    "strongPassword",
+    function (value) {
+      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(
+        value
+      );
+    },
+    "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
+  );
+
+  setTimeout(function () {
+    $("#error, #message").hide("slow");
+  }, 5000);
