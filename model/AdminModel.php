@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 
+ *
  */
 
 require "./database/Database.php";
@@ -36,22 +36,22 @@ class AdminModel extends Database
 
     /**
      * Updates user status
-     * 
+     *
      * @param int $id
      * @param int $data
-     * 
+     *
      * @return bool
      */
     public function updateStatus(int $id, int $data): bool
     {
-        return $this->db->update('users',  ['is_blocked' => $data], ['id' => $id]);
+        return $this->db->update('users', ['is_blocked' => $data], ['id' => $id]);
     }
 
     /**
      * Gets user status
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return bool
      */
     public function getStatus(int $id): bool
