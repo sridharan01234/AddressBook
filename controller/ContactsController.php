@@ -101,33 +101,23 @@ class ContactsController extends BaseController
      */
     public function validateContact(array $data): string
     {
-        if (!isset($data["name"]) || empty($data["name"])) {
-            $errors[] = "Please fill the name field";
+        $errors = [];
+        $fields = [
+            "name" => "Please fill the name field",
+            "address" => "Please fill the address field",
+            "state_id" => "Please fill the state field",
+            "country_id" => "Please fill the country field",
+            "pincode" => "Please fill the pincode field",
+            "phone" => "Please fill the phone field",
+            "age" => "Please fill the age field",
+        ];
+
+        foreach ($fields as $field => $errorMessage) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                $errors[] = $errorMessage;
+            }
         }
 
-        if (!isset($data["address"]) || empty($data["address"])) {
-            $errors[] = "Please fill the address field";
-        }
-
-        if (!isset($data["state_id"]) || empty($data["state_id"])) {
-            $errors[] = "Please fill the state field";
-        }
-
-        if (!isset($data["country_id"]) || empty($data["country_id"])) {
-            $errors[] = "Please fill the country field";
-        }
-
-        if (!isset($data["pincode"]) || empty($data["pincode"])) {
-            $errors[] = "Please fill the pincode field";
-        }
-
-        if (!isset($data["phone"]) || empty($data["phone"])) {
-            $errors[] = "Please fill the phone field";
-        }
-
-        if (!isset($data["age"]) || empty($data["age"])) {
-            $errors[] = "Please fill the age field";
-        }
         if (empty($errors)) {
             return "";
         }
@@ -159,7 +149,7 @@ class ContactsController extends BaseController
                 $this->render("editContact", ['contact' => $contact, 'error' => $error]);
                 exit;
             }
-            $this->contactsModel->editContacts($data); 
+            $this->contactsModel->editContacts($data);
             $contact = $this->contactsModel->getContact($data['id']);
             $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
             exit;
