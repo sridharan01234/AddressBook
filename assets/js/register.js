@@ -9,11 +9,11 @@ $("#register-form").validate({
         url: "verifyUser",
         type: "GET",
         data: {
-          email: function() {
+          email: function () {
             return $("#email").val();
           }
         },
-        complete: function(response) {
+        complete: function (response) {
           if (response.responseText === "exists") {
             $("#error-message").text("User exists");
           } else {
@@ -52,16 +52,16 @@ $("#register-form").validate({
   },
 });
 
-  jQuery.validator.addMethod(
-    "strongPassword",
-    function (value) {
-      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(
-        value
-      );
-    },
-    "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
-  );
+jQuery.validator.addMethod(
+  "strongPassword",
+  function (value) {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(
+      value
+    );
+  },
+  "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
+);
 
-  setTimeout(function () {
-    $("#error, #message").hide("slow");
-  }, 5000);
+setTimeout(function () {
+  $("#error, #message").hide("slow");
+}, 5000);
