@@ -91,45 +91,42 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="./assets/js/listContacts.js"></script>
   <script>
+
     $('.view-btn').click(function () {
-  let id = $(this).data('id');
+      let id = $(this).data('id');
 
-  $.ajax({
-    type: 'GET',
-    url: '/getContact',
-    data: { id: id }
-  })
-    .done(function (contact) {
-      if (contact.address) {
-        contact.address = contact.address.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2');
-      }
-      console.log('country',contact);
-      
-      let formattedContact = `
-        <strong>ID:</strong> ${contact.id}<br>
-        <strong>Name:</strong> ${contact.name}<br>
-        <strong>Phone:</strong> ${contact.phone}<br>
-        <strong>Age:</strong> ${contact.age}<br>
-        <strong>Pincode:</strong> ${contact.pincode}<br>
-        <strong>Address:</strong> ${contact.address}<br>
-        <strong>Country:</strong> ${contact.country}<br>
-        <strong>State:</strong> ${contact.state}<br>
-        <strong>Created At:</strong> ${contact.created_at}<br>
-        <strong>Updated At:</strong> ${contact.updated_at}
-      `;
+      $.ajax({
+        type: 'GET',
+        url: '/getContact',
+        data: { id: id }
+      })
+        .done(function (contact) {
+          contact = JSON.parse(contact);
+          console.log(contact);
+          let formattedContact = `
+          <strong>Name:</strong> ${contact.name}<br>
+          <strong>Phone:</strong> ${contact.phone}<br>
+          <strong>Age:</strong> ${contact.age}<br>
+          <strong>Pincode:</strong> ${contact.pincode}<br>
+          <strong>Address:</strong> ${contact.address}<br>
+          <strong>Country:</strong> ${contact.country}<br>
+          <strong>State:</strong> ${contact.state}<br>
+          <strong>Created At:</strong> ${contact.created_at}<br>
+          <strong>Updated At:</strong> ${contact.updated_at}<br>
+        `;
 
-      $('#contact-info').html(formattedContact);
-      $('.overlay').show();
-    })
-    .fail(function() {
-      $('#contact-info').html("Failed to retrieve contact information.");
-      $('.overlay').show();
+          $('#contact-info').html(formattedContact);
+          $('.overlay').show();
+        })
+        .fail(function () {
+          $('#contact-info').html("Failed to retrieve contact information.");
+          $('.overlay').show();
+        });
     });
-});
 
-$('#close-btn').click(function () {
-  $('.overlay').hide();
-});
+    $('#close-btn').click(function () {
+      $('.overlay').hide();
+    });
 
     $('#close-btn').click(function () {
       $('.overlay').hide();

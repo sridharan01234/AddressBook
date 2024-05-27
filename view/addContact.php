@@ -118,18 +118,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="./assets/js/fetchCountriesAndStates.js"></script>
     <script src="./assets/js/validContacts.js"></script>
-    <script>
-        let dobInput = document.getElementById('dob');
-        dobInput.addEventListener('change', calculateAge);
-        function calculateAge() {
-            let dob = dobInput.value;
-            let dobParts = dob.split('-');
-            let birthDate = new Date(dobParts[0], dobParts[1] - 1, dobParts[2]);
-            let currentDate = new Date();
-            let age = currentDate.getFullYear() - birthDate.getFullYear();
-            document.getElementById('age').value = age;
-        }
-    </script>
 </body>
 
 </html>
