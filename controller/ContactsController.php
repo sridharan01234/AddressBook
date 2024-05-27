@@ -155,7 +155,7 @@ class ContactsController extends BaseController
         }
 
         if ($_SERVER["REQUEST_METHOD"] == self::GET) {
-            $id = $_GET['contact_id'];
+            $id = $_GET['id'];
             $contact = $this->contactsModel->getContact($id);
             $this->render("editContact", ['contact' => $contact]);
             exit;
@@ -199,6 +199,23 @@ class ContactsController extends BaseController
         }
 
         echo json_encode($countries);
+        exit;
+    }
+
+    /**
+     * Get contact details
+     *
+     * @return mixed
+     */
+    public function getContact(): mixed
+    {
+        
+        if (!isset($_GET['id'])) {
+            $this->redirect("listContacts");
+        }
+        $id = (int)$_GET['id'];
+        $result = $this->contactsModel->getContact($id);
+        echo json_encode($result);
         exit;
     }
 }
