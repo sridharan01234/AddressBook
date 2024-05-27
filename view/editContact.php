@@ -50,13 +50,15 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Conatct Number" value="<?php echo $contact->phone ?>" />
                     </div>
-                    <div class="w-full">
-                        <label for="age"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
-                        <input type="number" name="age" id="age"
+                    <div>
+                        <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of
+                            Birth</label>
+                        <input type="date" id="dob"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="" value="<?php echo $contact->age ?>" />
+                            value="<?php echo $contact->age ?>" />
+                        <input type="hidden" name="age" id="age">
                     </div>
+
                     <div>
                         <label for="pincode"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pincode
@@ -71,7 +73,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
                         <select id="countrySelect" name="country"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="<?php echo $contact->country_id?>"><?php echo $contact->country?></option>
+                            <option value="<?php echo $contact->country_id ?>"><?php echo $contact->country ?></option>
                         </select>
                     </div>
                     <div>
@@ -79,7 +81,7 @@
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">State</label>
                         <select id="stateSelect" name="state"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="<?php echo $contact->state_id?>"><?php echo $contact->state?></option>
+                            <option value="<?php echo $contact->state_id ?>"><?php echo $contact->state ?></option>
                         </select>
                     </div>
                     <div class="sm:col-span-2">
