@@ -1,3 +1,29 @@
+function verifyUser(email) {
+  $.ajax({
+    url: "verifyUser",
+    type: "GET",
+    data: { email: email },
+    success: function (response) {
+      if (response === "exists") {
+        $("#error-message").text("User exists");
+      } else {
+        $("#error-message").text("");
+      }
+    },
+    error: function () {
+      $("#error-message").text("Failed to verify user");
+    }
+  });
+}
+
+$("#email").on("blur", function () {
+  if ($(this).val() === "") {
+    $("#error-message").text("Email field cannot be empty");
+  } else {
+    verifyUser($(this).val());
+  }
+});
+
 $("#register-form").validate({
   rules: {
     first_name: "required",
@@ -5,22 +31,6 @@ $("#register-form").validate({
     email: {
       required: true,
       email: true,
-      remote: {
-        url: "verifyUser",
-        type: "GET",
-        data: {
-          email: function () {
-            return $("#email").val();
-          }
-        },
-        complete: function (response) {
-          if (response.responseText === "exists") {
-            $("#error-message").text("User exists");
-          } else {
-            $("#error-message").text("");
-          }
-        }
-      }
     },
     password: {
       strongPassword: true,
@@ -51,17 +61,3 @@ $("#register-form").validate({
     },
   },
 });
-
-jQuery.validator.addMethod(
-  "strongPassword",
-  function (value) {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/.test(
-      value
-    );
-  },
-  "Password must contain at least 8 characters including at least one lowercase letter, one uppercase letter, one digit, and one special character."
-);
-
-setTimeout(function () {
-  $("#error, #message").hide("slow");
-}, 5000);
