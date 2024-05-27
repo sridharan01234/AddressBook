@@ -20,7 +20,7 @@ class Router
         $this->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
         $this->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
         $this->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
-        $this->add('getContact', ['Controller' => 'ContactsController', 'action' => 'getContact']);
+        $this->add('/getContact', ['Controller' => 'ContactsController', 'action' => 'getContact']);
         $this->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
         $this->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
         $this->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
