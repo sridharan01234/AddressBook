@@ -43,3 +43,14 @@ $("#contact-form").validate({
 setTimeout(function () {
     $("#error, #message").hide("slow");
 }, 5000);
+
+let dobInput = document.getElementById('dob');
+dobInput.addEventListener('change', calculateAge);
+function calculateAge() {
+    let dob = dobInput.value;
+    let dobParts = dob.split('-');
+    let birthDate = new Date(dobParts[0], dobParts[1] - 1, dobParts[2]);
+    let currentDate = new Date();
+    let age = currentDate.getFullYear() - birthDate.getFullYear();
+    document.getElementById('age').value = age;
+}
