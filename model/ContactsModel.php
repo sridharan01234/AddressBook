@@ -92,7 +92,6 @@ class ContactsModel extends Database
         return is_object($this->db->get('contacts', ['phone' => $phone, 'user_id' => $user_id], []));
     }
 
-
     /**
      * Create a new contact with the given data
      *
