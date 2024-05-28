@@ -54,8 +54,10 @@ class AdminController extends BaseController
      * Handles block user request
      *
      * @param int $id
+     * 
+     * @return void
      */
-    public function blockAndUnblockUser()
+    public function blockAndUnblockUser(): void
     {
         $id = $_GET['id'];
         if ($this->model->getStatus($id)) {

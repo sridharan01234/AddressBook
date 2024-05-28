@@ -118,6 +118,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="./assets/js/fetchCountriesAndStates.js"></script>
     <script src="./assets/js/validContacts.js"></script>
+
 </body>
 
 </html>

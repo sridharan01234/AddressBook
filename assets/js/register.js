@@ -5,7 +5,7 @@ function verifyUser(email) {
     data: { email: email },
     success: function (response) {
       if (response === "exists") {
-        $("#error-message").text("User exists");
+        $("#error-message").text(response);
       } else {
         $("#error-message").text("");
       }

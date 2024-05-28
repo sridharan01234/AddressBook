@@ -16,18 +16,18 @@ class Router
     {
         $this->add("/", ['Controller' => 'AuthController', 'action' => 'login']);
         $this->add("/register", ['Controller' => 'AuthController', 'action' => 'register']);
-        $this->add('/verifyUser', ['Controller' => 'AuthController', 'action' => 'verifyUser']);
+        $this->add('/user/verify', ['Controller' => 'AuthController', 'action' => 'verifyUser']);
         $this->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
-        $this->add("/listContacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
+        $this->add("/contacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
         $this->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
-        $this->add('/getContact', ['Controller' => 'ContactsController', 'action' => 'getContact']);
-        $this->add("/addContact", ['Controller' => 'ContactsController', 'action' => 'addContact']);
-        $this->add("/deleteContact", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
+        $this->add('/contact/get', ['Controller' => 'ContactsController', 'action' => 'getContact']);
+        $this->add("/contacts/add", ['Controller' => 'ContactsController', 'action' => 'addContact']);
+        $this->add("/contacts/delete", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
         $this->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
         $this->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-        $this->add('/editContact', ['Controller' => 'ContactsController', 'action' => 'editContact']);
+        $this->add('/contact/edit', ['Controller' => 'ContactsController', 'action' => 'editContact']);
         $this->add('/admin', ['Controller' => 'AdminController', 'action' => 'admin']);
-        $this->add('/userAction', ['Controller' => 'AdminController', 'action' => 'blockAndUnblockUser']);
+        $this->add('/admin/blockAndUnblockUser', ['Controller' => 'AdminController', 'action' => 'blockAndUnblockUser']);
     }
 
     /**

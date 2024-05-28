@@ -18,17 +18,30 @@ class AdminModel extends Database
         $this->db = new Database();
     }
 
+    /**
+     * Get all rows 
+     * 
+     * @param string $table
+     * @param array $condition
+     * @param array $columns
+     * 
+     * @return array
+     */
     public function getAll(string $table, array $condition, array $columns): array
     {
         return $this->db->getAll($table, $condition, $columns);
     }
 
     /**
+     * Get one row
+     * 
      * @param string $table
      * @param array $condition
      * @param array $columns
+     * 
+     * @return bool|object
      */
-    public function getOne(int $id)
+    public function getOne(int $id): bool|object
     {
         return $this->db->get('users', ['id' => $id], []);
     }
