@@ -30,16 +30,24 @@ class ContactsController extends BaseController
      */
     public function listContacts(): void
     {
-        //verfies if the user is logged in
-        if (!isset($_SESSION['user_id'])) {
-            $this->redirect("login");
+        $page = 1;
+        if (isset($_GET['page'])) {
+            $page = max(1, $_GET['page']);
         }
 
-        //get all contacts
-        $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
+        $perPage = 10;
+        $offset = ($page - 1) * $perPage;
 
+        $contacts = array_slice($this->contactsModel->getContacts($_SESSION['user_id']), $offset, $perPage);
+        $totalContacts = count($this->contactsModel->getContacts($_SESSION['user_id']));
+        $totalPages = max(1, ceil($totalContacts / $perPage));
+        if ($totalPages < $page) {
+            $this->redirect('contacts?page=' . $totalPages);
+        }
         $this->render("listContacts", [
-            "contacts" => $contacts,
+           "contacts" => $contacts,
+           "page" => $page,
+           "totalPages" => $totalPages,
         ]);
     }
 
@@ -210,7 +218,7 @@ class ContactsController extends BaseController
     public function getContact(): mixed
     {
         if (!isset($_GET['id'])) {
-            $this->redirect("contacts");
+            $this->redirect("listContacts");
         }
         $id = (int)$_GET['id'];
         $result = $this->contactsModel->getContact($id);
