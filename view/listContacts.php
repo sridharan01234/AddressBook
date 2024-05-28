@@ -36,6 +36,7 @@
     </div>
   </div>
 
+
   <div class="overflow-x-auto">
     <table
       class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 bg-white shadow-md dark:bg-gray-800 rounded-lg">
@@ -88,11 +89,21 @@
       </div>
     </div>
   </div>
-  <div class="pagination">
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-      <a href="?page=<?= $i ?>" class="<?= $currentPage == $i ? 'active' : '' ?>"><?= $i ?></a>
-    <?php endfor; ?>
-  </div>
+
+  <div class="flex items-center gap-8">
+      <button
+        type="button">
+        <a href="contacts?page=<?= $data['page'] - 1 ?>">Previous</a>
+      </button>
+      <p class="block font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+        Page <strong class="text-gray-900"><?= $data['page'] ?></strong> of
+        <strong class="text-gray-900"><?= $data['totalPages'] ?></strong>
+      </p>
+      <button
+        type="button">
+        <a href="contacts?page=<?= $data['page'] + 1 ?>">Next</a>
+      </button>
+    </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="./assets/js/listContacts.js"></script>
   <script>
