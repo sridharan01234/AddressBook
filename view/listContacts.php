@@ -71,11 +71,11 @@
             <td class="px-6 py-4">
               <button class="bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg px-4 py-2">
                 <a href="#" class="view-btn" data-id="<?= $user->id ?>">View</a> </button>
-              <button class="bg-red-700 hover:bg-red-800 text-white font-medium rounded-lg px-4 py-2"">
-              <a href=" /contacts/edit?id=<?= $user->id ?>">Edit</a>
-            </button>
-          </td>
-        </tr>
+              <button class="bg-red-700 hover:bg-red-800 text-white font-medium rounded-lg px-4 py-2">
+                <a href="/contacts/edit?id=<?= $user->id ?>">Edit</a>
+              </button>
+            </td>
+          </tr>
         <?php endforeach; ?>
       </tbody>
     </table>
@@ -87,6 +87,11 @@
         <button id="close-btn">Close</button>
       </div>
     </div>
+  </div>
+  <div class="pagination">
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+      <a href="?page=<?= $i ?>" class="<?= $currentPage == $i ? 'active' : '' ?>"><?= $i ?></a>
+    <?php endfor; ?>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="./assets/js/listContacts.js"></script>
