@@ -119,7 +119,7 @@ class Database
      */
     public function arrayToInsert(array $data): string
     {
-        return "(" . implode(",", array_keys($data)) . ") VALUES('" . implode("','", array_values($data)) . "')";
+        return sprintf('(%s) VALUES(\'%s\')', implode(',', array_keys($data)), implode('\',\'', array_values($data)));    
     }
 
     /**
@@ -131,7 +131,7 @@ class Database
      */
     public function arrayToColumns(array $columns): string
     {
-        return "(" . implode(",", $columns) . ")";
+        return sprintf('(%s)', implode(',', $columns));    
     }
 
     /**
@@ -145,7 +145,7 @@ class Database
     {
         $str = "SET ";
         foreach ($data as $key => $value) {
-            $str .= $key . "= '" . $value . "' ,";
+            $str .= sprintf('%s = \'%s\',', $key, $value);        
         }
 
         return substr($str, 0, strlen($str) - 1);
@@ -162,22 +162,20 @@ class Database
     {
         $str = "WHERE ";
         $conditions = [];
+foreach ($data as $key => $value) {
+    if ($key == "condition") {
+        $str = $str . " $value ";
+        continue;
+    }
 
-        foreach ($data as $key => $value) {
-            if ($key == "condition") {
-                $str = $str . " $value ";
-                continue;
-            }
+    if (is_array($value)) {
+        $conditions[] = sprintf('%s IN (%s)', $key, implode(',', $value));
+    } else {
+        $conditions[] = sprintf('%s = \'%s\'', $key, $value);
+    }
+}
 
-            if (is_array($value)) {
-                $conditions[] = $key . " IN (" . implode(",", $value) . ")";
-            }
-            else {
-                $conditions[] = $key . "=" . "'" . $value . "'";
-            }
-        }
-
-        $str .= implode(" AND ", $conditions);
+$str .= implode(" AND ", $conditions);
 
         return $str;
     }
@@ -194,8 +192,7 @@ class Database
     {
         $query = "DELETE FROM $table ";
         if (is_array($condition)) {
-            $query = $query . $this->arrayToCondition($condition);
-        }
+$query = sprintf('%s%s', $query, $this->arrayToCondition($condition));        }
         $this->query($query);
         //$this->logger->log($query, E_USER_WARNING);
         try {
@@ -217,14 +214,14 @@ class Database
      */
     public function get(string $table, array $condition, array $columns): bool | object
     {
-        if (!empty($columns)) {
-            $query = "SELECT " . $this->arrayToColumns($columns) . " FROM $table ";
-        } else {
-            $query = "SELECT * FROM $table ";
-        }
-        if (!empty($condition)) {
-            $query .= $this->arrayToCondition($condition);
-        }
+if (!empty($columns)) {
+    $query = sprintf('SELECT %s FROM %s ', $this->arrayToColumns($columns), $table);
+} else {
+    $query = sprintf('SELECT * FROM %s ', $table);
+}
+if (!empty($condition)) {
+    $query .= $this->arrayToCondition($condition);
+}
         $this->query($query);
         //$this->logger->log($query, E_USER_WARNING);
         try {
@@ -247,8 +244,7 @@ class Database
      */
     public function getAll(string $table, array $condition, array $columns): array
     {
-        $query = "SELECT " . ($columns ? $this->arrayToColumns($columns) : '*') . " FROM $table ";
-        $query .= $condition ? $this->arrayToCondition($condition) : '';
+        $query = sprintf('SELECT %s FROM %s %s', ($columns ? $this->arrayToColumns($columns) : '*'), $table, ($condition ? $this->arrayToCondition($condition) : ''));
         $this->query($query);
         //$this->logger->log($query, E_USER_WARNING);
         try {
