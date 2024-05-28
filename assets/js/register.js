@@ -1,6 +1,6 @@
 function verifyUser(email) {
   $.ajax({
-    url: "verifyUser",
+    url: "user/verify",
     type: "GET",
     data: { email: email },
     success: function (response) {

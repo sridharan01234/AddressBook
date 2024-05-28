@@ -6,7 +6,7 @@ $(document).ready(function () {
             var countries = JSON.parse(response);
             populateCountries(countries);
         },
-        error: function (xhr, status, error) {
+        error: function (error) {
             console.error("Error fetching countries: " + error);
         }
     });
@@ -42,7 +42,6 @@ $(document).ready(function () {
         var select = $('#stateSelect');
         select.empty();
         $.each(states, function (index, state) {
-            console.log(state);
             select.append(`<option value="${state.id}">${state.name}</option>`);
         });
     }

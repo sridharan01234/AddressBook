@@ -22,7 +22,7 @@ $('.view-btn').click(function () {
 
     $.ajax({
       type: 'GET',
-      url: '/getContact',
+      url: 'contacts/get',
       data: { id: id }
     })
       .done(function (contact) {

@@ -25,7 +25,7 @@
             Create and account
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
-            <div id="error" class="p-4 mb-4 <?php echo (isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+            <div id="error" class="p-4 mb-4 <?php echo(isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
               <span class="font-medium">Success !</span>
@@ -33,7 +33,7 @@
                   echo $data['message'];
               } ?>
               </div>
-              <div id="message" class="p-4 mb-4 <?php echo (isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+              <div id="message" class="p-4 mb-4 <?php echo(isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
               <span class="font-medium">Oops!</span>

@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id']) && !in_array($requestUri, ['/login', '/register
 }
 
 if (in_array($requestUri, ['/login', '/']) && isset($_SESSION['user_id'])) {
-    header('Location: /listContacts');
+    header('Location: /contacts');
     exit;
 }
 

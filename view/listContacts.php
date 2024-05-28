@@ -18,12 +18,12 @@
       </p>
     </div>
     <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-      <form id="delete" onsubmit="return deleteAlert()" action="/deleteContact" method="post">
+      <form id="delete" onsubmit="return deleteAlert()" action="/contacts/delete" method="post">
         <button type="submit"
           class="btn-delete bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg px-4 py-2">Delete
           Selected</button>
       </form>
-      <a href="/addContact">
+      <a href="/contacts/add">
         <button type="button"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Add new Contacts
@@ -72,7 +72,7 @@
               <button class="bg-blue-700 hover:bg-blue-800 text-white font-medium rounded-lg px-4 py-2">
                 <a href="#" class="view-btn" data-id="<?= $user->id ?>">View</a> </button>
               <button class="bg-red-700 hover:bg-red-800 text-white font-medium rounded-lg px-4 py-2"">
-              <a href=" /editContact?id=<?= $user->id ?>">Edit</a>
+              <a href=" /contacts/edit?id=<?= $user->id ?>">Edit</a>
             </button>
           </td>
         </tr>

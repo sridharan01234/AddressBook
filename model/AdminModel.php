@@ -19,12 +19,12 @@ class AdminModel extends Database
     }
 
     /**
-     * Get all rows 
-     * 
+     * Get all rows
+     *
      * @param string $table
      * @param array $condition
      * @param array $columns
-     * 
+     *
      * @return array
      */
     public function getAll(string $table, array $condition, array $columns): array
@@ -34,11 +34,11 @@ class AdminModel extends Database
 
     /**
      * Get one row
-     * 
+     *
      * @param string $table
      * @param array $condition
      * @param array $columns
-     * 
+     *
      * @return bool|object
      */
     public function getOne(int $id): bool|object

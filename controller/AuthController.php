@@ -47,7 +47,7 @@ class AuthController extends BaseController
                     if (password_verify($data['password'], $user->password)) {
                         $_SESSION['user_id'] = $user->id;
                         $_SESSION['user_name'] = $user->name;
-                        $this->redirect('listContacts');
+                        $this->redirect('contacts');
                     } else {
                         $data = ['error' => 'Incorrect password'];
                     }
@@ -101,7 +101,7 @@ class AuthController extends BaseController
     public function verifyUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === self::GET) {
-            if($this->model->verifyEmail($_GET['email'])) {
+            if ($this->model->verifyEmail($_GET['email'])) {
                 echo "exists";
             } else {
                 echo "not exists";
@@ -117,7 +117,6 @@ class AuthController extends BaseController
      */
     private function validateLoginEntries(): string
     {
-
         if (!strlen($_POST['email'])) {
             return "Please enter email";
         }
@@ -134,7 +133,6 @@ class AuthController extends BaseController
      */
     private function validateRegisterEntries(): string
     {
-
         if (strlen($_POST['first_name']) == 0) {
             return "please enter first name";
         }
@@ -186,5 +184,4 @@ class AuthController extends BaseController
         session_destroy();
         $this->redirect('login');
     }
-
 }

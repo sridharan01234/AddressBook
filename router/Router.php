@@ -20,12 +20,12 @@ class Router
         $this->add("/login", ['Controller' => 'AuthController', 'action' => 'login']);
         $this->add("/contacts", ['Controller' => 'ContactsController', 'action' => 'listContacts']);
         $this->add("/logout", ['Controller' => 'AuthController', 'action' => 'logout'], );
-        $this->add('/contact/get', ['Controller' => 'ContactsController', 'action' => 'getContact']);
+        $this->add('/contacts/get', ['Controller' => 'ContactsController', 'action' => 'getContact']);
         $this->add("/contacts/add", ['Controller' => 'ContactsController', 'action' => 'addContact']);
         $this->add("/contacts/delete", ['Controller' => 'ContactsController', 'action' => 'deleteContact']);
-        $this->add("/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
-        $this->add("/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
-        $this->add('/contact/edit', ['Controller' => 'ContactsController', 'action' => 'editContact']);
+        $this->add("/contacts/countries", ['Controller' => 'ContactsController', 'action' => 'getCounties']);
+        $this->add("/contacts/states", ['Controller' => 'ContactsController', 'action' => 'getStates']);
+        $this->add('/contacts/edit', ['Controller' => 'ContactsController', 'action' => 'editContact']);
         $this->add('/admin', ['Controller' => 'AdminController', 'action' => 'admin']);
         $this->add('/admin/blockAndUnblockUser', ['Controller' => 'AdminController', 'action' => 'blockAndUnblockUser']);
     }

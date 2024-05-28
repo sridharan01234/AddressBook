@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add user</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/addcontacts.css">
+    <link rel="stylesheet" href="../assets/css/addcontacts.css">
 </head>
 
 <body>
@@ -15,23 +15,23 @@
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                 Add a new Contact
             </h2>
-            <div id="error" class="p-4 mb-4 <?php echo (isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+            <div id="error" class="p-4 mb-4 <?php echo(isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                 <span class="font-medium">Success !</span>
                 <?php if (isset($data['message'])) {
                     echo $data['message'];
                 }
-                ?>
+            ?>
             </div>
-            <div id="message" class="p-4 mb-4 <?php echo (isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+            <div id="message" class="p-4 mb-4 <?php echo(isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">Oops!</span>
                 <?php if (isset($data['error'])) {
                     echo $data['error'];
                 }
-                ?>
+            ?>
             </div>
             <form id="contact-form" action="/addContact" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -100,7 +100,7 @@
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Add Contact
                         </button>
-                        <a href="/listContacts">
+                        <a href="/contacts">
                             <button type="button"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Go Back
@@ -116,8 +116,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <script src="./assets/js/fetchCountriesAndStates.js"></script>
-    <script src="./assets/js/validContacts.js"></script>
+    <script src="../assets/js/fetchCountriesAndStates.js"></script>
+    <script src="../assets/js/validContacts.js"></script>
 
 </body>
 

@@ -17,5 +17,4 @@ class DbLogger
         $message = 'Test message to log.';
         error_log($message, E_USER_NOTICE, self::file);
     }
-
 }

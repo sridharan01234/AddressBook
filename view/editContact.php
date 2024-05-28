@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit user</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/editcontacts.css">
+    <link rel="stylesheet" href="../assets/css/editcontacts.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                 Edit a Contact
             </h2>
-            <div id="error" class="p-4 mb-4 <?php echo (isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value ?>
+            <div id="error" class="p-4 mb-4 <?php echo(isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
                 <span class="font-medium">Success !</span>
@@ -24,7 +24,7 @@
                     echo $data['message'];
                 } ?>
             </div>
-            <div id="message" class="p-4 mb-4 <?php echo (isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value ?>
+            <div id="message" class="p-4 mb-4 <?php echo(isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">Oops!</span>
@@ -32,7 +32,7 @@
                     echo $data['error'];
                 } ?>
             </div>
-            <form id="contact-form" action="/editContact" method="post">
+            <form id="contact-form" action="/contacts/edit" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                     <div class="w-full">
@@ -55,8 +55,8 @@
                             Birth</label>
                         <input type="date" id="dob"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            value="<?php echo $contact->age ?>" />
-                        <input type="hidden" name="age" id="age">
+                            />
+                        <input type="hidden" name="age" id="age" value="<?php echo $contact->age ?>">
                     </div>
 
                     <div>
@@ -98,7 +98,7 @@
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Update Contact
                         </button>
-                        <a href="/listContacts">
+                        <a href="/contacts">
                             <button type="button"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Go Back
@@ -113,8 +113,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <script src="./assets/js/fetchCountriesAndStates.js"></script>
-    <script src="./assets/js/validContacts.js"></script>
+    <script src="../assets/js/fetchCountriesAndStates.js"></script>
+    <script src="../assets/js/validContacts.js"></script>
 </body>
 
 </html>

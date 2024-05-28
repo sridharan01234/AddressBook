@@ -209,9 +209,8 @@ class ContactsController extends BaseController
      */
     public function getContact(): mixed
     {
-        
         if (!isset($_GET['id'])) {
-            $this->redirect("listContacts");
+            $this->redirect("contacts");
         }
         $id = (int)$_GET['id'];
         $result = $this->contactsModel->getContact($id);
