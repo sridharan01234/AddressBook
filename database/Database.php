@@ -171,7 +171,8 @@ class Database
 
             if (is_array($value)) {
                 $conditions[] = $key . " IN (" . implode(",", $value) . ")";
-            } else {
+            }
+            else {
                 $conditions[] = $key . "=" . "'" . $value . "'";
             }
         }
