@@ -33,7 +33,7 @@
                 }
             ?>
             </div>
-            <form id="contact-form" action="/addContact" method="post">
+            <form id="contact-form" action="/contacts/add" method="post">
                 <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
 
                     <div class="w-full">
