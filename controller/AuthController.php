@@ -2,7 +2,7 @@
 
 /**
  * This file contains auth actions
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 13/5/2024
@@ -28,7 +28,7 @@ class AuthController extends BaseController
 
     /**
      * Handles login post request
-     * 
+     *
      * @return void
      */
     public function login(): void
@@ -47,7 +47,7 @@ class AuthController extends BaseController
                     if (password_verify($data['password'], $user->password)) {
                         $_SESSION['user_id'] = $user->id;
                         $_SESSION['user_name'] = $user->name;
-                        $this->redirect('listContacts');
+                        $this->redirect('contacts');
                     } else {
                         $data = ['error' => 'Incorrect password'];
                     }
@@ -63,7 +63,7 @@ class AuthController extends BaseController
 
     /**
      * Handles register post request for user add
-     * 
+     *
      * @return void
      */
     public function register(): void
@@ -94,13 +94,29 @@ class AuthController extends BaseController
     }
 
     /**
+     * Verify user exists
+     *
+     * @return void
+     */
+    public function verifyUser(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === self::GET) {
+            if ($this->model->verifyEmail($_GET['email'])) {
+                echo "exists";
+            } else {
+                echo "not exists";
+            }
+            exit;
+        }
+    }
+
+    /**
      * Validate login form entries
-     * 
+     *
      * @return string
      */
     private function validateLoginEntries(): string
     {
-
         if (!strlen($_POST['email'])) {
             return "Please enter email";
         }
@@ -112,12 +128,11 @@ class AuthController extends BaseController
 
     /**
      * Validate register form entries
-     * 
+     *
      * @return string
      */
     private function validateRegisterEntries(): string
     {
-
         if (strlen($_POST['first_name']) == 0) {
             return "please enter first name";
         }
@@ -161,7 +176,7 @@ class AuthController extends BaseController
 
     /**
      * Handles logout request
-     * 
+     *
      * @return void
      */
     public function logout(): void
@@ -169,5 +184,4 @@ class AuthController extends BaseController
         session_destroy();
         $this->redirect('login');
     }
-
 }

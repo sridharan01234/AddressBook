@@ -14,7 +14,6 @@ require_once "./helper/SessionHelper.php";
 
 class ContactsController extends BaseController
 {
-
     private const POST = "POST";
     private const GET = "GET";
     private $contactsModel;
@@ -31,16 +30,24 @@ class ContactsController extends BaseController
      */
     public function listContacts(): void
     {
-        //verfies if the user is logged in
-        if (!isset($_SESSION['user_id'])) {
-            $this->redirect("login");
+        $page = 1;
+        if (isset($_GET['page'])) {
+            $page = max(1, $_GET['page']);
         }
 
-        //get all contacts
-        $contacts = $this->contactsModel->getContacts($_SESSION['user_id']);
+        $perPage = 10;
+        $offset = ($page - 1) * $perPage;
 
+        $contacts = array_slice($this->contactsModel->getContacts($_SESSION['user_id']), $offset, $perPage);
+        $totalContacts = count($this->contactsModel->getContacts($_SESSION['user_id']));
+        $totalPages = max(1, ceil($totalContacts / $perPage));
+        if ($totalPages < $page) {
+            $this->redirect('contacts?page=' . $totalPages);
+        }
         $this->render("listContacts", [
-            "contacts" => $contacts,
+           "contacts" => $contacts,
+           "page" => $page,
+           "totalPages" => $totalPages,
         ]);
     }
 
@@ -81,7 +88,7 @@ class ContactsController extends BaseController
                 $this->render("addContact", ['error' => $error]);
                 return;
             }
-            if ($this->contactsModel->contactExists($data['phone'])) {
+            if ($this->contactsModel->contactExists($data['phone'], $data['user_id'])) {
                 $this->render("addContact", ['error' => 'Contact number already exists.']);
                 return;
             }
@@ -101,33 +108,23 @@ class ContactsController extends BaseController
      */
     public function validateContact(array $data): string
     {
-        if (!isset($data["name"]) || empty($data["name"])) {
-            $errors[] = "Please fill the name field";
+        $errors = [];
+        $fields = [
+            "name" => "Please fill the name field",
+            "address" => "Please fill the address field",
+            "state_id" => "Please fill the state field",
+            "country_id" => "Please fill the country field",
+            "pincode" => "Please fill the pincode field",
+            "phone" => "Please fill the phone field",
+            "age" => "Please fill the age field",
+        ];
+
+        foreach ($fields as $field => $errorMessage) {
+            if (!isset($data[$field]) || empty($data[$field])) {
+                $errors[] = $errorMessage;
+            }
         }
 
-        if (!isset($data["address"]) || empty($data["address"])) {
-            $errors[] = "Please fill the address field";
-        }
-
-        if (!isset($data["state_id"]) || empty($data["state_id"])) {
-            $errors[] = "Please fill the state field";
-        }
-
-        if (!isset($data["country_id"]) || empty($data["country_id"])) {
-            $errors[] = "Please fill the country field";
-        }
-
-        if (!isset($data["pincode"]) || empty($data["pincode"])) {
-            $errors[] = "Please fill the pincode field";
-        }
-
-        if (!isset($data["phone"]) || empty($data["phone"])) {
-            $errors[] = "Please fill the phone field";
-        }
-
-        if (!isset($data["age"]) || empty($data["age"])) {
-            $errors[] = "Please fill the age field";
-        }
         if (empty($errors)) {
             return "";
         }
@@ -159,14 +156,14 @@ class ContactsController extends BaseController
                 $this->render("editContact", ['contact' => $contact, 'error' => $error]);
                 exit;
             }
-            $this->contactsModel->editContacts($data); 
+            $this->contactsModel->editContacts($data);
             $contact = $this->contactsModel->getContact($data['id']);
             $this->render("editContact", ['contact' => $contact, 'message' => 'Contact updated successfully.']);
             exit;
         }
 
         if ($_SERVER["REQUEST_METHOD"] == self::GET) {
-            $id = $_GET['contact_id'];
+            $id = $_GET['id'];
             $contact = $this->contactsModel->getContact($id);
             $this->render("editContact", ['contact' => $contact]);
             exit;
@@ -210,6 +207,22 @@ class ContactsController extends BaseController
         }
 
         echo json_encode($countries);
+        exit;
+    }
+
+    /**
+     * Get contact details
+     *
+     * @return mixed
+     */
+    public function getContact(): mixed
+    {
+        if (!isset($_GET['id'])) {
+            $this->redirect("listContacts");
+        }
+        $id = (int)$_GET['id'];
+        $result = $this->contactsModel->getContact($id);
+        echo json_encode($result);
         exit;
     }
 }

@@ -7,8 +7,7 @@
  */
 class DbLogger
 {
-
-    const file = '/var/log/database.log'; // Update the log file path as needed
+    public const file = '/var/log/database.log'; // Update the log file path as needed
 
     /**
      * Logs a test message to the file.
@@ -18,5 +17,4 @@ class DbLogger
         $message = 'Test message to log.';
         error_log($message, E_USER_NOTICE, self::file);
     }
-
 }

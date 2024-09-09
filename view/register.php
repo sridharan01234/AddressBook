@@ -25,19 +25,21 @@
             Create and account
           </h1>
           <form class="space-y-4 md:space-y-6" action="/register" id="register-form" method="post">
-            <div id="error" class="p-4 mb-4 <?php echo (isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+            <div id="error" class="p-4 mb-4 <?php echo(isset($data['message']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800
                             dark:text-green-400" role="alert">
               <span class="font-medium">Success !</span>
-              <?php if (isset($data['message']))
-                echo $data['message'] ?>
+              <?php if (isset($data['message'])) {
+                  echo $data['message'];
+              } ?>
               </div>
-              <div id="message" class="p-4 mb-4 <?php echo (isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
+              <div id="message" class="p-4 mb-4 <?php echo(isset($data['error']) ? DisplayState::BLOCK : DisplayState::HIDDEN)->value; ?>
                             text-sm text-red-800 rounded-lg bg-red-50
                             dark:bg-gray-800 dark:text-red-400" role="alert">
               <span class="font-medium">Oops!</span>
-              <?php if (isset($data['error']))
-                echo $data['error'] ?>
+              <?php if (isset($data['error'])) {
+                  echo $data['error'];
+              } ?>
               </div>
               <input type="hidden" name="type" value="register" />
               <div class="relative z-0 w-full mb-5 group">
@@ -55,6 +57,7 @@
                 <input type="text" name="email" id="email"
                   class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:ring-blue-500 focus:outline-none focus:ring focus:ring-opacity-40"
                   placeholder="Email address" />
+                <div id="error-message" class="text-red-500"></div>
               </div>
               <div class="relative z-0 w-full mb-5 group">
                 <input type="password" name="password" id="password"
@@ -77,6 +80,7 @@
                     Click here</a>
                 </p>
                 <button
+                type="submit"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   Submit
                 </button>

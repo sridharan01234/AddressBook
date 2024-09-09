@@ -2,7 +2,7 @@
 
 /**
  * This file contains user auth database actions
- * 
+ *
  * Author : sridharan
  * Email : sridharan01234@gmail.com
  * Last modified : 10/5/2024
@@ -12,12 +12,11 @@ require "./database/Database.php";
 
 class AuthModel extends Database
 {
-
     /**
      * Verify email is existing or not in db
-     * 
+     *
      * @param string $email
-     * 
+     *
      * @return mixed
      */
     public function verifyEmail(string $email): mixed
@@ -27,9 +26,9 @@ class AuthModel extends Database
 
     /**
      * Register user in database
-     * 
+     *
      * @param array $data
-     * 
+     *
      * @return mixed
      */
     public function registerUser(array $data): mixed
