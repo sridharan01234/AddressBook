@@ -1,0 +1,13 @@
+#contact-form {
+    .error,
+    .required {
+      color: #FF0000;
+    }
+  }
+  
+  .buttons {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
